@@ -39,6 +39,6 @@ sh ~/domiopublic/deploy/copy_nginx_config_files.sh
 
 sh ~/domiopublic/deploy/build.sh
 
-service domio restart
+service domio_public restart
 
 cd /
