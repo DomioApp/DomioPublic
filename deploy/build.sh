@@ -36,6 +36,9 @@ go build -o /usr/local/bin/domio_public -ldflags "-X main.Buildstamp=$buildstamp
 cd /
 rm -rf ~/domiopublic
 
+service domio_public stop
+service domio_public start
+
 echo Domio Public is built and ready!
 
 logger -n logs5.papertrailapp.com -t deploy -P 18422 -p user.notice "Domio Public is built and ready!"
