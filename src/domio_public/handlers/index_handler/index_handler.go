@@ -2,9 +2,7 @@ package index_handler
 
 import (
     "net/http"
-    "github.com/yosssi/ace"
     "html/template"
-    "log"
     "domio_public/components/config"
     "path"
 )
