@@ -2,7 +2,7 @@
 set -e
 
 echo Installing Go dependendcies...
-cd ~/domioapi
+cd ~/domiopublic
 
 go get -u -v github.com/dgrijalva/jwt-go
 go get -u -v github.com/aws/aws-sdk-go/aws

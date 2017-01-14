@@ -5,7 +5,7 @@ echo Building Domio...
 rm -rf /domio
 mkdir /domio
 
-cd ~/domioapi
+cd ~/domiopublic
 
 
 #=====================================================================================================================
@@ -34,7 +34,7 @@ go build -o /domio/domio -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$
 #/domio/domio init --aws-access-key-id=12 --aws-secret-access-key=23 --db-name=34 --db-user=45 --db-password=56
 
 cd /
-rm -rf ~/domioapi
+rm -rf ~/domiopublic
 
 echo Domio is built and ready!
 

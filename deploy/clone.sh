@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cd ~/
-rm -rf ~/domioapi
-git clone git@gitlab.com:basharov/DomioApi.git ~/domioapi
-cd ~/domioapi
+rm -rf ~/domiopublic
+git clone git@gitlab.com:basharov/DomioPublic.git ~/domiopublic
+cd ~/domiopublic
 git tag -l --points-at HEAD
