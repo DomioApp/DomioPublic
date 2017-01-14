@@ -1,0 +1,11 @@
+= doctype html
+html lang=en
+  head
+    title Domio
+    = css
+      h1 { color: red; }
+  body
+    h1 {{.Msg}}
+    #container.wrapper
+      p..
+        Domio will be here
