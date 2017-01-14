@@ -20,17 +20,16 @@ echo ---------------------------
 echo
 
 
-echo Compiling for Windows...
-export GOARCH=amd64
-export GOOS=windows
+#echo Compiling for Windows...
+#export GOARCH=amd64
+#export GOOS=windows
+#go build -o /usr/local/bin/${PROJECT_NAME}_win.exe -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
 
-go build -o /usr/local/bin/${PROJECT_NAME}_win.exe -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
 
-
-echo Compiling for Linux...
-export GOARCH=amd64
-export GOOS=linux
-go build -o /usr/local/bin/${PROJECT_NAME}_linux -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+#echo Compiling for Linux...
+#export GOARCH=amd64
+#export GOOS=linux
+#go build -o /usr/local/bin/${PROJECT_NAME}_linux -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
 
 echo Compiling for Mac...
 export GOARCH=amd64
