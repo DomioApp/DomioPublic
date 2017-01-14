@@ -12,7 +12,7 @@ var Template *template.Template
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
 
     t := template.New("some template") // Create a template.
-    t, _ = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"), nil)  // Parse template file.
+    t, _ = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))  // Parse template file.
     /*user := GetUser() // Get current user infomration.*/
     t.Execute(w, nil)  // merge.
 
