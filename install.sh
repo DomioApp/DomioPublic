@@ -17,6 +17,13 @@ if ! [ -x "$(command -v go)" ]; then
    echo "Go is already installed!" >&2
 fi
 
+if ! [ -x "$(command -v letsencrypt)" ]; then
+   echo 'letsencrypt is not installed.' >&2
+   sh ~/domiopublic/deploy/install_letsencrypt.sh
+  else
+   echo "letsencrypt is already installed!" >&2
+fi
+
 sh ~/domiopublic/deploy/install_deps.sh
 
 if ! [ -x "$(command -v nginx)" ]; then
