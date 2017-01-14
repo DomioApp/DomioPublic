@@ -1,5 +1,16 @@
-.idea/*
+.idea/**/*
 bin
 pkg
-src
-!src/domio_public
+src/*
+!src/domio_public/**/*
+.DS_Store
+.idea/
+Would skip repository src/github.com/fatih/color
+Would skip repository src/github.com/gorilla/mux
+Would skip repository src/github.com/mattn/go-colorable
+Would skip repository src/github.com/mattn/go-isatty
+Would skip repository src/github.com/valyala/bytebufferpool
+Would skip repository src/github.com/valyala/quicktemplate
+Would skip repository src/github.com/yosssi/ace
+Would skip repository src/github.com/yosssi/ace-proxy
+src/domio_public
