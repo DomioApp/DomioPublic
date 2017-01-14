@@ -2,7 +2,7 @@
 
 set -e
 
-logger -n logs5.papertrailapp.com -t deploy -P 18422 -p user.notice "Domio public deploy has started..."
+logger -n logs5.papertrailapp.com -t deploy -P 18422 -p user.notice "Domio Public deploy has started..."
 
 cd ~/domiopublic
 export GOPATH=$PWD
