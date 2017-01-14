@@ -24,8 +24,6 @@ if ! [ -x "$(command -v letsencrypt)" ]; then
    echo "letsencrypt is already installed!" >&2
 fi
 
-sh ~/domiopublic/deploy/install_deps.sh
-
 if ! [ -x "$(command -v nginx)" ]; then
    echo 'nginx is not installed.' >&2
    sh ~/domiopublic/deploy/install_nginx.sh
@@ -33,6 +31,7 @@ if ! [ -x "$(command -v nginx)" ]; then
    echo "nginx is already installed!" >&2
 fi
 
+sh ~/domiopublic/deploy/install_deps.sh
 sh ~/domiopublic/deploy/copy_templates.sh
 sh ~/domiopublic/deploy/copy_domio_service_config.sh
 sh ~/domiopublic/deploy/copy_nginx_config_files.sh
