@@ -5,16 +5,23 @@ import (
     "html/template"
     "domio_public/components/config"
     "path"
+    "log"
 )
 
 var Template *template.Template
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
 
+    var err error
+
     t := template.New("some template") // Create a template.
-    t, _ = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))  // Parse template file.
+    t, err = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))  // Parse template file.
+    if (err != nil) {
+        log.Fatal(err)
+
+    }
     /*user := GetUser() // Get current user infomration.*/
-    t.Execute(w, nil)  // merge.
+    t.Execute(w, "")  // merge.
 
 
 }
