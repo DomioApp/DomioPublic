@@ -31,12 +31,15 @@ http {
 
     #gzip  on;
 
+
+    #    Redirect all non-https requests to https naked domain
     server {
         listen 80;
         server_name domio.in www.domio.in;
         return 301 https://domio.in$request_uri;
     }
 
+    #    Redirect all https wwww requests to https naked domain
     server {
         listen      443 ssl http2;
         listen [::]:443 ssl http2;
