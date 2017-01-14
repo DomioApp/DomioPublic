@@ -55,29 +55,14 @@ func processInitArguments() Arguments {
 
     initCommand := flag.NewFlagSet("init", flag.ExitOnError)
     filenameFlag := initCommand.String("file", "config.json", "config file absolute path")
-    awsAccessKeyIdFlag := initCommand.String("aws-access-key-id", "", "AWS Access Key ID")
-    awsSecretAccessKeyFlag := initCommand.String("aws-secret-access-key", "", "AWS Secret Access Key")
-    dbNameFlag := initCommand.String("db-name", "", "DB name")
-    dbUserFlag := initCommand.String("db-user", "", "DB user name")
-    dbPasswordFlag := initCommand.String("db-password", "", "DB password")
-    webPortFlag := initCommand.Uint("port", 8080, "Port for the HTTP server to run on")
+    templatesFolder := initCommand.String("templates-folder", "/usr/local/domio_public", "templates folder absolute path")
+    webPortFlag := initCommand.Uint("port", 8090, "Port for the HTTP server to run on")
     envFlag := initCommand.String("env", "development", "Environment name: development, testing, production")
-
-    log.Print(*filenameFlag)
-    log.Print(*awsAccessKeyIdFlag)
-    log.Print(*awsSecretAccessKeyFlag)
-    log.Print(*awsSecretAccessKeyFlag)
-    log.Print(*dbNameFlag)
-    log.Print(*dbUserFlag)
-    log.Print(*dbPasswordFlag)
-    log.Print(*dbPasswordFlag)
-    log.Print(*webPortFlag)
-    log.Print(*envFlag)
 
     initCommand.Parse(os.Args[2:])
 
     if initCommand.Parsed() {
-        config.InitConfigFile(filenameFlag, awsAccessKeyIdFlag, awsSecretAccessKeyFlag, dbNameFlag, dbUserFlag, dbPasswordFlag, webPortFlag, envFlag)
+        config.InitConfigFile(filenameFlag, templatesFolder, webPortFlag, envFlag)
     }
     return args
 }

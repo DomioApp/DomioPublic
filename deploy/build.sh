@@ -31,7 +31,7 @@ go build -o /usr/local/bin/domio_public -ldflags "-X main.Buildstamp=$buildstamp
 #                                 --db-user=$DOMIO_DB_USER \
 #                                 --db-password=$DOMIO_DB_PASSWORD
 
-#/domio/domio init --aws-access-key-id=12 --aws-secret-access-key=23 --db-name=34 --db-user=45 --db-password=56
+/usr/local/bin/domio_public init --templates-folder=/usr/local/domio_public
 
 cd /
 rm -rf ~/domiopublic

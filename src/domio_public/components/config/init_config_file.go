@@ -9,7 +9,7 @@ import (
     "path"
 )
 
-func InitConfigFile(filenameFlag *string, templatesFolder *string, awsSecretAccessKeyFlag *string, dbNameFlag *string, dbUserFlag *string, dbPasswordFlag *string, webPortFlag *uint, envFlag *string) error {
+func InitConfigFile(filenameFlag *string, templatesFolder *string, webPortFlag *uint, envFlag *string) error {
 
     argsErr := false
 
@@ -19,27 +19,7 @@ func InitConfigFile(filenameFlag *string, templatesFolder *string, awsSecretAcce
     }
 
     if *templatesFolder == "" {
-        fmt.Println("Please supply the --aws-access-key-id option.")
-        argsErr = true
-    }
-
-    if *awsSecretAccessKeyFlag == "" {
-        fmt.Println("Please supply the --aws-secret-access-key option.")
-        argsErr = true
-    }
-
-    if *dbNameFlag == "" {
-        fmt.Println("Please supply the DB name --db-name option.")
-        argsErr = true
-    }
-
-    if *dbUserFlag == "" {
-        fmt.Println("Please supply the DB user name --db-user option.")
-        argsErr = true
-    }
-
-    if *dbPasswordFlag == "" {
-        fmt.Println("Please supply the DB password --db-password option.")
+        fmt.Println("Please supply the --templates-folder option.")
         argsErr = true
     }
 
