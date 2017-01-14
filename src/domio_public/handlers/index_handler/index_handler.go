@@ -14,15 +14,16 @@ func IndexHandler(w http.ResponseWriter, req *http.Request) {
 
     var err error
 
-    t := template.New("some template") // Create a template.
-    t, err = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))  // Parse template file.
+    t := template.New("index.html")
+    t, err = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))
+
     if (err != nil) {
-        log.Fatal(err)
-
+        log.Print(err)
     }
-    /*user := GetUser() // Get current user infomration.*/
-    t.Execute(w, "")  // merge.
 
+
+    /*user := GetUser() // Get current user infomration.*/
+    t.Execute(w, nil)
 
 }
 
