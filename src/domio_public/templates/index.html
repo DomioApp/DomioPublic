@@ -20,7 +20,14 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				flex-direction: column;
 			}
+
+			.stats-container {
+				display: flex;
+				flex-direction: column;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -49,7 +56,8 @@
 
             function reqListener() {
                 var data = JSON.parse(this.responseText);
-                var container = document.createElement('div')
+                var container = document.createElement('div');
+                container.classList.add('stats-container');
 
                 container.innerHTML =
                   '<p>Version: ' + data.app_version + '</p>' +
