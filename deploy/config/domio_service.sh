@@ -5,7 +5,7 @@ DESC="Domio Public service"
 PIDFILE="/var/run/${NAME}.pid"
 LOGFILE="/var/log/${NAME}.log"
 
-DAEMON="/user/local/bin/domio_public"
+DAEMON="/usr/local/bin/domio_public"
 
 #start-stop-daemon --start --background --make-pidfile --pidfile /var/run/domio.pid --exec /domio/domio
 #start-stop-daemon --stop --pidfile /var/run/domio.pid
@@ -13,7 +13,7 @@ DAEMON="/user/local/bin/domio_public"
 START_OPTS="--start --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} start"
 STOP_OPTS="--stop --pidfile ${PIDFILE}"
 
-test -x $DAEMON || exit 0
+test -x $DAEMON || exit 1
 
 set -e
 
