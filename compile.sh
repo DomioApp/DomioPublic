@@ -8,8 +8,7 @@ hash=`git rev-parse --short HEAD`
 version=`git tag -l --points-at HEAD`
 
 
-
-export GOPATH=$PWD
+#export GOPATH=${PWD}
 
 echo
 echo ---------------------------
@@ -19,11 +18,26 @@ echo "  Version:    ${version}"
 echo ---------------------------
 echo
 
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'CYGWIN_NT-10.0' ]]; then
+   platform='cygwin'
+elif [[ "$unamestr" == 'FreeBSD' ]]; then
+   platform='freebsd'
+fi
 
-#echo Compiling for Windows...
-#export GOARCH=amd64
-#export GOOS=windows
-#go build -o /usr/local/bin/${PROJECT_NAME}_win.exe -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+
+if [ $platform == "cygwin" ]
+    then
+        echo Compiling for Windows...
+        echo Output folder: /usr/local/bin/${PROJECT_NAME}_win.exe
+        export GOARCH=amd64
+        export GOOS=windows
+        go build -o /usr/local/bin/${PROJECT_NAME}_win.exe -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+
+fi
+
+
 
 
 #echo Compiling for Linux...
@@ -31,7 +45,7 @@ echo
 #export GOOS=linux
 #go build -o /usr/local/bin/${PROJECT_NAME}_linux -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
 
-echo Compiling for Mac...
-export GOARCH=amd64
-export GOOS=darwin
-go build -o /usr/local/bin/${PROJECT_NAME}_mac -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+#echo Compiling for Mac...
+#export GOARCH=amd64
+#export GOOS=darwin
+#go build -o /usr/local/bin/${PROJECT_NAME}_mac -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
