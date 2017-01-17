@@ -3,9 +3,7 @@ package login_page_handler
 import (
     "net/http"
     "html/template"
-    "domio_public/components/config"
-    "path"
-    "log"
+    "domio_public/templates"
 )
 
 var Template *template.Template
@@ -14,6 +12,10 @@ type TemplateData struct {
     Title string
 }
 
+func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
+    w.Write([]byte(templates.Show("John")))
+}
+/*
 func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
 
     var err error
@@ -29,6 +31,7 @@ func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
     t.Execute(w, templateData)
 
 }
+*/
 
 /*
 func IndexHandler(w http.ResponseWriter, req *http.Request) {

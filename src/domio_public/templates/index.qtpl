@@ -1,3 +1,0 @@
-{% func Hello(name string) %}
-<p>Hello, <i>{%s name %}</i>!</p>
-{% endfunc %}

@@ -1,0 +1,28 @@
+{% func Show(name string) %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="page">
+    <link href="/style.css" media="all" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" media="all" rel="stylesheet">
+</head>
+<body>
+<script type="text/javascript" src="/public.bundle.js"></script>
+<div id="login-container">
+    <p>Hey, {%s name %}</p>
+    <form id="login-form">
+        <div class="input-wrapper">
+            <input id="email-input" type="email">
+        </div>
+        <div class="input-wrapper">
+            <input id="password-input" type="password">
+        </div>
+        <div class="input-wrapper">
+            <input id="submit-button" type="submit" value="Login">
+        </div>
+    </form>
+</div>
+</body>
+</html>
+{% endfunc %}

@@ -26,6 +26,9 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
    platform='freebsd'
 fi
 
+cd ./src/domio_public/templates
+../../../utils/qtc
+cd ../../../
 
 if [ $platform == "cygwin" ]
     then
@@ -34,7 +37,6 @@ if [ $platform == "cygwin" ]
         export GOARCH=amd64
         export GOOS=windows
         go build -o /usr/local/bin/${PROJECT_NAME}_win.exe -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
-
 fi
 
 
