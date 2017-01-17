@@ -53,7 +53,6 @@ go_build:
 
         - go get -u github.com/valyala/quicktemplate
         - go get -u github.com/valyala/quicktemplate/qtc
-        - cd ./src/domio_public/templates
         - ./bin/qtc -dir ./src/domio_public/templates
 
         - go build -o bin/domio_public domio_public
