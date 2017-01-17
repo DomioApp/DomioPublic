@@ -97,5 +97,9 @@ http {
         location /app.user.js {
             alias /usr/local/domio_client/client.user.bundle.js;
         }
+
+        location /style.css {
+            alias /usr/local/domio_client/style.css;
+        }
     }
 }
