@@ -89,5 +89,13 @@ http {
         location / {
             proxy_pass   http://127.0.0.1:8090;
         }
+
+        location /app.public.js {
+            alias /usr/local/domio_client/client.public.bundle.js;
+        }
+
+        location /app.user.js {
+            alias /usr/local/domio_client/client.user.bundle.js;
+        }
     }
 }
