@@ -4,3 +4,4 @@ bin
 pkg
 src/*
 !src/domio_public
+src/domio_public/templates/**/*.go
