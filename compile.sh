@@ -26,9 +26,7 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
    platform='freebsd'
 fi
 
-cd ./src/domio_public/templates
-../../../utils/qtc
-cd ../../../
+./bin/qtc -dir ./src/domio_public/templates
 
 if [ $platform == "cygwin" ]
     then
