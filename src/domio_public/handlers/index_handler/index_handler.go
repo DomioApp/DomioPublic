@@ -13,8 +13,6 @@ type TemplateData struct {
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    //templates.WritePageTemplate(pages.Hello)
-    //templates.WriteHello(w, "john")
     w.Write([]byte(templates.Hello("John")))
 
 }
