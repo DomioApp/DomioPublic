@@ -50,8 +50,12 @@ go_build:
         - go get -u github.com/yosssi/ace
         - go get -u golang.org/x/crypto/bcrypt
         - go get -u github.com/RackSec/srslog
+
         - go get -u github.com/valyala/quicktemplate
         - go get -u github.com/valyala/quicktemplate/qtc
+        - cd ./src/domio_public/templates
+        - ../../../utils/qtc
+        - cd ../../../
 
         - go build -o bin/domio_public domio_public
     only:
