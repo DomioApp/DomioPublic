@@ -3,6 +3,7 @@ package routes
 import (
     "net/http"
     "domio_public/handlers/index_handler"
+    "domio_public/handlers/login_page_handler"
 )
 
 type Route struct {
@@ -20,5 +21,11 @@ var RoutesList = Routes{
         "GET",
         "/",
         index_handler.IndexHandler,
+    },
+    Route{
+        "LoginPage",
+        "GET",
+        "/login",
+        login_page_handler.LoginPageHandler,
     },
 }

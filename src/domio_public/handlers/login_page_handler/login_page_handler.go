@@ -1,9 +1,11 @@
-package index_handler
+package login_page_handler
 
 import (
     "net/http"
     "html/template"
-    "domio_public/templates"
+    "domio_public/components/config"
+    "path"
+    "log"
 )
 
 var Template *template.Template
@@ -12,20 +14,12 @@ type TemplateData struct {
     Title string
 }
 
-func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    //templates.WritePageTemplate(pages.Hello)
-    //templates.WriteHello(w, "john")
-    w.Write([]byte(templates.Hello("John")))
-
-}
-
-/*
-func IndexHandler(w http.ResponseWriter, req *http.Request) {
+func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
 
     var err error
 
-    t := template.New("index.html")
-    t, err = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))
+    t := template.New("login_page.html")
+    t, err = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "login_page.html"))
 
     if (err != nil) {
         log.Print(err)
@@ -35,7 +29,6 @@ func IndexHandler(w http.ResponseWriter, req *http.Request) {
     t.Execute(w, templateData)
 
 }
-*/
 
 /*
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
