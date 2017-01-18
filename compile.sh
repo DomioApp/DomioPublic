@@ -29,11 +29,11 @@ elif [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
 fi
 
-./bin/qtc -dir ./src/domio_public/templates
-
 if [ $platform == "cygwin" ]
     then
         echo Compiling for Windows...
+        export GOPATH=C:/Users/sbasharov/WebstormProjects/DomioPublic
+        qtc -dir ${GOPATH}/src/domio_public/templates
         echo Output folder: /usr/local/bin/${PROJECT_NAME}_win.exe
         export GOARCH=amd64
         export GOOS=windows

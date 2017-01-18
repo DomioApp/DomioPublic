@@ -4,6 +4,7 @@ import (
     "net/http"
     "html/template"
     //"domio_public/templates"
+    "domio_public/templates"
 )
 
 var Template *template.Template
@@ -13,7 +14,7 @@ type TemplateData struct {
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    //w.Write([]byte(templates.Hello("John")))
+    w.Write([]byte(templates.ShowIndex()))
 
 }
 
