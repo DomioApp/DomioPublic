@@ -14,7 +14,7 @@ type TemplateData struct {
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    w.Write([]byte(templates.ShowIndex()))
+    w.Write([]byte(templates.ShowIndex("Domio")))
 
 }
 
