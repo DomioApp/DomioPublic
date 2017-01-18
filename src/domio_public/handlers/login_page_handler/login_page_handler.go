@@ -2,11 +2,11 @@ package login_page_handler
 
 import (
     "net/http"
-    "domio_public/templates/login_page"
+    "domio_public/handlers/login_page_handler/login_page_template"
 )
 
 func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
-    w.Write([]byte(login_page.Show("John")))
+    w.Write([]byte(login_page_template.Show("John")))
 }
 /*
 func LoginPageHandler(w http.ResponseWriter, req *http.Request) {

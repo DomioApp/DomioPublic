@@ -2,7 +2,7 @@ package index_handler
 
 import (
     "net/http"
-    "domio_public/templates/index_page"
+    "domio_public/handlers/index_handler/index_page_template"
 )
 
 type TemplateData struct {
@@ -10,7 +10,7 @@ type TemplateData struct {
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    w.Write([]byte(index_page.ShowIndex("Domio")))
+    w.Write([]byte(index_page_template.Show("Domio")))
 
 }
 
