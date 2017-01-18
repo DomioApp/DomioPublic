@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo Building Domio...
+echo Building Domio Public...
 #rm -rf /domio
 #mkdir /domio
 

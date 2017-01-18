@@ -41,18 +41,19 @@ go_build:
     script:
         - export GOPATH=$PWD
 
-        - go get -u github.com/dgrijalva/jwt-go
-        - go get -u github.com/aws/aws-sdk-go/aws
-        - go get -u github.com/go-ini/ini
+#        - go get -u github.com/dgrijalva/jwt-go
+#        - go get -u github.com/aws/aws-sdk-go/aws
+#        - go get -u github.com/go-ini/ini
         - go get -u github.com/jmespath/go-jmespath
         - go get -u github.com/fatih/color
         - go get -u github.com/gorilla/mux
-        - go get -u github.com/yosssi/ace
-        - go get -u golang.org/x/crypto/bcrypt
+#        - go get -u github.com/yosssi/ace
+#        - go get -u golang.org/x/crypto/bcrypt
         - go get -u github.com/RackSec/srslog
 
         - go get -u github.com/valyala/quicktemplate
         - go get -u github.com/valyala/quicktemplate/qtc
+
         - ./bin/qtc -dir ./src/domio_public/templates
 
         - go build -o bin/domio_public domio_public
