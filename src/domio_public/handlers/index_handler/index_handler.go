@@ -2,19 +2,15 @@ package index_handler
 
 import (
     "net/http"
-    "html/template"
-    //"domio_public/templates"
-    "domio_public/templates"
+    "domio_public/templates/index_page"
 )
-
-var Template *template.Template
 
 type TemplateData struct {
     Title string
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    w.Write([]byte(templates.ShowIndex("Domio")))
+    w.Write([]byte(index_page.ShowIndex("Domio")))
 
 }
 
