@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" media="all" rel="stylesheet">
 </head>
 <body>
-<script type="text/javascript" src="/public.bundle.js"></script>
+<script type="text/javascript" src="/app.public.js"></script>
 <div id="login-container">
-    <p>Hey, {%s name %}</p>
+    <p>Hello, {%s name %}</p>
     <form id="login-form">
         <div class="input-wrapper">
             <input id="email-input" type="email">
