@@ -7,7 +7,7 @@ echo Building Domio Public...
 
 cd ~/domiopublic
 
-./bin/qtc -dir ./src/domio_public/templates
+./bin/qtc -dir ./src/domio_public/handlers
 
 #=====================================================================================================================
 
