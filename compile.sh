@@ -19,11 +19,14 @@ echo ---------------------------
 echo
 
 platform='unknown'
-unamestr=`uname`
+unamestr=`uname -s`
+
 if [[ "$unamestr" == 'CYGWIN_NT-10.0' ]]; then
    platform='cygwin'
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
-   platform='freebsd'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='mac'
+elif [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
 fi
 
 ./bin/qtc -dir ./src/domio_public/templates
@@ -37,15 +40,20 @@ if [ $platform == "cygwin" ]
         go build -o /usr/local/bin/${PROJECT_NAME}_win.exe -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
 fi
 
+if [ $platform == "mac" ]
+    then
+        echo Compiling for Mac...
+        echo Output folder: /usr/local/bin/${PROJECT_NAME}_mac
+        export GOARCH=amd64
+        export GOOS=darwin
+        go build -o /usr/local/bin/${PROJECT_NAME}_mac -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+fi
 
-
-
-#echo Compiling for Linux...
-#export GOARCH=amd64
-#export GOOS=linux
-#go build -o /usr/local/bin/${PROJECT_NAME}_linux -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
-
-#echo Compiling for Mac...
-#export GOARCH=amd64
-#export GOOS=darwin
-#go build -o /usr/local/bin/${PROJECT_NAME}_mac -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+if [ $platform == "linux" ]
+    then
+        echo Compiling for Linux...
+        export GOARCH=amd64
+        export GOOS=linux
+        echo Output folder: /usr/local/bin/${PROJECT_NAME}_linux
+        go build -o /usr/local/bin/${PROJECT_NAME}_linux -ldflags "-X main.Buildstamp=$buildstamp -X main.Hash=$hash  -X main.Version=$version" ${PROJECT_NAME}
+fi
