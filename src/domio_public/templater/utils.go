@@ -7,7 +7,8 @@ import (
 )
 
 type BasePageData struct {
-    Body template.HTML
+    Title string
+    Body  template.HTML
 }
 
 func GetParsedTemplate(templateName string) (*template.Template, error) {
@@ -24,6 +25,7 @@ func getTemplateAsString(templateName string) string {
     if (templateName == "Index") {
         t := template.New("temp_tmpl")
         pageData := BasePageData{
+            Title:"Domio",
             Body: template.HTML("{{.LinksContainer}} <br> {{.UserName}}"),
         }
         baseTemplate, err := t.Parse(getBaseTemplate())
@@ -46,7 +48,7 @@ func getBaseTemplate() string {
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
-                    <title></title>
+                    <title>{{.Title}}</title>
                     <link rel="stylesheet" type="text/css" href="/style.css">
                     <script src="/client.public.bundle.js"></script>
                 </head>
