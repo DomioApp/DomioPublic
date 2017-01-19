@@ -59,10 +59,6 @@ func LoadConfig() error {
     err := decoder.Decode(&Config)
 
 
-    log.Print("+++++++++++++++++++++++++++++++++++++++++++++++")
-    log.Print(Config.TemplatesFolder)
-    log.Print("+++++++++++++++++++++++++++++++++++++++++++++++")
-
     if err != nil {
         log.Fatalln("Config file load error:", err)
     }
