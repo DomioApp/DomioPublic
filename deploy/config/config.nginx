@@ -106,14 +106,17 @@ http {
         }
 
         location /app.public.js {
+            proxy_cache_valid any 30m;
             alias /usr/local/domio_client/client.public.bundle.js;
         }
 
         location /app.user.js {
+            proxy_cache_valid any 14d;
             alias /usr/local/domio_client/client.user.bundle.js;
         }
 
         location /style.css {
+            proxy_cache_valid any 14d;
             alias /usr/local/domio_client/style.css;
         }
     }
