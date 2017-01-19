@@ -5,6 +5,7 @@ import (
     "github.com/gorilla/mux"
     "domio_public/routes"
     "domio_public/components/config"
+    "log"
 )
 
 func NewRouter() *mux.Router {
@@ -13,9 +14,8 @@ func NewRouter() *mux.Router {
     router := mux.NewRouter().StrictSlash(true)
 
     if (conf.Env == "development") {
-        router.PathPrefix("/style.css").Handler(http.FileServer(http.Dir("/usr/local/domio_client/style.css")))
-        router.PathPrefix("/public.bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client/client.public.bundle.js")))
-        router.PathPrefix("/user.bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client/client.user.bundle.js")))
+        log.Print("Development environment, handling static files by Go...")
+        router.PathPrefix("/").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
     }
 
     for _, route := range routes.RoutesList {
