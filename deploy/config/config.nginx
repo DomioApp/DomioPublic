@@ -74,6 +74,7 @@ http {
             text/plain
             text/css
             text/js
+            text/html
             text/xml
             text/javascript
             application/javascript
