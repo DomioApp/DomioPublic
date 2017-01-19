@@ -33,7 +33,6 @@ if [ $platform == "cygwin" ]
     then
         echo Compiling for Windows...
         export GOPATH=C:/Users/sbasharov/WebstormProjects/DomioPublic
-        qtc -dir ${GOPATH}/src/domio_public/handlers
         echo Output folder: /usr/local/bin/${PROJECT_NAME}_win.exe
         export GOARCH=amd64
         export GOOS=windows
@@ -43,6 +42,7 @@ fi
 if [ $platform == "mac" ]
     then
         echo Compiling for Mac...
+        export GOPATH=$PWD
         echo Output folder: /usr/local/bin/${PROJECT_NAME}_mac
         export GOARCH=amd64
         export GOOS=darwin

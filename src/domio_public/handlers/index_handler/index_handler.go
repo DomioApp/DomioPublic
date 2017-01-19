@@ -2,48 +2,24 @@ package index_handler
 
 import (
     "net/http"
-    "domio_public/handlers/index_handler/index_page_template"
+    "html/template"
+    "domio_public/templater"
 )
 
-type TemplateData struct {
-    Title string
+type pageData struct {
+    LinksContainer template.HTML
+    UserName       string
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
-    w.Write([]byte(index_page_template.Show("Domio")))
 
+    w.Header().Set("Content-Type", "text/html")
+
+    t := template.New("Index")
+    output, _ := t.Parse("{{.LinksContainer}} <br> {{.UserName}}")
+
+    header := templater.GetHeader()
+    p := pageData{UserName: "Astaxie", LinksContainer:header}
+
+    output.Execute(w, p)
 }
-
-/*
-func IndexHandler(w http.ResponseWriter, req *http.Request) {
-
-    var err error
-
-    t := template.New("index.html")
-    t, err = t.ParseFiles(path.Join(config.Config.TemplatesFolder, "index.html"))
-
-    if (err != nil) {
-        log.Print(err)
-    }
-
-    templateData := TemplateData{Title:"hello there"}
-    t.Execute(w, templateData)
-
-}
-*/
-
-/*
-func IndexHandler(w http.ResponseWriter, req *http.Request) {
-
-    var err error
-    Template, err = ace.Load("index", "", &ace.Options{DynamicReload: true, BaseDir:config.Config.TemplatesFolder})
-
-    if err != nil {
-        log.Println(err)
-    }
-
-    if err := Template.Execute(w, map[string]string{"Msg": "Hello Domio"}); err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
-}*/
