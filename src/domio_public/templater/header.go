@@ -6,7 +6,8 @@ import (
 )
 
 type Link struct {
-    Url string
+    Url   string
+    Label string
 }
 type PageData struct {
     Links []Link
@@ -22,7 +23,7 @@ func GetHeader() template.HTML {
                                     <ul>
                                         {{range .Links}}
                                             <li>
-                                             <a href={{.Url}}>{{.Url}}</a>
+                                             <a href={{.Url}}>{{.Label}}</a>
                                             </li>
                                         {{end}}
                                     </ul>
@@ -32,8 +33,8 @@ func GetHeader() template.HTML {
 
     pageData := PageData{
         Links:[]Link{
-            Link{Url:"https://domio.in"},
-            Link{Url:"https://google.com"},
+            Link{Url:"/", Label:"Home"},
+            Link{Url:"/login", Label:"Login"},
         },
     }
 
