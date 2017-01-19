@@ -7,8 +7,6 @@ echo Building Domio Public...
 
 cd ~/domiopublic
 
-./bin/qtc -dir ./src/domio_public/handlers
-
 #=====================================================================================================================
 
 buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'`
