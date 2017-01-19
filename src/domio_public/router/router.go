@@ -4,27 +4,19 @@ import (
     "net/http"
     "github.com/gorilla/mux"
     "domio_public/routes"
-    //"domio_public/components/config"
+    "domio_public/components/config"
 )
 
 func NewRouter() *mux.Router {
-    //conf := config.Config
+    conf := config.Config
 
     router := mux.NewRouter().StrictSlash(true)
 
-    styleSheet := http.FileServer(http.Dir("/usr/local/domio_client/"))
-    http.Handle("/", styleSheet)
-
-
-    /*
     if (conf.Env == "development") {
-        styleSheet := http.FileServer(http.Dir("/style.css"))
-        http.Handle("/usr/local/domio_client/style.css", styleSheet)
-
-        scriptFile := http.FileServer(http.Dir("/public.bundle.js"))
-        http.Handle("/usr/local/domio_client/client.public.bundle.js", scriptFile)
+        router.PathPrefix("/style.css").Handler(http.FileServer(http.Dir("/usr/local/domio_client/style.css")))
+        router.PathPrefix("/public.bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client/client.public.bundle.js")))
+        router.PathPrefix("/user.bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client/client.user.bundle.js")))
     }
-    */
 
     for _, route := range routes.RoutesList {
         var handler http.Handler

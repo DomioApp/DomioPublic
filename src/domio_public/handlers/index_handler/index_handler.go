@@ -15,11 +15,14 @@ func IndexHandler(w http.ResponseWriter, req *http.Request) {
 
     w.Header().Set("Content-Type", "text/html")
 
-    t := template.New("Index")
-    output, _ := t.Parse("{{.LinksContainer}} <br> {{.UserName}}")
+    parsedTemplate, _ := templater.GetParsedTemplate("Index")
 
     header := templater.GetHeader()
-    p := pageData{UserName: "Astaxie", LinksContainer:header}
 
-    output.Execute(w, p)
+    p := pageData{
+        UserName: "Astaxie",
+        LinksContainer:header,
+    }
+
+    parsedTemplate.Execute(w, p)
 }
