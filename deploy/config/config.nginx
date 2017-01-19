@@ -66,8 +66,7 @@ http {
 
     server {
         gzip on;
-#        gzip_min_length  1100;
-        gzip_min_length  500;
+        gzip_min_length  1100;
         gzip_buffers  4 32k;
         gzip_proxied any;
 
