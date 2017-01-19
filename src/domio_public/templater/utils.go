@@ -4,6 +4,7 @@ import (
     "html/template"
     "bytes"
     "log"
+    "net/http"
 )
 
 type BasePageData struct {
@@ -11,23 +12,25 @@ type BasePageData struct {
     Body  template.HTML
 }
 
-func GetParsedTemplate(templateName string) (*template.Template, error) {
+func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
     t := template.New(templateName)
 
-    parsed, err := t.Parse(getTemplateAsString(templateName))
+    parsed, err := t.Parse(getTemplateAsString(templateName, title))
     if (err != nil) {
         log.Print(err)
     }
     return parsed, err
 }
 
-func getTemplateAsString(templateName string) string {
-    if (templateName == "Index") {
+func getTemplateAsString(templateName string, title string) string {
+    if (templateName == "IndexPage") {
         t := template.New("temp_tmpl")
+
         pageData := BasePageData{
-            Title:"Domio",
+            Title:title,
             Body: template.HTML("{{.LinksContainer}} <br> {{.UserName}}"),
         }
+
         baseTemplate, err := t.Parse(getBaseTemplate())
 
         if (err != nil) {
@@ -57,4 +60,12 @@ func getBaseTemplate() string {
                 </body>
                 </html>
     `
+}
+
+func WritePage(w http.ResponseWriter, parsedTemplate *template.Template, pageData interface{}) {
+    err := parsedTemplate.Execute(w, pageData)
+    if (err != nil) {
+        log.Print(err.Error())
+    }
+
 }

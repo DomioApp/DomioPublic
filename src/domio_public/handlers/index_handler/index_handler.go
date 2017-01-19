@@ -7,7 +7,7 @@ import (
     "log"
 )
 
-type pageData struct {
+type PageData struct {
     Title          string
     LinksContainer template.HTML
     UserName       string
@@ -17,7 +17,7 @@ var parsedTemplate *template.Template
 
 func init() {
     var err error
-    parsedTemplate, err = templater.GetParsedTemplate("Index")
+    parsedTemplate, err = templater.GetParsedTemplate("IndexPage", "Domio")
 
     if (err != nil) {
         log.Print(err)
@@ -28,13 +28,11 @@ func IndexHandler(w http.ResponseWriter, req *http.Request) {
 
     w.Header().Set("Content-Type", "text/html")
 
-    header := templater.GetHeader()
-
-    p := pageData{
+    pageData := PageData{
         Title: "Domio",
-        UserName: "Astaxie",
-        LinksContainer:header,
+        UserName: "Domio",
+        LinksContainer: templater.GetHeader(),
     }
 
-    parsedTemplate.Execute(w, p)
+    templater.WritePage(w, parsedTemplate, pageData)
 }
