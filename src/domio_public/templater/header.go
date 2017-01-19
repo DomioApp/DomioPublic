@@ -17,10 +17,16 @@ func GetHeader() template.HTML {
     t := template.New("Index")
 
     output, _ := t.Parse(`
-                            <div class="b-links-list-container">
-                                {{range .Links}}
-                                    <a href={{.Url}}>{{.Url}}</a>
-                                {{end}}
+                            <div class="b-top-bar-container">
+                                <div class="left-column">
+                                    <ul>
+                                        {{range .Links}}
+                                            <li>
+                                             <a href={{.Url}}>{{.Url}}</a>
+                                            </li>
+                                        {{end}}
+                                    </ul>
+                                </div>
                             </div>
                         `)
 

@@ -9,7 +9,7 @@ import (
 
 type PageData struct {
     Title          string
-    LinksContainer template.HTML
+    TopBar template.HTML
     UserName       string
 }
 
@@ -31,7 +31,7 @@ func IndexHandler(w http.ResponseWriter, req *http.Request) {
     pageData := PageData{
         Title: "Domio",
         UserName: "Domio",
-        LinksContainer: templater.GetHeader(),
+        TopBar: templater.GetHeader(),
     }
 
     templater.WritePage(w, parsedTemplate, pageData)
