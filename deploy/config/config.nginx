@@ -68,7 +68,21 @@ http {
         gzip on;
         gzip_min_length  1100;
         gzip_buffers  4 32k;
-        gzip_types    text/plain application/x-javascript text/xml text/css;
+        gzip_proxied any;
+
+        gzip_types
+            text/plain
+            text/css
+            text/js
+            text/xml
+            text/javascript
+            application/javascript
+            application/x-javascript
+            application/json
+            application/xml
+            application/rss+xml
+            image/svg+xml;
+
         gzip_vary on;
 
         listen      443 ssl http2;
