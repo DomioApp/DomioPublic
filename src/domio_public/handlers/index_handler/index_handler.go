@@ -5,6 +5,7 @@ import (
     "html/template"
     "domio_public/templater"
     "log"
+    "domio_public/components/api"
 )
 
 type PageData struct {
@@ -25,6 +26,7 @@ func init() {
 }
 
 func IndexHandler(w http.ResponseWriter, req *http.Request) {
+    api.GetApiStatus()
 
     w.Header().Set("Content-Type", "text/html")
 
