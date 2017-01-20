@@ -15,7 +15,6 @@ type Link struct {
 
 type BasePageData struct {
     Title          string
-    ScriptFilePath string
     Body           template.HTML
 }
 
@@ -52,7 +51,6 @@ func getTemplateAsString(templateName string, title string) string {
         return doc.String()
     } else if (templateName == "LoginPage") {
         pageData := BasePageData{
-            ScriptFilePath:"login_page.js",
             Title: title,
             Body: template.HTML(LoginPageTemplate),
         }
@@ -85,10 +83,7 @@ func getBaseTemplate() string {
                     <body>
                         {{.Body}}
                     </body>
-                    <script src="/api_connector.js"></script>
-                    {{if .ScriptFilePath}}
-                        <script src="/{{.ScriptFilePath}}"></script>
-                    {{end}}
+                    <script src="/bundle.js"></script>
                 </html>
     `
 }
