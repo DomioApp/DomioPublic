@@ -105,12 +105,8 @@ http {
             proxy_pass   http://127.0.0.1:8090;
         }
 
-        location /login_page.js {
-            alias /usr/local/domio_client/scripts/login_page.js;
-        }
-
-        location /api_connector.js {
-            alias /usr/local/domio_client/scripts/api_connector.js;
+        location /bundle.js {
+            alias /usr/local/domio_client/bundle.js;
         }
 
         location /style.css {
