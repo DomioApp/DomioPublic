@@ -7,10 +7,20 @@ import (
     "net/http"
 )
 
-type BasePageData struct {
-    Title string
-    Body  template.HTML
+type Link struct {
+    Url       string
+    Label     string
+    ClassName string
 }
+
+type BasePageData struct {
+    Title          string
+    ScriptFilePath string
+    Body           template.HTML
+}
+
+const IndexPageTemplate = "{{.TopBar}} <br> {{.UserName}}"
+const LoginPageTemplate = "{{.LoginForm}}"
 
 func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
     t := template.New(templateName)
@@ -23,12 +33,28 @@ func GetParsedTemplate(templateName string, title string) (*template.Template, e
 }
 
 func getTemplateAsString(templateName string, title string) string {
-    if (templateName == "IndexPage") {
-        t := template.New("temp_tmpl")
+    t := template.New("temp_tmpl")
 
+    if (templateName == "IndexPage") {
         pageData := BasePageData{
             Title:title,
-            Body: template.HTML("{{.TopBar}} <br> {{.UserName}}"),
+            Body: template.HTML(IndexPageTemplate),
+        }
+
+        baseTemplate, err := t.Parse(getBaseTemplate())
+
+        if (err != nil) {
+            log.Print(err)
+        }
+
+        var doc bytes.Buffer
+        baseTemplate.Execute(&doc, pageData)
+        return doc.String()
+    } else if (templateName == "LoginPage") {
+        pageData := BasePageData{
+            ScriptFilePath:"login_page.js",
+            Title: title,
+            Body: template.HTML(LoginPageTemplate),
         }
 
         baseTemplate, err := t.Parse(getBaseTemplate())
@@ -49,15 +75,19 @@ func getBaseTemplate() string {
     return `
                 <!DOCTYPE html>
                 <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>{{.Title}}</title>
-                    <link rel="stylesheet" type="text/css" href="/style.css">
-                    <script src="/client.public.bundle.js"></script>
-                </head>
-                <body>
-                    {{.Body}}
-                </body>
+
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>{{.Title}}</title>
+                        <link rel="stylesheet" type="text/css" href="/style.css">
+                    </head>
+
+                    <body>
+                        {{.Body}}
+                    </body>
+                    {{if .ScriptFilePath}}
+                        <script src="/{{.ScriptFilePath}}"></script>
+                    {{end}}
                 </html>
     `
 }

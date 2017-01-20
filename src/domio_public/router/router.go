@@ -16,7 +16,7 @@ func NewRouter() *mux.Router {
     if (conf.Env == "development") {
         log.Print("Development environment, handling static files by Go...")
         router.Path("/style.css").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
-        router.Path("/client.public.bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
+        router.Path("/login_page.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
         router.Path("/client.user.bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
     }
 
