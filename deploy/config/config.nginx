@@ -109,6 +109,10 @@ http {
             alias /usr/local/domio_client/scripts/login_page.js;
         }
 
+        location /api_connector.js {
+            alias /usr/local/domio_client/scripts/api_connector.js;
+        }
+
         location /style.css {
             alias /usr/local/domio_client/style.css;
         }

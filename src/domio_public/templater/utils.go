@@ -85,6 +85,7 @@ func getBaseTemplate() string {
                     <body>
                         {{.Body}}
                     </body>
+                    <script src="/api_connector.js"></script>
                     {{if .ScriptFilePath}}
                         <script src="/{{.ScriptFilePath}}"></script>
                     {{end}}
