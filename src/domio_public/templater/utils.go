@@ -28,7 +28,7 @@ func getTemplateAsString(templateName string, title string) string {
 
         pageData := BasePageData{
             Title:title,
-            Body: template.HTML("{{.LinksContainer}} <br> {{.UserName}}"),
+            Body: template.HTML("{{.TopBar}} <br> {{.UserName}}"),
         }
 
         baseTemplate, err := t.Parse(getBaseTemplate())
