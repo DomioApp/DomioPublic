@@ -106,15 +106,10 @@ http {
         }
 
         location /login_page.js {
-            add_header Cache-Control "public";
-            expires 14d;
             alias /usr/local/domio_client/scripts/login_page.js;
         }
 
         location /style.css {
-            add_header Cache-Control "public";
-            expires 14d;
-
             alias /usr/local/domio_client/style.css;
         }
     }
