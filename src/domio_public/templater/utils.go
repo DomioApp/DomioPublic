@@ -14,8 +14,9 @@ type Link struct {
 }
 
 type BasePageData struct {
-    Title string
-    Body  template.HTML
+    Title    string
+    PageName string
+    Body     template.HTML
 }
 
 const IndexPageTemplate = `
@@ -40,7 +41,8 @@ func getTemplateAsString(templateName string, title string) string {
 
     if (templateName == "IndexPage") {
         pageData := BasePageData{
-            Title:title,
+            PageName: templateName,
+            Title: title,
             Body: template.HTML(IndexPageTemplate),
         }
 
@@ -55,6 +57,7 @@ func getTemplateAsString(templateName string, title string) string {
         return doc.String()
     } else if (templateName == "LoginPage") {
         pageData := BasePageData{
+            PageName: templateName,
             Title: title,
             Body: template.HTML(LoginPageTemplate),
         }
@@ -80,7 +83,7 @@ func getBaseTemplate() string {
 
                     <head>
                         <meta charset="UTF-8">
-                        <meta name="page" content="default_page">
+                        <meta name="page" content="{{.PageName}}">
                         <title>{{.Title}}</title>
                         <link rel="stylesheet" type="text/css" href="/style.css">
                     </head>
