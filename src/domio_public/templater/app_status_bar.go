@@ -4,7 +4,6 @@ import (
     "html/template"
     "bytes"
     "domio_public/components/api"
-    "log"
 )
 
 func GetAppStatusInfoBar(appStatusInfo api.AppStatusInfo) template.HTML {
