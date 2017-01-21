@@ -14,11 +14,23 @@ type Link struct {
 }
 
 type BasePageData struct {
-    Title          string
-    Body           template.HTML
+    Title string
+    Body  template.HTML
 }
 
-const IndexPageTemplate = "{{.TopBar}} <br> {{.UserName}}"
+const IndexPageTemplate = `
+                            {{.TopBar}}
+                                <div class="b-app-status-info">
+                                    {{with .AppStatusInfo}}
+                                        <div>Version: <span>{{.Version}}</span></div>
+                                        <div>Build: <span>{{.BuildAgo}} ago</span></div>
+                                        <div>Buildstamp: <span>{{.Buildstamp}}</span></div>
+                                        <div>BuildDateTime: <span>{{.BuildTimeDate}}</span></div>
+                                        <div>Hash: <span>{{.Hash}}</span></div>
+                                    {{end}}
+                                </div>
+                            `
+
 const LoginPageTemplate = "{{.LoginForm}}"
 
 func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
