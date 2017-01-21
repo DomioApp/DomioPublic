@@ -54,7 +54,7 @@ deploy_staging:
     stage: deploy
     script:
       - echo "Deploy to staging server"
-      - ssh root@$DEPLOY_STAGING_IP "rm -rf ~/domiopublic; git clone git@gitlab.com:basharov/DomioPublic.git ~/domiopublic; cd ~/domiopublic; export TEMPLATES_FOLDER=$TEMPLATES_FOLDER; export PORT=$PORT; ./deploy.sh"
+      - ssh root@$DEPLOY_STAGING_IP "rm -rf ~/domiopublic; git clone git@gitlab.com:basharov/DomioPublic.git ~/domiopublic; cd ~/domiopublic; export PORT=$PORT; ./deploy.sh"
     environment:
       name: staging
       url: https://domio.in

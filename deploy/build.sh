@@ -30,7 +30,7 @@ go build -o /usr/local/bin/domio_public -ldflags "-X main.Buildstamp=$buildstamp
 #                                 --db-user=$DOMIO_DB_USER \
 #                                 --db-password=$DOMIO_DB_PASSWORD
 
-/usr/local/bin/domio_public init --templates-folder=/usr/local/domio_public/templates
+/usr/local/bin/domio_public init --env=staging
 
 cd /
 rm -rf ~/domiopublic
