@@ -13,6 +13,7 @@ type Configuration struct {
     TemplatesFolder string `json:"templates_folder"`
     Port            uint    `json:"port"`
     Env             string    `json:"env"`
+    ApiUrl          string    `json:"api_url"`
 }
 
 type AppStatus struct {
@@ -57,7 +58,6 @@ func LoadConfig() error {
 
     decoder := json.NewDecoder(file)
     err := decoder.Decode(&Config)
-
 
     if err != nil {
         log.Fatalln("Config file load error:", err)

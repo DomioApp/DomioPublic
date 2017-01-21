@@ -3,6 +3,7 @@ package api
 import (
     "net/http"
     "log"
+    "domio_public/components/config"
 )
 
 type AppStatusInfo struct {
@@ -16,7 +17,7 @@ type AppStatusInfo struct {
 
 // GetAPIStatus comment
 func GetAPIStatus() AppStatusInfo {
-    url := "https://api.domio.in"
+    url := config.Config.ApiUrl
     //fmt.Println("URL:> ", url)
 
     req, err := http.NewRequest("GET", url, nil)
