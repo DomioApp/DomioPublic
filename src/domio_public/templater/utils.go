@@ -80,6 +80,7 @@ func getBaseTemplate() string {
 
                     <head>
                         <meta charset="UTF-8">
+                        <meta name="page" content="default_page">
                         <title>{{.Title}}</title>
                         <link rel="stylesheet" type="text/css" href="/style.css">
                     </head>
