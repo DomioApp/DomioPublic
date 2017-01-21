@@ -20,16 +20,8 @@ type BasePageData struct {
 
 const IndexPageTemplate = `
                             {{.TopBar}}
-                                <div class="b-app-status-info">
-                                    {{with .AppStatusInfo}}
-                                        <div>Version: <span>{{.Version}}</span></div>
-                                        <div>Built: <span>{{.BuildAgo}} ago</span></div>
-                                        <div>Buildstamp: <span>{{.Buildstamp}}</span></div>
-                                        <div>BuildDateTime: <span>{{.BuildDateTime}}</span></div>
-                                        <div>Hash: <span>{{.Hash}}</span></div>
-                                    {{end}}
-                                </div>
-                            `
+                            {{.AppStatusInfoBar}}
+                          `
 
 const LoginPageTemplate = "{{.LoginForm}}"
 

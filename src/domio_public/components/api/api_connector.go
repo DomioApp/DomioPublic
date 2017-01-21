@@ -39,7 +39,5 @@ func GetAPIStatus() AppStatusInfo {
         return appStatusInfo
     }
 
-    log.Print(appStatusInfo.BuildDateTime)
-
     return appStatusInfo
 }

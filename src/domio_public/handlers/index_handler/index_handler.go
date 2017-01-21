@@ -9,10 +9,9 @@ import (
 )
 
 type PageData struct {
-    Title         string
-    UserName      string
-    TopBar        template.HTML
-    AppStatusInfo api.AppStatusInfo
+    Title            string
+    TopBar           template.HTML
+    AppStatusInfoBar template.HTML
 }
 
 var parsedTemplate *template.Template
@@ -33,9 +32,8 @@ func IndexHandler(w http.ResponseWriter, req *http.Request) {
 
     pageData := PageData{
         Title:    "Domio",
-        UserName: "Domio",
         TopBar:   templater.GetTopBar(),
-        AppStatusInfo: appStatusInfo,
+        AppStatusInfoBar: templater.GetAppStatusInfoBar(appStatusInfo),
     }
 
     templater.WritePage(w, parsedTemplate, pageData)
