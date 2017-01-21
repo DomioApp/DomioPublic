@@ -12,6 +12,7 @@ func GetAppStatusInfoBar(appStatusInfo api.AppStatusInfo) template.HTML {
 
     output, _ := t.Parse(`
                             <div class="b-app-status-info">
+                                <div><span>API Info</span></div>
                                 <div>Version: <span>{{.Version}}</span></div>
                                 <div>Built: <span>{{.BuildAgo}} ago</span></div>
                                 <div>Buildstamp: <span>{{.Buildstamp}}</span></div>
