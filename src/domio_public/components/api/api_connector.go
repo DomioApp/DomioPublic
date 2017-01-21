@@ -9,7 +9,7 @@ type AppStatusInfo struct {
     Version       string `json:"app_version"`
     BuildAgo      string `json:"app_buildago"`
     Buildstamp    string `json:"app_buildstamp"`
-    BuildTimeDate string `json:"app_builddatetime"`
+    BuildDateTime string `json:"app_builddatetime"`
     Hash          string `json:"app_hash"`
 }
 
@@ -39,7 +39,7 @@ func GetAPIStatus() AppStatusInfo {
         return appStatusInfo
     }
 
-    log.Print(appStatusInfo.BuildTimeDate)
+    log.Print(appStatusInfo.BuildDateTime)
 
     return appStatusInfo
 }
