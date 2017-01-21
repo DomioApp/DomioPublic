@@ -10,7 +10,6 @@ import (
 )
 
 type Configuration struct {
-    TemplatesFolder string `json:"templates_folder"`
     Port            uint    `json:"port"`
     Env             string    `json:"env"`
     ApiUrl          string    `json:"api_url"`
