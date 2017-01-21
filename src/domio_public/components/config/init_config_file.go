@@ -9,17 +9,12 @@ import (
     "path"
 )
 
-func InitConfigFile(filenameFlag *string, templatesFolder *string, webPortFlag *uint, envFlag *string, apiUrl *string) error {
+func InitConfigFile(filenameFlag *string, webPortFlag *uint, envFlag *string, apiUrl *string) error {
 
     argsErr := false
 
     if *filenameFlag == "" {
         fmt.Println("Please supply the filename --file option.")
-        argsErr = true
-    }
-
-    if *templatesFolder == "" {
-        fmt.Println("Please supply the --templates-folder option.")
         argsErr = true
     }
 
@@ -31,7 +26,6 @@ func InitConfigFile(filenameFlag *string, templatesFolder *string, webPortFlag *
     //dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 
     conf := Configuration{
-        TemplatesFolder: *templatesFolder,
         Port: *webPortFlag,
         Env: *envFlag,
         ApiUrl: *apiUrl,
