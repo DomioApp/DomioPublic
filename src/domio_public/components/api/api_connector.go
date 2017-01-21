@@ -4,6 +4,9 @@ import (
     "net/http"
     "log"
     "domio_public/components/config"
+    "fmt"
+    "github.com/fatih/color"
+    "time"
 )
 
 type AppStatusInfo struct {
@@ -17,21 +20,32 @@ type AppStatusInfo struct {
 
 // GetAPIStatus comment
 func GetAPIStatus() AppStatusInfo {
-    url := config.Config.ApiUrl
-    //fmt.Println("URL:> ", url)
 
-    req, err := http.NewRequest("GET", url, nil)
+    var appStatusInfo AppStatusInfo
+
+    url := config.Config.ApiUrl
+
+    color.Set(color.FgGreen)
+    fmt.Println("URL:> ", url)
+    color.Unset()
+
+    req, requestErr := http.NewRequest("GET", url, nil)
 
     req.Header.Set("Content-Type", "application/json")
 
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    if err != nil {
-        panic(err)
+    timeout := time.Duration(5 * time.Second)
+
+    client := &http.Client{
+        Timeout: timeout,
+    }
+
+    resp, requestErr := client.Do(req)
+
+    if requestErr != nil {
+        log.Print(requestErr)
+        return appStatusInfo
     }
     defer resp.Body.Close()
-
-    var appStatusInfo AppStatusInfo
 
     decodeError := DecodeJsonRequestBody(resp, &appStatusInfo)
 
