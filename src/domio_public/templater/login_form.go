@@ -30,7 +30,7 @@ func GetLoginForm() template.HTML {
                                         {{range .FormRows}}
                                              <div>
                                                 <label>{{.Label}}</label>
-                                                <input name="{{.Name}}"></input>
+                                                <input autocomplete="off" name="{{.Name}}"></input>
                                              </div>
                                         {{end}}
                                     </div>
