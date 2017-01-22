@@ -42,6 +42,7 @@ func GetTopBar() template.HTML {
         },
         RightColumnLinks:[]Link{
             Link{Url:"/login", Label:"Login"},
+            Link{Url:"/signup", Label:"Signup"},
         },
         DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
     }
