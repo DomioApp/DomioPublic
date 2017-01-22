@@ -7,7 +7,8 @@ import (
 
 type FormRow struct {
     Label string
-    Name string
+    Name  string
+    Type  string
 }
 
 type SubmitButton struct {
@@ -30,7 +31,7 @@ func GetLoginForm() template.HTML {
                                         {{range .FormRows}}
                                              <div>
                                                 <label>{{.Label}}</label>
-                                                <input autocomplete="off" name="{{.Name}}"></input>
+                                                <input type="{{.Type}}" autocomplete="off" name="{{.Name}}"></input>
                                              </div>
                                         {{end}}
                                     </div>
@@ -46,8 +47,8 @@ func GetLoginForm() template.HTML {
 
     pageData := LoginPageData{
         FormRows:[]FormRow{
-            FormRow{Label:"Email", Name:"email"},
-            FormRow{Label:"Password", Name:"password"},
+            FormRow{Label:"Email", Name:"email", Type:"email"},
+            FormRow{Label:"Password", Name:"password", Type:"password"},
         },
         SubmitButton: SubmitButton{Label:"Submit"},
     }
