@@ -26,6 +26,8 @@ const IndexPageTemplate = `
 
 const LoginPageTemplate = "{{.LoginForm}}"
 
+const SignupPageTemplate = "{{.SignupForm}}"
+
 func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
     t := template.New(templateName)
 
@@ -60,6 +62,22 @@ func getTemplateAsString(templateName string, title string) string {
             PageName: templateName,
             Title: title,
             Body: template.HTML(LoginPageTemplate),
+        }
+
+        baseTemplate, err := t.Parse(getBaseTemplate())
+
+        if (err != nil) {
+            log.Print(err)
+        }
+
+        var doc bytes.Buffer
+        baseTemplate.Execute(&doc, pageData)
+        return doc.String()
+    } else if (templateName == "SignupPage") {
+        pageData := BasePageData{
+            PageName: templateName,
+            Title: title,
+            Body: template.HTML(SignupPageTemplate),
         }
 
         baseTemplate, err := t.Parse(getBaseTemplate())
