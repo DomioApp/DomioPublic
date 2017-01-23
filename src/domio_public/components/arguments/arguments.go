@@ -54,15 +54,16 @@ func processInitArguments() Arguments {
     }
 
     initCommand := flag.NewFlagSet("init", flag.ExitOnError)
+
     filenameFlag := initCommand.String("file", "config.json", "config file absolute path")
-    templatesFolder := initCommand.String("templates-folder", "/usr/local/domio_public", "templates folder absolute path")
     webPortFlag := initCommand.Uint("port", 8090, "Port for the HTTP server to run on")
     envFlag := initCommand.String("env", "development", "Environment name: development, testing, production")
+    apiUrl := initCommand.String("api-url", "https://api.domio.in/", "Url where API is served")
 
     initCommand.Parse(os.Args[2:])
 
     if initCommand.Parsed() {
-        config.InitConfigFile(filenameFlag, templatesFolder, webPortFlag, envFlag)
+        config.InitConfigFile(filenameFlag, webPortFlag, envFlag, apiUrl)
     }
     return args
 }

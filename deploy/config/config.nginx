@@ -107,10 +107,12 @@ http {
 
         location /bundle.js {
             alias /usr/local/domio_client/bundle.js;
+            expires 7d;
         }
 
         location /style.css {
             alias /usr/local/domio_client/style.css;
+            expires 7d;
         }
     }
 }
