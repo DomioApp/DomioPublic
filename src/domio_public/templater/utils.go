@@ -19,13 +19,19 @@ type BasePageData struct {
     Body     template.HTML
 }
 
+type HomePageData struct {
+    Title    string
+    PageName string
+    Header   template.HTML
+    Body     template.HTML
+}
+
 const IndexPageTemplate = `
-                            {{.TopBar}}
+                            {{.LeftColumn}}
+                            {{.RightColumn}}
                             {{.AppStatusInfoBar}}
                           `
-
 const LoginPageTemplate = "{{.LoginForm}}"
-
 const SignupPageTemplate = "{{.SignupForm}}"
 
 func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
@@ -42,9 +48,10 @@ func getTemplateAsString(templateName string, title string) string {
     t := template.New("temp_tmpl")
 
     if (templateName == "IndexPage") {
-        pageData := BasePageData{
+        pageData := HomePageData{
             PageName: templateName,
             Title: title,
+            Header: template.HTML(`{{.TopBar}}`),
             Body: template.HTML(IndexPageTemplate),
         }
 

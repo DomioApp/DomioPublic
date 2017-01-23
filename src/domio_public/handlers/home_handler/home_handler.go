@@ -1,4 +1,4 @@
-package index_handler
+package home_handler
 
 import (
     "domio_public/components/api"
@@ -18,14 +18,14 @@ var parsedTemplate *template.Template
 
 func init() {
     var err error
-    parsedTemplate, err = templater.GetParsedTemplate("IndexPage", "Domio")
+    parsedTemplate, err = GetTemplate()
 
     if err != nil {
         log.Print(err)
     }
 }
 
-func IndexHandler(w http.ResponseWriter, req *http.Request) {
+func HomeHandler(w http.ResponseWriter, req *http.Request) {
     appStatusInfo := api.GetAPIStatus()
 
     w.Header().Set("Content-Type", "text/html")
