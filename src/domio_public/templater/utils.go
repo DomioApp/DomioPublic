@@ -34,16 +34,6 @@ const IndexPageTemplate = `
 const LoginPageTemplate = "{{.LoginForm}}"
 const SignupPageTemplate = "{{.SignupForm}}"
 
-func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
-    t := template.New(templateName)
-
-    parsed, err := t.Parse(getTemplateAsString(templateName, title))
-    if (err != nil) {
-        log.Print(err)
-    }
-    return parsed, err
-}
-
 func getTemplateAsString(templateName string, title string) string {
     t := template.New("temp_tmpl")
 
@@ -55,7 +45,7 @@ func getTemplateAsString(templateName string, title string) string {
             Body: template.HTML(IndexPageTemplate),
         }
 
-        baseTemplate, err := t.Parse(getBaseTemplate())
+        baseTemplate, err := t.Parse(GetBaseTemplateAsString())
 
         if (err != nil) {
             log.Print(err)
@@ -71,7 +61,7 @@ func getTemplateAsString(templateName string, title string) string {
             Body: template.HTML(LoginPageTemplate),
         }
 
-        baseTemplate, err := t.Parse(getBaseTemplate())
+        baseTemplate, err := t.Parse(GetBaseTemplateAsString())
 
         if (err != nil) {
             log.Print(err)
@@ -87,7 +77,7 @@ func getTemplateAsString(templateName string, title string) string {
             Body: template.HTML(SignupPageTemplate),
         }
 
-        baseTemplate, err := t.Parse(getBaseTemplate())
+        baseTemplate, err := t.Parse(GetBaseTemplateAsString())
 
         if (err != nil) {
             log.Print(err)
@@ -101,25 +91,6 @@ func getTemplateAsString(templateName string, title string) string {
     return "error"
 }
 
-func getBaseTemplate() string {
-    return `
-                <!DOCTYPE html>
-                <html lang="en">
-
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="page" content="{{.PageName}}">
-                        <title>{{.Title}}</title>
-                        <link rel="stylesheet" type="text/css" href="/style.css">
-                    </head>
-
-                    <body>
-                        {{.Body}}
-                    </body>
-                    <script src="/bundle.js"></script>
-                </html>
-    `
-}
 
 func WritePage(w http.ResponseWriter, parsedTemplate *template.Template, pageData interface{}) {
     err := parsedTemplate.Execute(w, pageData)
