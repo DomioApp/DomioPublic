@@ -8,10 +8,11 @@ import (
 )
 
 type HomePageData struct {
-    Title    string
-    PageName string
-    Header   template.HTML
-    Body     template.HTML
+    PageTitle string
+    PageName  string
+    Header    template.HTML
+    Body      template.HTML
+    SideBar   template.HTML
 }
 
 var parsedTemplate *template.Template
@@ -28,19 +29,37 @@ func HomeHandler(w http.ResponseWriter, req *http.Request) {
 
     baseTemplateContent := `
                         {{define "BaseTemplate"}}
-                            <head>{{template "head" .}}</head>
-                            <body>{{template "body" .}}</body>
+                            <!DOCTYPE html>
+
+                            <html lang="en">
+
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>{{.PageTitle}}</title>
+                                <link rel="stylesheet" href="/style.css" />
+                                {{template "head" .}}
+                            </head>
+
+                            <body>
+                                {{template "body" .}}
+                                <script src="/bundle.js"></script>
+                            </body>
+
+                            </html>
                         {{end}}`
 
     homeTemplateContent := `
-                            {{define "head"}}<title>Domio</title>{{end}}
-                            {{define "body"}}index{{end}}
+                            {{define "head"}}{{end}}
+                            {{define "body"}}
+                                <h1>{{.PageTitle}}</h1>
+                                {{.Body}}
+                                {{.SideBar}}
+                            {{end}}
                         `
 
     parsedBaseTemplate, _ := baseTemplate.Parse(baseTemplateContent)
 
     parsedHomeTemplate, _ := parsedBaseTemplate.Parse(homeTemplateContent)
-
 
     m := minify.New()
     m.AddFunc("text/html", html.Minify)
@@ -50,7 +69,9 @@ func HomeHandler(w http.ResponseWriter, req *http.Request) {
 
     w = mw
 
-    parsedHomeTemplate.ExecuteTemplate(w, "BaseTemplate", nil)
+    data := HomePageData{PageTitle:"Domio Home", Body:GetBody(), SideBar: GetSideBar()}
+
+    parsedHomeTemplate.ExecuteTemplate(w, "BaseTemplate", data)
 
     //appStatusInfo := api.GetAPIStatus()
 
@@ -83,4 +104,12 @@ func HomeHandler(w http.ResponseWriter, req *http.Request) {
     */
 
 
+}
+
+func GetSideBar() template.HTML {
+    return template.HTML("<h3>sidebar</h3>")
+}
+
+func GetBody() template.HTML {
+    return template.HTML("<h3>body</h3>")
 }
