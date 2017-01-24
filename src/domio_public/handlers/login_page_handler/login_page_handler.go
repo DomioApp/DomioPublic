@@ -32,10 +32,10 @@ func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
 
     w.Header().Set("Content-Type", "text/html")
 
-    pageData := LoginPageData{
-        Title: "Domio",
-        LoginForm:templater.GetLoginForm(),
-    }
+    //pageData := LoginPageData{
+    //    Title: "Domio",
+    //    LoginForm:templater.GetLoginForm(),
+    //}
 
-    templater.WritePage(w, parsedTemplate, pageData)
+    //templater.WritePage(w, parsedTemplate, pageData)
 }

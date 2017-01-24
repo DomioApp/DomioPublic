@@ -47,8 +47,8 @@ func GetLoginForm() template.HTML {
 
     pageData := LoginPageData{
         FormRows:[]FormRow{
-            FormRow{Label:"Email", Name:"email", Type:"email"},
-            FormRow{Label:"Password", Name:"password", Type:"password"},
+            {Label:"Email", Name:"email", Type:"email"},
+            {Label:"Password", Name:"password", Type:"password"},
         },
         SubmitButton: SubmitButton{Label:"Submit"},
     }

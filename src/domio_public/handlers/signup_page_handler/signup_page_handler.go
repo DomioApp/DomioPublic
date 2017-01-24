@@ -32,10 +32,10 @@ func SignupPageHandler(w http.ResponseWriter, req *http.Request) {
 
     w.Header().Set("Content-Type", "text/html")
 
-    pageData := SignupPageData{
-        Title: "Domio",
-        SignupForm:templater.GetLoginForm(),
-    }
-
-    templater.WritePage(w, parsedTemplate, pageData)
+    //pageData := SignupPageData{
+    //    Title: "Domio",
+    //    SignupForm:templater.GetLoginForm(),
+    //}
+    //
+    //templater.WritePage(w, parsedTemplate, pageData)
 }
