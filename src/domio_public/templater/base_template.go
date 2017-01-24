@@ -1,36 +1,33 @@
-package templater
+package base_template
 
-import (
-    "log"
-    "html/template"
-)
+import "html/template"
 
-func GetParsedTemplate(templateName string, title string) (*template.Template, error) {
-    t := template.New(templateName)
-
-    parsed, err := t.Parse(GetBaseTemplateAsString())
-    if (err != nil) {
-        log.Print(err)
-    }
-    return parsed, err
+func GetBaseTemplate() *template.Template {
+    baseTemplate := template.New("BaseTemplate")
+    parsedBaseTemplate, _ := baseTemplate.Parse(getBaseTemplateContent())
+    return parsedBaseTemplate
 }
 
-func GetBaseTemplateAsString() string {
-    return `
-                <!DOCTYPE html>
-                <html lang="en">
+func getBaseTemplateContent() string {
+    baseTemplateContent := `
+                        {{define "BaseTemplate"}}
+                            <!DOCTYPE html>
 
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="page" content="{{.PageName}}">
-                        <title>{{.Title}}</title>
-                        <link rel="stylesheet" type="text/css" href="/style.css">
-                    </head>
+                            <html lang="en">
 
-                    <body>
-                        {{.Body}}
-                    </body>
-                    <script src="/bundle.js"></script>
-                </html>
-           `
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>{{.PageTitle}}</title>
+                                <link rel="stylesheet" href="/style.css" />
+                                {{template "head" .}}
+                            </head>
+
+                            <body>
+                                {{template "body" .}}
+                                <script src="/bundle.js"></script>
+                            </body>
+
+                            </html>
+                        {{end}}`
+    return baseTemplateContent
 }

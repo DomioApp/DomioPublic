@@ -3,8 +3,9 @@ package home_handler
 import (
     "html/template"
     "net/http"
-    "github.com/tdewolff/minify"
-    "github.com/tdewolff/minify/html"
+    //"github.com/tdewolff/minify"
+    //"github.com/tdewolff/minify/html"
+    "domio_public/templater"
 )
 
 type HomePageData struct {
@@ -24,43 +25,10 @@ func init() {
 func HomeHandler(w http.ResponseWriter, req *http.Request) {
     w.Header().Set("Content-Type", "text/html")
 
-    baseTemplate := template.New("BaseTemplate")
-    //homeTemplate := template.New("HomeTemplate")
+    baseTemplate := base_template.GetBaseTemplate()
+    parsedHomeTemplate, _ := baseTemplate.Parse(getHomeTemplateContent())
 
-    baseTemplateContent := `
-                        {{define "BaseTemplate"}}
-                            <!DOCTYPE html>
-
-                            <html lang="en">
-
-                            <head>
-                                <meta charset="UTF-8">
-                                <title>{{.PageTitle}}</title>
-                                <link rel="stylesheet" href="/style.css" />
-                                {{template "head" .}}
-                            </head>
-
-                            <body>
-                                {{template "body" .}}
-                                <script src="/bundle.js"></script>
-                            </body>
-
-                            </html>
-                        {{end}}`
-
-    homeTemplateContent := `
-                            {{define "head"}}{{end}}
-                            {{define "body"}}
-                                <h1>{{.PageTitle}}</h1>
-                                {{.Body}}
-                                {{.SideBar}}
-                            {{end}}
-                        `
-
-    parsedBaseTemplate, _ := baseTemplate.Parse(baseTemplateContent)
-
-    parsedHomeTemplate, _ := parsedBaseTemplate.Parse(homeTemplateContent)
-
+    /*
     m := minify.New()
     m.AddFunc("text/html", html.Minify)
 
@@ -68,8 +36,13 @@ func HomeHandler(w http.ResponseWriter, req *http.Request) {
     defer mw.Close()
 
     w = mw
+    */
 
-    data := HomePageData{PageTitle:"Domio Home", Body:GetBody(), SideBar: GetSideBar()}
+    data := HomePageData{
+        PageTitle: "Domio Home",
+        Body: GetBody(),
+        SideBar: GetSideBar(),
+    }
 
     parsedHomeTemplate.ExecuteTemplate(w, "BaseTemplate", data)
 
@@ -104,6 +77,18 @@ func HomeHandler(w http.ResponseWriter, req *http.Request) {
     */
 
 
+}
+
+func getHomeTemplateContent() string {
+    homeTemplateContent := `
+                            {{define "head"}}{{end}}
+                            {{define "body"}}
+                                <h1>{{.PageTitle}}</h1>
+                                {{.Body}}
+                                {{.SideBar}}
+                            {{end}}
+                        `
+    return homeTemplateContent
 }
 
 func GetSideBar() template.HTML {
