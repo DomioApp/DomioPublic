@@ -4,6 +4,7 @@ import (
     "net/http"
     "domio_public/handlers/signup_page_handler"
     "domio_public/handlers/home_page_handler"
+    "domio_public/handlers/login_page_handler"
 )
 
 type Route struct {
@@ -22,14 +23,12 @@ var RoutesList = Routes{
         "/",
         home_page_handler.HomePageHandler,
     },
-    /*
     Route{
         "LoginPage",
         "GET",
         login_page_handler.GetUrl(),
         login_page_handler.LoginPageHandler,
     },
-    */
     Route{
         "SignupPage",
         "GET",
