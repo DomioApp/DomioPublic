@@ -45,6 +45,7 @@ go_build:
         - go get -u github.com/fatih/color
         - go get -u github.com/gorilla/mux
         - go get -u github.com/RackSec/srslog
+        - go get -u github.com/tdewolff/minify
 
         - go build -o bin/domio_public domio_public
     only:
