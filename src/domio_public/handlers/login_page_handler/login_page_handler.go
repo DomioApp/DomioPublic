@@ -3,8 +3,6 @@ package login_page_handler
 import (
     "net/http"
     "html/template"
-    "domio_public/templater"
-    "log"
 )
 
 type Person struct {
@@ -19,12 +17,12 @@ type LoginPageData struct {
 var parsedTemplate *template.Template
 
 func init() {
-    var err error
-    parsedTemplate, err = templater.GetParsedTemplate("LoginPage", "Domio Login")
-
-    if (err != nil) {
-        log.Print(err)
-    }
+    //var err error
+    //parsedTemplate, err = templater.GetParsedTemplate("LoginPage", "Domio Login")
+    //
+    //if (err != nil) {
+    //    log.Print(err)
+    //}
 
 }
 

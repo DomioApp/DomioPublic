@@ -1,9 +1,8 @@
 package home_handler
 
 import (
-    "domio_public/templater"
     "html/template"
-    "log"
+    "domio_public/templater"
 )
 
 const HomePageTemplate = `
@@ -11,18 +10,30 @@ const HomePageTemplate = `
                             {{.RightColumn}}
                             {{.AppStatusInfoBar}}
                           `
-const TopBar = `{{.TopBar}}`
 
 func GetTemplate() (*template.Template, error) {
-    baseTemplate := templater.GetBaseTemplateAsString()
+    baseTemplate := templater.GetBaseTemplate()
+    parsedHomeTemplate, _ := baseTemplate.Parse(getHomeTemplateContent())
 
-    t := template.New("temp_tmpl")
+    return parsedHomeTemplate, nil
+}
 
-    homeTemplate, err := t.Parse(baseTemplate)
+func getHomeTemplateContent() string {
+    homeTemplateContent := `
+                            {{define "head"}}{{end}}
+                            {{define "body"}}
+                                {{.TopBar}}
+                                {{.Body}}
+                                {{.SideBar}}
+                            {{end}}
+                        `
+    return homeTemplateContent
+}
 
-    if (err != nil) {
-        log.Print(err)
-    }
+func GetSideBar() template.HTML {
+    return template.HTML("<h3>sidebar</h3>")
+}
 
-    return homeTemplate, nil
+func GetBody() template.HTML {
+    return template.HTML("<h3>body</h3>")
 }

@@ -5,6 +5,7 @@ import (
     //"bytes"
     //"log"
     //"net/http"
+    "net/http"
 )
 
 type Link struct {
@@ -19,12 +20,10 @@ type BasePageData struct {
     Body     template.HTML
 }
 
-
 const LoginPageTemplate = "{{.LoginForm}}"
 const SignupPageTemplate = "{{.SignupForm}}"
 
 func getTemplateAsString(templateName string, title string) string {
-
 
     //if (templateName == "IndexPage") {
     //
@@ -64,4 +63,8 @@ func getTemplateAsString(templateName string, title string) string {
     //}
 
     return "error"
+}
+func WritePage(w http.ResponseWriter, template *template.Template, data interface{}) {
+    w.Header().Set("Content-Type", "text/html")
+    template.ExecuteTemplate(w, "BaseTemplate", data)
 }
