@@ -20,7 +20,7 @@ var RoutesList = Routes{
     Route{
         "Index",
         "GET",
-        "/",
+        home_page_handler.GetUrl(),
         home_page_handler.HomePageHandler,
     },
     Route{
