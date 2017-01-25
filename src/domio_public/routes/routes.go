@@ -26,13 +26,13 @@ var RoutesList = Routes{
     Route{
         "LoginPage",
         "GET",
-        "/login",
+        login_page_handler.GetUrl(),
         login_page_handler.LoginPageHandler,
     },
     Route{
         "SignupPage",
         "GET",
-        "/signup",
+        signup_page_handler.GetUrl(),
         signup_page_handler.SignupPageHandler,
     },
 }

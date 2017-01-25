@@ -4,6 +4,7 @@ import (
     "html/template"
     "domio_public/templater"
     "log"
+    "bytes"
 )
 
 func GetTemplate() (*template.Template, error) {
@@ -20,19 +21,43 @@ func GetTemplate() (*template.Template, error) {
 func getHomeTemplateContent() string {
     homeTemplateContent := `
                             {{define "head"}}{{end}}
+
                             {{define "body"}}
                                 {{.TopBar}}
-                                {{.Body}}
-                                {{.SideBar}}
+
+                                <div class="b-main-container">
+                                    {{.SideBar}}
+                                    {{.MainArea}}
+                                </div>
                             {{end}}
                         `
     return homeTemplateContent
 }
 
 func GetSideBar() template.HTML {
-    return template.HTML("<h3>sidebar</h3>")
+    return templater.GetSideBar()
 }
 
-func GetBody() template.HTML {
-    return template.HTML("<h3>body</h3>")
+type MainAreaData struct {
+    Content template.HTML
+}
+
+func GetMainArea() template.HTML {
+
+    t := template.New("MainArea")
+
+    output, _ := t.Parse(`
+                            <div class="b-main-area-container">
+                                {{.Content}}
+                            </div>
+                        `)
+
+    sideBarData := MainAreaData{
+        Content:"main content here",
+    }
+
+    var doc bytes.Buffer
+    output.Execute(&doc, sideBarData)
+
+    return template.HTML(doc.String())
 }

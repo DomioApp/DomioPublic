@@ -37,3 +37,7 @@ func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
 
     //templater.WritePage(w, parsedTemplate, pageData)
 }
+
+func GetUrl() string {
+    return "/login"
+}

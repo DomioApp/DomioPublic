@@ -15,7 +15,7 @@ type HomePageData struct {
 
     Header    template.HTML
     TopBar    template.HTML
-    Body      template.HTML
+    MainArea  template.HTML
     SideBar   template.HTML
 }
 
@@ -38,7 +38,7 @@ func HomeHandler(w http.ResponseWriter, req *http.Request) {
         PageTitle: "Domio Home",
 
         TopBar: templater.GetTopBar(),
-        Body: GetBody(),
+        MainArea: GetMainArea(),
         SideBar: GetSideBar(),
     }
 
