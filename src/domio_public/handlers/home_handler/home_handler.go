@@ -12,6 +12,7 @@ import (
 type HomePageData struct {
     PageTitle string
     PageName  string
+
     Header    template.HTML
     TopBar    template.HTML
     Body      template.HTML
@@ -33,6 +34,7 @@ func init() {
 func HomeHandler(w http.ResponseWriter, req *http.Request) {
 
     data := HomePageData{
+        PageName: "HomePage",
         PageTitle: "Domio Home",
 
         TopBar: templater.GetTopBar(),

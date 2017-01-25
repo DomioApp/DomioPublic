@@ -3,17 +3,16 @@ package home_handler
 import (
     "html/template"
     "domio_public/templater"
+    "log"
 )
-
-const HomePageTemplate = `
-                            {{.LeftColumn}}
-                            {{.RightColumn}}
-                            {{.AppStatusInfoBar}}
-                          `
 
 func GetTemplate() (*template.Template, error) {
     baseTemplate := templater.GetBaseTemplate()
-    parsedHomeTemplate, _ := baseTemplate.Parse(getHomeTemplateContent())
+    parsedHomeTemplate, parseErr := baseTemplate.Parse(getHomeTemplateContent())
+
+    if (parseErr != nil) {
+        log.Print(parseErr)
+    }
 
     return parsedHomeTemplate, nil
 }

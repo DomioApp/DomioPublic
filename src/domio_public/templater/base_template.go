@@ -18,6 +18,8 @@ func getBaseTemplateContent() string {
                             <head>
                                 <meta charset="UTF-8">
                                 <meta name="description" content="Domio is a marketplace for domains.">
+                                <meta name="page" content="{{.PageName}}">
+
                                 <title>{{.PageTitle}}</title>
                                 <link rel="stylesheet" href="/style.css" />
                                 {{template "head" .}}
