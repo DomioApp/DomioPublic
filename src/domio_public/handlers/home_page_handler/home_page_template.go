@@ -1,10 +1,10 @@
-package login_page_handler
+package home_page_handler
 
 import (
+    "html/template"
     "domio_public/templater"
     "log"
     "bytes"
-    "html/template"
 )
 
 func GetTemplate() (*template.Template, error) {

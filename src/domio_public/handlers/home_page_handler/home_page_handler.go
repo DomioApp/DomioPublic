@@ -1,4 +1,4 @@
-package login_page_handler
+package home_page_handler
 
 import (
     "html/template"
@@ -31,7 +31,7 @@ func init() {
     }
 }
 
-func HomeHandler(w http.ResponseWriter, req *http.Request) {
+func HomePageHandler(w http.ResponseWriter, req *http.Request) {
 
     data := HomePageData{
         PageName: "HomePage",
@@ -54,4 +54,7 @@ func initMinifier(w http.ResponseWriter, req *http.Request) {
     defer mw.Close()
 
     w = mw
+}
+func GetUrl() string {
+    return "/"
 }

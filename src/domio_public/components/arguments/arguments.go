@@ -5,9 +5,6 @@ import (
     "os"
     "fmt"
     "log"
-    //"domio_public/components/config"
-    //"domio_public/components/server"
-    //"domio_public/db"
     "domio_public/components/config"
     "domio_public/components/server"
 )

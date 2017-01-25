@@ -4,7 +4,6 @@ import (
     "html/template"
     "bytes"
     "domio_public/handlers/signup_page_handler"
-    "domio_public/handlers/login_page_handler"
 )
 
 type PageData struct {
@@ -43,7 +42,7 @@ func GetTopBar() template.HTML {
             Link{Url:"/domains", Label:"Domains"},
         },
         RightColumnLinks:[]Link{
-            Link{Url:login_page_handler.GetUrl(), Label:"Login"},
+            Link{Url:"/login", Label:"Login"},
             Link{Url:signup_page_handler.GetUrl(), Label:"Signup"},
         },
         DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
