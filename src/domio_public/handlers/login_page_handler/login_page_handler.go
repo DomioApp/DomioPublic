@@ -1,43 +1,57 @@
 package login_page_handler
 
 import (
-    "net/http"
     "html/template"
+    "net/http"
+    "log"
+    "github.com/tdewolff/minify"
+    "github.com/tdewolff/minify/html"
+    "domio_public/templater"
 )
 
-type Person struct {
-    UserName string
+type HomePageData struct {
+    PageTitle string
+    PageName  string
+
+    Header    template.HTML
+    TopBar    template.HTML
+    MainArea  template.HTML
+    SideBar   template.HTML
 }
 
-type LoginPageData struct {
-    Title     string
-    LoginForm template.HTML
-}
-
-var parsedTemplate *template.Template
+var homeTemplate *template.Template
 
 func init() {
-    //var err error
-    //parsedTemplate, err = templater.GetParsedTemplate("LoginPage", "Domio Login")
-    //
-    //if (err != nil) {
-    //    log.Print(err)
-    //}
+    var err error
+
+    homeTemplate, err = GetTemplate();
+
+    if (err != nil) {
+        log.Print(err)
+    }
+}
+
+func HomeHandler(w http.ResponseWriter, req *http.Request) {
+
+    data := HomePageData{
+        PageName: "HomePage",
+        PageTitle: "Domio Home",
+
+        TopBar: templater.GetTopBar(),
+        MainArea: GetMainArea(),
+        SideBar: GetSideBar(),
+    }
+
+    templater.WritePage(w, homeTemplate, data)
 
 }
 
-func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
+func initMinifier(w http.ResponseWriter, req *http.Request) {
+    m := minify.New()
+    m.AddFunc("text/html", html.Minify)
 
-    w.Header().Set("Content-Type", "text/html")
+    mw := m.ResponseWriter(w, req)
+    defer mw.Close()
 
-    //pageData := LoginPageData{
-    //    Title: "Domio",
-    //    LoginForm:templater.GetLoginForm(),
-    //}
-
-    //templater.WritePage(w, parsedTemplate, pageData)
-}
-
-func GetUrl() string {
-    return "/login"
+    w = mw
 }

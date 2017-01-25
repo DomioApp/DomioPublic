@@ -27,6 +27,7 @@ func getBaseTemplateContent() string {
 
                             <body>
                                 {{template "body" .}}
+                                {{template "appstatus" .}}
                                 <script src="/bundle.js"></script>
                             </body>
 
