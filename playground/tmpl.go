@@ -7,7 +7,6 @@ package main
 import (
     "html/template"
     "os"
-    "log"
 )
 
 type Data struct {
@@ -15,11 +14,13 @@ type Data struct {
 }
 
 func main() {
-    homePageTemplate, _ := template.New("home_template").Parse(`{{define "home_template"}}I'm inner {{.Title}}.{{end}}`)
+    homePageTemplate, _ := template.New("home_template").Parse(`{{define "home_template"}}I'm inner {{.Title}}.{{template "sidebar_template"}}{{end}}`)
+
+    homePageTemplate.New("sidebar_template").Parse(`{{define "sidebar_template"}}Sidebar here{{end}}`)
+
 
     base, _ := homePageTemplate.New("base_template").Parse(`{{define "base_template"}}I'm base, including inner: {{template "home_template" .}}{{end}}`)
 
-    log.Print(base.DefinedTemplates())
     data := Data{Title:"Hello there"}
     base.ExecuteTemplate(os.Stdout, "base_template", data)
 }
