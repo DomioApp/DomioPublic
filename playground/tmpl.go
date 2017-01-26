@@ -1,15 +1,25 @@
 //http://stackoverflow.com/questions/41856021/how-to-parse-multiple-strings-into-a-template-with-go
 //http://golang-examples.tumblr.com/post/87553422434/template-and-associated-templates
+//https://hackernoon.com/golang-template-1-bcb690165663#.yyz27j1br
 
 package main
 
 import (
     "html/template"
     "os"
+    "log"
 )
 
+type Data struct {
+    Title string
+}
+
 func main() {
-    t1, _ := template.New("t1").Parse(`{{define "one"}}I'm #1.{{end}}`)
-    t2, _ := t1.New("t2").Parse(`{{define "two"}}I'm #2, including #1: {{template "one" .}}{{end}}`)
-    t2.ExecuteTemplate(os.Stdout, "two", nil)
+    homePageTemplate, _ := template.New("home_template").Parse(`{{define "home_template"}}I'm inner {{.Title}}.{{end}}`)
+
+    base, _ := homePageTemplate.New("base_template").Parse(`{{define "base_template"}}I'm base, including inner: {{template "home_template" .}}{{end}}`)
+
+    log.Print(base.DefinedTemplates())
+    data := Data{Title:"Hello there"}
+    base.ExecuteTemplate(os.Stdout, "base_template", data)
 }
