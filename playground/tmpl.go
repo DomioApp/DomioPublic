@@ -19,8 +19,8 @@ func main() {
     homePageTemplate.New("sidebar_template").Parse(`{{define "sidebar_template"}}Sidebar here{{end}}`)
 
 
-    base, _ := homePageTemplate.New("base_template").Parse(`{{define "base_template"}}I'm base, including inner: {{template "home_template" .}}{{end}}`)
+    homePageTemplate.New("base_template").Parse(`{{define "base_template"}}I'm base, including inner: {{template "home_template" .}}{{end}}`)
 
     data := Data{Title:"Hello there"}
-    base.ExecuteTemplate(os.Stdout, "base_template", data)
+    homePageTemplate.ExecuteTemplate(os.Stdout, "base_template", data)
 }
