@@ -20,18 +20,20 @@ func main() {
         Title:"Hello there",
         SidebarContent:"123123123",
     }
+
     homePageTemplate := buildTemplate()
 
     writeTemplate(os.Stdout, homePageTemplate, data)
 }
 
 func writeTemplate(w io.Writer, tmpl *template.Template, data interface{}) {
-    tmpl.ExecuteTemplate(w, "base_template", data)
+    tmpl.Execute(w, data)
 }
 
 func buildTemplate() *template.Template {
-    parsedTemplate, _ := template.New("base_template").Parse(`{{define "base_template"}}
-                                                   I'm base, including inner: {{template "home_template" .}}
+    parsedTemplate, _ := template.New("base_template").Parse(`
+                                                                {{define "base_template"}}
+                                                                    I'm base, including inner: {{template "home_template" .}}
                                                  {{end}}`)
 
     parsedTemplate.New("sidebar_template").Parse(`{{define "sidebar_template"}}
