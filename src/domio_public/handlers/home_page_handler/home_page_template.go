@@ -2,64 +2,20 @@ package home_page_handler
 
 import (
     "html/template"
-    "domio_public/templater"
-    "log"
-    "bytes"
 )
 
-func GetTemplate() (*template.Template, error) {
-    baseTemplate := templater.GetBaseTemplate()
-    parsedHomeTemplate, parseErr := baseTemplate.Parse(getHomeTemplateContent())
+func GetHomeTemplate(parsedTemplate *template.Template) {
+    parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
+                                                    {{template "sidebar_template" .}}
+                                                {{end}}`)
 
-    if (parseErr != nil) {
-        log.Print(parseErr)
-    }
+    parsedTemplate.New("sidebar_template").Parse(`{{ define "sidebar_template"}}
+                                                        <div class="b-side-bar-container">
+                                                            <h4>{{.SideBarTitle}}</h4>
 
-    return parsedHomeTemplate, nil
-}
-
-func getHomeTemplateContent() string {
-    homeTemplateContent := `
-                            {{define "head"}}{{end}}
-
-                            {{define "body"}}
-                                {{.TopBar}}
-
-                                <div class="b-main-container">
-                                    {{.SideBar}}
-                                    {{.MainArea}}
-                                </div>
-                            {{end}}
-
-                            {{define "appstatus"}}{{.AppStatusInfo}}{{end}}
-                        `
-    return homeTemplateContent
-}
-
-func GetSideBar() template.HTML {
-    return templater.GetSideBar()
-}
-
-type MainAreaData struct {
-    Content template.HTML
-}
-
-func GetMainArea() template.HTML {
-
-    t := template.New("MainArea")
-
-    output, _ := t.Parse(`
-                            <div class="b-main-area-container">
-                                {{.Content}}
-                            </div>
-                        `)
-
-    sideBarData := MainAreaData{
-        Content:"main content here",
-    }
-
-    var doc bytes.Buffer
-    output.Execute(&doc, sideBarData)
-
-    return template.HTML(doc.String())
+                                                            {{range .Links}}
+                                                                 <a href="{{.Url}}">{{.Label}}</a>
+                                                            {{end}}
+                                                        </div>
+                                                    {{end}}`)
 }

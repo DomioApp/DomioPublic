@@ -5,43 +5,48 @@
 package main
 
 import (
-    "html/template"
-    "os"
-    "io"
+	"html/template"
+	"io"
+	"os"
 )
 
+type homeTemplateFn func(*template.Template)
+
 type Data struct {
-    Title          string
-    SidebarContent string
+	Title          string
+	SidebarContent string
 }
 
 func main() {
-    data := Data{
-        Title:"Hello there",
-        SidebarContent:"123123123",
-    }
+	data := Data{
+		Title:          "Hello there",
+		SidebarContent: "123123123",
+	}
 
-    homePageTemplate := buildTemplate()
+	homePageTemplate := BuildTemplate(GetHomeTemplate)
 
-    writeTemplate(os.Stdout, homePageTemplate, data)
+	writeTemplate(os.Stdout, homePageTemplate, data)
 }
 
 func writeTemplate(w io.Writer, tmpl *template.Template, data interface{}) {
-    tmpl.Execute(w, data)
+	tmpl.Execute(w, data)
 }
 
-func buildTemplate() *template.Template {
-    parsedTemplate, _ := template.New("base_template").Parse(`
-                                                                {{define "base_template"}}
-                                                                    I'm base, including inner: {{template "home_template" .}}
-                                                 {{end}}`)
+func BuildTemplate(cb homeTemplateFn) *template.Template {
 
-    parsedTemplate.New("sidebar_template").Parse(`{{define "sidebar_template"}}
+	var basetemplate_name = "base_template"
+	parsedTemplate, _ := template.New(basetemplate_name).Parse(`{{define "` + basetemplate_name + `"}}
+                                                                    {{template "main_template" .}}
+                                                                {{end}}`)
+	cb(parsedTemplate)
+	return parsedTemplate
+}
+
+func GetHomeTemplate(parsedTemplate *template.Template) {
+	parsedTemplate.New("main_template").Parse(`{{define "main_template"}}I'm inner {{.Title}}. {{template "sidebar_template" .}}{{end}}`)
+
+	parsedTemplate.New("sidebar_template").Parse(`{{define "sidebar_template"}}
                                                         Sidebar here:
                                                         {{.SidebarContent}}
                                                     {{end}}`)
-
-    parsedTemplate.New("home_template").Parse(`{{define "home_template"}}I'm inner {{.Title}}. {{template "sidebar_template" .}}{{end}}`)
-
-    return parsedTemplate
 }

@@ -10,7 +10,7 @@ func GetBaseTemplate() *template.Template {
 
 func getBaseTemplateContent() string {
     baseTemplateContent := `
-                        {{define "BaseTemplate"}}
+                        {{define "base_template"}}
                             <!DOCTYPE html>
 
                             <html lang="en">
@@ -22,12 +22,10 @@ func getBaseTemplateContent() string {
 
                                 <title>{{.PageTitle}}</title>
                                 <link rel="stylesheet" href="/style.css" />
-                                {{template "head" .}}
                             </head>
 
                             <body>
-                                {{template "body" .}}
-                                {{template "appstatus" .}}
+                                {{template "main_template" .}}
                                 <script src="/bundle.js"></script>
                             </body>
 

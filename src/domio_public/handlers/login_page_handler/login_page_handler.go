@@ -6,7 +6,6 @@ import (
     "log"
     "github.com/tdewolff/minify"
     "github.com/tdewolff/minify/html"
-    "domio_public/templater"
 )
 
 type HomePageData struct {
@@ -33,16 +32,16 @@ func init() {
 
 func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    data := HomePageData{
-        PageName: "LoginPage",
-        PageTitle: "Domio Login",
+    //data := HomePageData{
+    //    PageName: "LoginPage",
+    //    PageTitle: "Domio Login",
+    //
+    //    TopBar: GetTopBar(),
+    //    MainArea: GetMainArea(),
+    //    SideBar: GetSideBar(),
+    //}
 
-        TopBar: GetTopBar(),
-        MainArea: GetMainArea(),
-        SideBar: GetSideBar(),
-    }
-
-    templater.WritePage(w, homeTemplate, data)
+    //templater.WritePage(w, homeTemplate, data)
 
 }
 

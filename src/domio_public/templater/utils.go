@@ -3,6 +3,7 @@ package templater
 import (
     "html/template"
     "net/http"
+    "log"
 )
 
 type Link struct {
@@ -11,13 +12,32 @@ type Link struct {
     ClassName string
 }
 
-type BasePageData struct {
-    Title    string
-    PageName string
-    Body     template.HTML
+type homeTemplateFn func(*template.Template)
+
+type Data struct {
+    SideBarTitle   string
+    PageName       string
+    PageTitle      string
+    SidebarContent string
 }
 
-func WritePage(w http.ResponseWriter, template *template.Template, data interface{}) {
+func BuildTemplate(cb homeTemplateFn) *template.Template {
+
+    parsedTemplate, parseErr := template.New("base_template").Parse(getBaseTemplateContent())
+
+    if (parseErr != nil) {
+        log.Fatalln(parseErr)
+    }
+
+    cb(parsedTemplate)
+    return parsedTemplate
+}
+
+func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, data interface{}) {
     w.Header().Set("Content-Type", "text/html")
-    template.ExecuteTemplate(w, "BaseTemplate", data)
+    execErr := tmpl.Execute(w, data)
+
+    if (execErr != nil) {
+        log.Print(execErr)
+    }
 }
