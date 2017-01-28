@@ -31,6 +31,9 @@ func HomePageHandler(w http.ResponseWriter, req *http.Request) {
         PageTitle: "Domio - Marketplace for domains",
         SidebarContent: "sidebar here",
         SideBarTitle: "Categories",
+        SideBarLinks:[]templater.Link{
+            {Url:"/home", Label:"Home"},
+        },
     }
 
     templater.WriteTemplate(w, homePageTemplate, data)

@@ -19,6 +19,7 @@ type Data struct {
     PageName       string
     PageTitle      string
     SidebarContent string
+    SideBarLinks   []Link
 }
 
 func BuildTemplate(cb homeTemplateFn) *template.Template {
@@ -35,6 +36,9 @@ func BuildTemplate(cb homeTemplateFn) *template.Template {
 
 func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, data interface{}) {
     w.Header().Set("Content-Type", "text/html")
+
+    //wr := gohtml.NewWriter(os.Stdout)
+
     execErr := tmpl.Execute(w, data)
 
     if (execErr != nil) {
