@@ -6,9 +6,6 @@ import (
     "log"
     "github.com/tdewolff/minify"
     "github.com/tdewolff/minify/html"
-    "encoding/json"
-    "io"
-    "os"
 )
 
 type Link struct {
@@ -50,8 +47,9 @@ func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName stri
         TopBarData:GetTopBarData(),
         PageData:data,
     }
-    result, _ := json.Marshal(fullData)
-    io.Writer(os.Stdout).Write(result)
+
+    //result, _ := json.Marshal(fullData)
+    //io.Writer(os.Stdout).Write(result)
 
     execErr := tmpl.Execute(w, fullData)
 
