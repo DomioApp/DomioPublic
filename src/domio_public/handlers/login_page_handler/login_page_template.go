@@ -2,61 +2,27 @@ package login_page_handler
 
 import (
     "html/template"
-    "domio_public/templater"
     "log"
-    "bytes"
+    "domio_public/templater"
 )
 
-func GetTemplate() (*template.Template, error) {
-    baseTemplate := templater.GetBaseTemplate()
-    parsedHomeTemplate, parseErr := baseTemplate.Parse(getHomeTemplateContent())
-
-    if (parseErr != nil) {
-        log.Print(parseErr)
+func GetLoginPageTemplate(parsedTemplate *template.Template) {
+    _, err := parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
+                                                            {{template "login_form_template" .}}
+                                                         {{end}}`)
+    if (err != nil) {
+        log.Print(err)
     }
 
-    return parsedHomeTemplate, nil
-}
+    _, err2 := parsedTemplate.New("sidebar_template").Parse(templater.GetSideBarTemplate())
 
-func getHomeTemplateContent() string {
-    homeTemplateContent := `
-                            {{define "head"}}{{end}}
-
-                            {{define "body"}}
-                                {{.TopBar}}
-
-                                <div class="b-main-container">
-                                    {{.SideBar}}
-                                    {{.MainArea}}
-                                </div>
-                            {{end}}
-
-                            {{define "appstatus"}}{{.AppStatusInfo}}{{end}}
-                        `
-    return homeTemplateContent
-}
-
-type MainAreaData struct {
-    Content template.HTML
-}
-
-
-func GetMainArea() template.HTML {
-
-    t := template.New("MainArea")
-
-    output, _ := t.Parse(`
-                            <div class="b-main-area-container">
-                                {{.Content}}
-                            </div>
-                        `)
-
-    sideBarData := MainAreaData{
-        Content:"main content here",
+    if (err2 != nil) {
+        log.Print(err2)
     }
 
-    var doc bytes.Buffer
-    output.Execute(&doc, sideBarData)
+    _, err3 := parsedTemplate.New("login_form_template").Parse(GetLoginFormTemplate())
 
-    return template.HTML(doc.String())
+    if (err3 != nil) {
+        log.Print(err3)
+    }
 }

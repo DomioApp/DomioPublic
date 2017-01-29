@@ -7,9 +7,6 @@ import (
     "github.com/tdewolff/minify"
     "github.com/tdewolff/minify/html"
     "domio_public/components/api"
-    //"io"
-    //"os"
-    //"encoding/json"
 )
 
 type Link struct {
@@ -49,14 +46,15 @@ func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName stri
     w.Header().Set("Content-Type", "text/html")
 
     fullData := FullPageData{
-        BaseTemplateData:BaseTemplateData{PageName: pageName},
+        BaseTemplateData: BaseTemplateData{PageName: pageName},
         AppStatusInfoBarData: api.GetAPIStatus(),
-        TopBarData:GetTopBarData(),
-        PageData:data,
+        TopBarData: GetTopBarData(),
+        PageData: data,
     }
 
     //result, _ := json.Marshal(fullData)
     //io.Writer(os.Stdout).Write(result)
+    //fmt.Println()
 
     execErr := tmpl.Execute(w, fullData)
 

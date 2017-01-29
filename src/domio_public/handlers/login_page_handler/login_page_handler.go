@@ -3,57 +3,51 @@ package login_page_handler
 import (
     "html/template"
     "net/http"
-    "log"
-    "github.com/tdewolff/minify"
-    "github.com/tdewolff/minify/html"
+    "domio_public/templater"
 )
 
-type HomePageData struct {
-    PageTitle string
-    PageName  string
-
-    Header    template.HTML
-    TopBar    template.HTML
-    MainArea  template.HTML
-    SideBar   template.HTML
+type LoginPageData struct {
+    FormRows     []FormRow
+    SubmitButton SubmitButton
 }
 
-var homeTemplate *template.Template
+type PageData struct {
+    PageTitle     string
+    LoginPageData LoginPageData
+}
+
+var loginPageTemplate *template.Template
 
 func init() {
-    var err error
-
-    homeTemplate, err = GetTemplate();
-
-    if (err != nil) {
-        log.Print(err)
-    }
+    loginPageTemplate = templater.BuildTemplate(GetLoginPageTemplate)
 }
 
 func LoginPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    //data := HomePageData{
-    //    PageName: "LoginPage",
-    //    PageTitle: "Domio Login",
-    //
-    //    TopBar: GetTopBar(),
-    //    MainArea: GetMainArea(),
-    //    SideBar: GetSideBar(),
-    //}
-
-    //templater.WritePage(w, homeTemplate, data)
+    templater.WriteTemplate(w, loginPageTemplate, GetPageName(), GetPageData())
 
 }
 
-func initMinifier(w http.ResponseWriter, req *http.Request) {
-    m := minify.New()
-    m.AddFunc("text/html", html.Minify)
-
-    mw := m.ResponseWriter(w, req)
-    defer mw.Close()
-
-    w = mw
-}
 func GetUrl() string {
     return "/login"
+}
+
+func GetPageName() string {
+    return "LoginPage"
+}
+
+func GetPageData() PageData {
+
+    pageData := PageData{
+        PageTitle: "Domio - Marketplace for domains. Login to your account.",
+
+        LoginPageData:LoginPageData{
+            FormRows:[]FormRow{
+                {Label:"Email", Name:"email", Type:"email"},
+                {Label:"Password", Name:"password", Type:"password"},
+            },
+            SubmitButton: SubmitButton{Label:"Submit"},
+        },
+    }
+    return pageData
 }

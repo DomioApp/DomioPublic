@@ -2,7 +2,6 @@ package routes
 
 import (
     "net/http"
-    "domio_public/handlers/signup_page_handler"
     "domio_public/handlers/home_page_handler"
     "domio_public/handlers/login_page_handler"
 )
@@ -28,11 +27,5 @@ var RoutesList = Routes{
         "GET",
         login_page_handler.GetUrl(),
         login_page_handler.LoginPageHandler,
-    },
-    Route{
-        "SignupPage",
-        "GET",
-        signup_page_handler.GetUrl(),
-        signup_page_handler.SignupPageHandler,
     },
 }
