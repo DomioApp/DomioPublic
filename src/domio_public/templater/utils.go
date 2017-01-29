@@ -6,6 +6,9 @@ import (
     "log"
     "github.com/tdewolff/minify"
     "github.com/tdewolff/minify/html"
+    "encoding/json"
+    "io"
+    "os"
 )
 
 type Link struct {
@@ -19,8 +22,9 @@ type BaseTemplateData struct {
 }
 
 type FullPageData struct {
-    BaseTemplateData
-    PageData interface{}
+    BaseTemplateData BaseTemplateData
+    TopBarData       TopBarData
+    PageData         interface{}
 }
 
 type TemplateAdditionals func(*template.Template)
@@ -28,6 +32,7 @@ type TemplateAdditionals func(*template.Template)
 func BuildTemplate(addTemplatesToBaseTemplate TemplateAdditionals) *template.Template {
 
     parsedTemplate, parseErr := template.New("base_template").Parse(getBaseTemplateContent())
+    parsedTemplate.New("top_bar_template").Parse(GetTopBarTemplate())
 
     if (parseErr != nil) {
         log.Fatalln(parseErr)
@@ -41,9 +46,12 @@ func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName stri
     w.Header().Set("Content-Type", "text/html")
 
     fullData := FullPageData{
-        BaseTemplateData{PageName: pageName},
-        data,
+        BaseTemplateData:BaseTemplateData{PageName: pageName},
+        TopBarData:GetTopBarData(),
+        PageData:data,
     }
+    result, _ := json.Marshal(fullData)
+    io.Writer(os.Stdout).Write(result)
 
     execErr := tmpl.Execute(w, fullData)
 

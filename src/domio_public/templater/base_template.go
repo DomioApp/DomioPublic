@@ -25,13 +25,13 @@ func getBaseTemplateContent() string {
                             </head>
 
                             <body>
-
+                                {{template "top_bar_template" .}}
                                 {{template "main_template" .}}
                                 <script src="/bundle.js"></script>
                             </body>
 
                             </html>
                         {{end}}`
-    //                                {{template "top_bar_template" .}}
+
     return baseTemplateContent
 }

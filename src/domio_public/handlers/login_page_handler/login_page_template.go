@@ -36,17 +36,10 @@ func getHomeTemplateContent() string {
     return homeTemplateContent
 }
 
-func GetSideBar() template.HTML {
-    return templater.GetSideBar()
-}
-
 type MainAreaData struct {
     Content template.HTML
 }
 
-func GetTopBar() template.HTML {
-    return templater.GetTopBar()
-}
 
 func GetMainArea() template.HTML {
 

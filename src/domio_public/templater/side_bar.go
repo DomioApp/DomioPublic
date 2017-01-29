@@ -1,40 +1,40 @@
 package templater
 
-import (
-    "html/template"
-    "bytes"
-)
-
 type SideBarData struct {
     Title string
     Links []Link
 }
 
-func GetSideBar() template.HTML {
+func GetSideBarTemplate() string {
 
-    t := template.New("SideBar")
+    sideBarTemplate := `
+                         {{define "sidebar_template"}}
+                             {{with .PageData.SideBarData}}
 
-    output, _ := t.Parse(`
-                            <div class="b-side-bar-container">
-                                <h4>{{.Title}}</h4>
+                                <div class="b-side-bar-container">
+                                    <h4>{{.Title}}</h4>
 
-                                {{range .Links}}
-                                     <a href="{{.Url}}">{{.Label}}</a>
-                                {{end}}
-                            </div>
-                        `)
+                                    {{range .Links}}
+                                         <a href="{{.Url}}">{{.Label}}</a>
+                                    {{end}}
+                                </div>
 
+                             {{end}}
+                         {{end}}
+                        `
+    return sideBarTemplate
+
+}
+
+func GetSideBarData() SideBarData {
     sideBarData := SideBarData{
         Title: "Categories",
         Links:[]Link{
-            Link{Url:"/domains/business", Label:"Business"},
-            Link{Url:"/domains/social", Label:"Social"},
-            Link{Url:"/domains/cars", Label:"Cars"},
+            {Url:"/domains/business", Label:"Business"},
+            {Url:"/domains/social", Label:"Social"},
+            {Url:"/domains/cars", Label:"Cars"},
         },
     }
 
-    var doc bytes.Buffer
-    output.Execute(&doc, sideBarData)
-
-    return template.HTML(doc.String())
+    return sideBarData
 }

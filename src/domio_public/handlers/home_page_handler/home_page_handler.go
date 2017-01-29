@@ -7,11 +7,9 @@ import (
 )
 
 type PageData struct {
-    PageTitle      string
+    PageTitle   string
 
-    SideBarTitle   string
-    SidebarContent string
-    SideBarLinks   []templater.Link
+    SideBarData templater.SideBarData
 }
 
 var homePageTemplate *template.Template
@@ -37,11 +35,7 @@ func GetPageName() string {
 func GetPageData() PageData {
     return PageData{
         PageTitle: "Domio - Marketplace for domains",
-        SidebarContent: "sidebar here",
-        SideBarTitle: "Categories",
-        SideBarLinks:[]templater.Link{
-            {Url:"/home", Label:"Home"},
-        },
+        SideBarData:templater.GetSideBarData(),
     }
 
 }

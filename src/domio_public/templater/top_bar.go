@@ -1,55 +1,52 @@
 package templater
 
-import (
-    "html/template"
-    "bytes"
-    "domio_public/handlers/signup_page_handler"
-)
-
-type PageData struct {
+type TopBarData struct {
     LeftColumnLinks  []Link
     RightColumnLinks []Link
     DomainAddLink    Link
 }
 
-func GetTopBar() template.HTML {
+func GetTopBarTemplate() string {
+    return `{{ define "top_bar_template"}}
 
-    t := template.New("TopBar")
+                {{with .TopBarData}}
 
-    output, _ := t.Parse(`
-                            <div class="b-top-bar-container">
-                                <div class="left-area">
-                                    {{range .LeftColumnLinks}}
-                                         <a href="{{.Url}}">{{.Label}}</a>
-                                    {{end}}
-                                </div>
-                                <div class="right-area">
+                    <div class="b-top-bar-container">
+                        <div class="left-area">
+                            {{range .LeftColumnLinks}}
+                                 <a href="{{.Url}}">{{.Label}}</a>
+                            {{end}}
+                        </div>
+                        <div class="right-area">
 
-                                    {{with .DomainAddLink}}
-                                        <a href="{{.Url}}" class="{{.ClassName}}">{{.Label}}</a>
-                                    {{end}}
+                            {{with .DomainAddLink}}
+                                <a href="{{.Url}}" class="{{.ClassName}}">{{.Label}}</a>
+                            {{end}}
 
-                                    {{range .RightColumnLinks}}
-                                         <a href="{{.Url}}">{{.Label}}</a>
-                                    {{end}}
-                                </div>
-                            </div>
-                        `)
+                            {{range .RightColumnLinks}}
+                                 <a href="{{.Url}}">{{.Label}}</a>
+                            {{end}}
+                        </div>
+                    </div>
 
-    pageData := PageData{
+                {{end}}
+
+            {{end}}
+        `
+}
+
+func GetTopBarData() TopBarData {
+    topBarData := TopBarData{
         LeftColumnLinks:[]Link{
-            Link{Url:"/", Label:"Home"},
-            Link{Url:"/domains", Label:"Domains"},
+            {Url:"/", Label:"Home"},
+            {Url:"/domains", Label:"Domains"},
         },
         RightColumnLinks:[]Link{
-            Link{Url:"/login", Label:"Login"},
-            Link{Url:signup_page_handler.GetUrl(), Label:"Signup"},
+            {Url:"/login", Label:"Login"},
+            {Url:"/signup", Label:"Signup"},
         },
         DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
     }
 
-    var doc bytes.Buffer
-    output.Execute(&doc, pageData)
-
-    return template.HTML(doc.String())
+    return topBarData
 }
