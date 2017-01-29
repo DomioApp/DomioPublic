@@ -27,6 +27,7 @@ func getBaseTemplateContent() string {
                             <body>
                                 {{template "top_bar_template" .}}
                                 {{template "main_template" .}}
+                                {{template "app_status_infobar" .}}
                                 <script src="/bundle.js"></script>
                             </body>
 

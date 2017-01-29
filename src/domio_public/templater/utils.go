@@ -6,6 +6,10 @@ import (
     "log"
     "github.com/tdewolff/minify"
     "github.com/tdewolff/minify/html"
+    "domio_public/components/api"
+    //"io"
+    //"os"
+    //"encoding/json"
 )
 
 type Link struct {
@@ -19,9 +23,10 @@ type BaseTemplateData struct {
 }
 
 type FullPageData struct {
-    BaseTemplateData BaseTemplateData
-    TopBarData       TopBarData
-    PageData         interface{}
+    BaseTemplateData     BaseTemplateData
+    AppStatusInfoBarData interface{}
+    TopBarData           TopBarData
+    PageData             interface{}
 }
 
 type TemplateAdditionals func(*template.Template)
@@ -30,6 +35,7 @@ func BuildTemplate(addTemplatesToBaseTemplate TemplateAdditionals) *template.Tem
 
     parsedTemplate, parseErr := template.New("base_template").Parse(getBaseTemplateContent())
     parsedTemplate.New("top_bar_template").Parse(GetTopBarTemplate())
+    parsedTemplate.New("app_status_infobar").Parse(GetAppStatusInfoBarTemplate())
 
     if (parseErr != nil) {
         log.Fatalln(parseErr)
@@ -44,6 +50,7 @@ func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName stri
 
     fullData := FullPageData{
         BaseTemplateData:BaseTemplateData{PageName: pageName},
+        AppStatusInfoBarData: api.GetAPIStatus(),
         TopBarData:GetTopBarData(),
         PageData:data,
     }
