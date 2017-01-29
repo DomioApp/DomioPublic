@@ -15,9 +15,9 @@ func GetHomeTemplate(parsedTemplate *template.Template) {
 
     _, err2 := parsedTemplate.New("sidebar_template").Parse(`{{ define "sidebar_template"}}
                                                         <div class="b-side-bar-container">
-                                                            <h4>{{.SideBarTitle}}</h4>
+                                                            <h4>{{.PageData.SideBarTitle}}</h4>
 
-                                                            {{range .SideBarLinks}}
+                                                            {{range .PageData.SideBarLinks}}
                                                                  <a href="{{.Url}}">{{.Label}}</a>
                                                             {{end}}
                                                         </div>

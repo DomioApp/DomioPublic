@@ -3,19 +3,15 @@ package home_page_handler
 import (
     "html/template"
     "net/http"
-    "github.com/tdewolff/minify"
-    "github.com/tdewolff/minify/html"
     "domio_public/templater"
 )
 
-type HomePageData struct {
-    PageTitle string
-    PageName  string
+type PageData struct {
+    PageTitle      string
 
-    Header    template.HTML
-    TopBar    template.HTML
-    MainArea  template.HTML
-    SideBar   template.HTML
+    SideBarTitle   string
+    SidebarContent string
+    SideBarLinks   []templater.Link
 }
 
 var homePageTemplate *template.Template
@@ -26,8 +22,20 @@ func init() {
 
 func HomePageHandler(w http.ResponseWriter, req *http.Request) {
 
-    data := templater.Data{
-        PageName: "HomePage",
+    templater.WriteTemplate(w, homePageTemplate, GetPageName(), GetPageData())
+
+}
+
+func GetUrl() string {
+    return "/"
+}
+
+func GetPageName() string {
+    return "HomePage"
+}
+
+func GetPageData() PageData {
+    return PageData{
         PageTitle: "Domio - Marketplace for domains",
         SidebarContent: "sidebar here",
         SideBarTitle: "Categories",
@@ -36,19 +44,4 @@ func HomePageHandler(w http.ResponseWriter, req *http.Request) {
         },
     }
 
-    templater.WriteTemplate(w, homePageTemplate, data)
-
-}
-
-func initMinifier(w http.ResponseWriter, req *http.Request) {
-    m := minify.New()
-    m.AddFunc("text/html", html.Minify)
-
-    mw := m.ResponseWriter(w, req)
-    defer mw.Close()
-
-    w = mw
-}
-func GetUrl() string {
-    return "/"
 }

@@ -4,6 +4,8 @@ import (
     "html/template"
     "net/http"
     "log"
+    "github.com/tdewolff/minify"
+    "github.com/tdewolff/minify/html"
 )
 
 type Link struct {
@@ -12,17 +14,18 @@ type Link struct {
     ClassName string
 }
 
-type homeTemplateFn func(*template.Template)
-
-type Data struct {
-    SideBarTitle   string
-    PageName       string
-    PageTitle      string
-    SidebarContent string
-    SideBarLinks   []Link
+type BaseTemplateData struct {
+    PageName string
 }
 
-func BuildTemplate(cb homeTemplateFn) *template.Template {
+type FullPageData struct {
+    BaseTemplateData
+    PageData interface{}
+}
+
+type TemplateAdditionals func(*template.Template)
+
+func BuildTemplate(addTemplatesToBaseTemplate TemplateAdditionals) *template.Template {
 
     parsedTemplate, parseErr := template.New("base_template").Parse(getBaseTemplateContent())
 
@@ -30,18 +33,31 @@ func BuildTemplate(cb homeTemplateFn) *template.Template {
         log.Fatalln(parseErr)
     }
 
-    cb(parsedTemplate)
+    addTemplatesToBaseTemplate(parsedTemplate)
     return parsedTemplate
 }
 
-func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, data interface{}) {
+func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName string, data interface{}) {
     w.Header().Set("Content-Type", "text/html")
 
-    //wr := gohtml.NewWriter(os.Stdout)
+    fullData := FullPageData{
+        BaseTemplateData{PageName: pageName},
+        data,
+    }
 
-    execErr := tmpl.Execute(w, data)
+    execErr := tmpl.Execute(w, fullData)
 
     if (execErr != nil) {
         log.Print(execErr)
     }
+}
+
+func InitMinifier(w http.ResponseWriter, req *http.Request) {
+    m := minify.New()
+    m.AddFunc("text/html", html.Minify)
+
+    mw := m.ResponseWriter(w, req)
+    defer mw.Close()
+
+    w = mw
 }

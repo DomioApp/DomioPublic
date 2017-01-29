@@ -18,18 +18,20 @@ func getBaseTemplateContent() string {
                             <head>
                                 <meta charset="UTF-8">
                                 <meta name="description" content="Domio is a marketplace for domains.">
-                                <meta name="page" content="{{.PageName}}">
+                                <meta name="page" content="{{.BaseTemplateData.PageName}}">
 
-                                <title>{{.PageTitle}}</title>
+                                <title>{{.PageData.PageTitle}}</title>
                                 <link rel="stylesheet" href="/style.css" />
                             </head>
 
                             <body>
+
                                 {{template "main_template" .}}
                                 <script src="/bundle.js"></script>
                             </body>
 
                             </html>
                         {{end}}`
+    //                                {{template "top_bar_template" .}}
     return baseTemplateContent
 }
