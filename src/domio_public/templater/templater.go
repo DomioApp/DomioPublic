@@ -48,7 +48,7 @@ func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName stri
     fullData := FullPageData{
         BaseTemplateData: BaseTemplateData{PageName: pageName},
         AppStatusInfoBarData: api.GetAPIStatus(),
-        TopBarData: GetTopBarData(),
+        TopBarData: GetTopBarData(pageName),
         PageData: data,
     }
 

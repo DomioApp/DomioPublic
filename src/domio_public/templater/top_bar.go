@@ -1,5 +1,10 @@
 package templater
 
+type PagesTopBars struct {
+    HomePage    TopBarData
+    ProfilePage TopBarData
+}
+
 type TopBarData struct {
     LeftColumnLinks  []Link
     RightColumnLinks []Link
@@ -35,18 +40,37 @@ func GetTopBarTemplate() string {
         `
 }
 
-func GetTopBarData() TopBarData {
-    topBarData := TopBarData{
-        LeftColumnLinks:[]Link{
-            {Url:"/", Label:"Home"},
-            {Url:"/domains", Label:"Domains"},
+func GetTopBarData(pageName string) TopBarData {
+
+    dataset := PagesTopBars{
+        HomePage:TopBarData{
+            LeftColumnLinks:[]Link{
+                {Url:"/", Label:"Home"},
+                {Url:"/domains", Label:"Domains"},
+            },
+            RightColumnLinks:[]Link{
+                {Url:"/login", Label:"Login"},
+                {Url:"/signup", Label:"Signup"},
+            },
+            DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
-        RightColumnLinks:[]Link{
-            {Url:"/login", Label:"Login"},
-            {Url:"/signup", Label:"Signup"},
+        ProfilePage:TopBarData{
+            LeftColumnLinks:[]Link{
+                {Url:"/", Label:"Home"},
+                {Url:"/domains", Label:"Domains"},
+            },
+            RightColumnLinks:[]Link{
+                {Url:"/profile", Label:"Profile"},
+            },
+            DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
-        DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
     }
 
-    return topBarData
+    if pageName == "HomePage" {
+        return dataset.HomePage
+    } else if pageName == "ProfilePage" {
+        return dataset.ProfilePage
+    }
+
+    return TopBarData{}
 }
