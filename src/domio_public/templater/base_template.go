@@ -28,7 +28,8 @@ func getBaseTemplateContent() string {
                                 {{template "top_bar_template" .}}
                                 {{template "main_template" .}}
                                 {{template "app_status_infobar" .}}
-                                <script src="/bundle.js"></script>
+                                <!--<script src="/bundle.js"></script>-->
+                                <script type="application/dart" src="/app.dart"></script>
                             </body>
 
                             </html>
