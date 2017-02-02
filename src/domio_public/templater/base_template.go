@@ -1,13 +1,5 @@
 package templater
 
-import "html/template"
-
-func GetBaseTemplate() *template.Template {
-    baseTemplate := template.New("BaseTemplate")
-    parsedBaseTemplate, _ := baseTemplate.Parse(getBaseTemplateContent())
-    return parsedBaseTemplate
-}
-
 func getBaseTemplateContent() string {
     baseTemplateContent := `
                         {{define "base_template"}}
