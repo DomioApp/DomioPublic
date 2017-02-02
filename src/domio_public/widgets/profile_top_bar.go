@@ -1,0 +1,24 @@
+package widgets
+
+import "domio_public/templater"
+
+type ProfileTopBarData struct {
+    Links []templater.Link
+}
+
+func GetProfileTopBarTemplate() string {
+    return `{{ define "profile_topbar_template"}}
+
+                {{with .PageData.ProfileTopBarData}}
+
+                    <div class="b-profile-top-bar-container">
+                        {{range .Links}}
+                             <a href="{{.Url}}">{{.Label}}</a>
+                        {{end}}
+                    </div>
+
+                {{end}}
+
+            {{end}}
+        `
+}

@@ -1,4 +1,4 @@
-package profile_page_handler
+package user_domains_page_handler
 
 import (
     "html/template"
@@ -8,9 +8,9 @@ import (
 )
 
 type PageData struct {
-    PageTitle         string
-    ProfileTopBarData widgets.ProfileTopBarData
-    SideBarData       templater.SideBarData
+    PageTitle             string
+    UserDomainsTopBarData widgets.ProfileTopBarData
+    SideBarData           templater.SideBarData
 }
 
 var profilePageTemplate *template.Template
@@ -19,14 +19,14 @@ func init() {
     profilePageTemplate = templater.BuildTemplate(GetProfilePageTemplate)
 }
 
-func ProfilePageHandler(w http.ResponseWriter, req *http.Request) {
+func UserDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
 
     templater.WriteTemplate(w, profilePageTemplate, GetPageName(), GetPageData())
 
 }
 
 func GetUrl() string {
-    return "/profile"
+    return "/profile/domains"
 }
 
 func GetPageName() string {
@@ -36,17 +36,17 @@ func GetPageName() string {
 func GetPageData() PageData {
     return PageData{
         PageTitle: "Domio - Marketplace for domains",
-        SideBarData:templater.GetSideBarData(),
-        ProfileTopBarData:GetProfileTopBarData(),
+        SideBarData: templater.GetSideBarData(),
+        UserDomainsTopBarData: GetUserDomainsTopBarData(),
     }
 
 }
 
-func GetProfileTopBarData() widgets.ProfileTopBarData {
+func GetUserDomainsTopBarData() widgets.ProfileTopBarData {
 
     return widgets.ProfileTopBarData{
         Links:[]templater.Link{
-            {Url:"/profile/domains", Label:"My Domains"},
+            {Url:"/profile/domains", Label:"Domains"},
             {Url:"/profile/domains/rented", Label:"Domains I rent"},
             {Url:"/profile/stats", Label:"Stats"},
         },

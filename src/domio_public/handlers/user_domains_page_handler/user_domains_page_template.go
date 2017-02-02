@@ -1,4 +1,4 @@
-package profile_page_handler
+package user_domains_page_handler
 
 import (
     "html/template"
