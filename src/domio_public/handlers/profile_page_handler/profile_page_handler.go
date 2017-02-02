@@ -4,12 +4,11 @@ import (
     "html/template"
     "net/http"
     "domio_public/templater"
-    "domio_public/widgets"
 )
 
 type PageData struct {
     PageTitle         string
-    ProfileTopBarData widgets.ProfileTopBarData
+    ProfileTopBarData ProfileTopBarData
     SideBarData       templater.SideBarData
 }
 
@@ -42,9 +41,9 @@ func GetPageData() PageData {
 
 }
 
-func GetProfileTopBarData() widgets.ProfileTopBarData {
+func GetProfileTopBarData() ProfileTopBarData {
 
-    return widgets.ProfileTopBarData{
+    return ProfileTopBarData{
         Links:[]templater.Link{
             {Url:"/profile/domains", Label:"My Domains"},
             {Url:"/profile/domains/rented", Label:"Domains I rent"},

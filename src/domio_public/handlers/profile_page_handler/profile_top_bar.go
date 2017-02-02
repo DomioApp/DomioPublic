@@ -1,4 +1,4 @@
-package widgets
+package profile_page_handler
 
 import "domio_public/templater"
 

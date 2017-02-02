@@ -3,7 +3,6 @@ package profile_page_handler
 import (
     "html/template"
     "log"
-    "domio_public/widgets"
 )
 
 func GetProfilePageTemplate(parsedTemplate *template.Template) {
@@ -14,7 +13,7 @@ func GetProfilePageTemplate(parsedTemplate *template.Template) {
         log.Print(err)
     }
 
-    _, err2 := parsedTemplate.New("profile_topbar_template").Parse(widgets.GetProfileTopBarTemplate())
+    _, err2 := parsedTemplate.New("profile_topbar_template").Parse(GetProfileTopBarTemplate())
 
     if (err2 != nil) {
         log.Print(err2)

@@ -1,8 +1,9 @@
 package templater
 
 type PagesTopBars struct {
-    HomePage    TopBarData
-    ProfilePage TopBarData
+    HomePage        TopBarData
+    ProfilePage     TopBarData
+    UserDomainsPage TopBarData
 }
 
 type TopBarData struct {
@@ -64,11 +65,23 @@ func GetTopBarData(pageName string) TopBarData {
             },
             DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
+        UserDomainsPage:TopBarData{
+            LeftColumnLinks:[]Link{
+                {Url:"/", Label:"Home"},
+                {Url:"/domains", Label:"Domains"},
+            },
+            RightColumnLinks:[]Link{
+                {Url:"/profile", Label:"Profile"},
+            },
+            DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+        },
     }
 
     if pageName == "HomePage" {
         return dataset.HomePage
     } else if pageName == "ProfilePage" {
+        return dataset.ProfilePage
+    } else if pageName == "UserDomainsPage" {
         return dataset.ProfilePage
     }
 
