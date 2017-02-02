@@ -11,7 +11,7 @@ func GetUserDomainsPageTemplate(parsedTemplate *template.Template) {
                                                             {{range .PageData.UserDomains}}
                                                                 <div>
                                                                     <a href="/profile/domains/{{.Name}}">{{.Name}}</a>
-                                                                <div>
+                                                                </div>
                                                             {{end}}
                                                          {{end}}`)
     if (err != nil) {
