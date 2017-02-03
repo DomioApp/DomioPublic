@@ -4,6 +4,7 @@ type PagesTopBars struct {
     HomePage        TopBarData
     ProfilePage     TopBarData
     UserDomainsPage TopBarData
+    AddDomainPage   TopBarData
 }
 
 type TopBarData struct {
@@ -75,6 +76,16 @@ func GetTopBarData(pageName string) TopBarData {
             },
             DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
+        AddDomainPage:TopBarData{
+            LeftColumnLinks:[]Link{
+                {Url:"/", Label:"Home"},
+                {Url:"/domains", Label:"Domains"},
+            },
+            RightColumnLinks:[]Link{
+                {Url:"/profile", Label:"Profile"},
+            },
+            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+        },
     }
 
     if pageName == "HomePage" {
@@ -83,6 +94,8 @@ func GetTopBarData(pageName string) TopBarData {
         return dataset.ProfilePage
     } else if pageName == "UserDomainsPage" {
         return dataset.ProfilePage
+    } else if pageName == "AddDomainPage" {
+        return dataset.AddDomainPage
     }
 
     return TopBarData{}

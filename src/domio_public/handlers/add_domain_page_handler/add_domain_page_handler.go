@@ -29,7 +29,7 @@ func GetUrl() string {
 }
 
 func GetPageName() string {
-    return "HomePage"
+    return "AddDomainPage"
 }
 
 func GetPageData() PageData {

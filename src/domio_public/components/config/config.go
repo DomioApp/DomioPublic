@@ -10,9 +10,9 @@ import (
 )
 
 type Configuration struct {
-    Port            uint    `json:"port"`
-    Env             string    `json:"env"`
-    ApiUrl          string    `json:"api_url"`
+    Port   uint    `json:"port"`
+    Env    string    `json:"env"`
+    ApiUrl string    `json:"api_url"`
 }
 
 type AppStatus struct {
