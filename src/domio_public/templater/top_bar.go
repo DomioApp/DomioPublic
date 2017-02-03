@@ -53,7 +53,7 @@ func GetTopBarData(pageName string) TopBarData {
                 {Url:"/login", Label:"Login"},
                 {Url:"/signup", Label:"Signup"},
             },
-            DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
         ProfilePage:TopBarData{
             LeftColumnLinks:[]Link{
@@ -63,7 +63,7 @@ func GetTopBarData(pageName string) TopBarData {
             RightColumnLinks:[]Link{
                 {Url:"/profile", Label:"Profile"},
             },
-            DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
         UserDomainsPage:TopBarData{
             LeftColumnLinks:[]Link{
@@ -73,7 +73,7 @@ func GetTopBarData(pageName string) TopBarData {
             RightColumnLinks:[]Link{
                 {Url:"/profile", Label:"Profile"},
             },
-            DomainAddLink:Link{Url:"/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
     }
 

@@ -6,6 +6,16 @@ import (
     "domio_public/templater"
 )
 
+type FormRow struct {
+    Label string
+    Name  string
+    Type  string
+}
+
+type SubmitButton struct {
+    Label string
+}
+
 type LoginPageData struct {
     FormRows     []FormRow
     SubmitButton SubmitButton

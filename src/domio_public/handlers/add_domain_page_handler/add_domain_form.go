@@ -1,9 +1,24 @@
-package login_page_handler
+package add_domain_page_handler
 
-func GetLoginFormTemplate() string {
+type FormRow struct {
+    Label string
+    Name  string
+    Type  string
+}
+
+type SubmitButton struct {
+    Label string
+}
+
+type FormData struct {
+    FormRows     []FormRow
+    SubmitButton SubmitButton
+}
+
+func GetAddDomainFormTemplate() string {
     loginFormTemplate := `
-                            {{define "login_form_template"}}
-                                {{with .PageData.LoginPageData}}
+                            {{define "add_domain_form_template"}}
+                                {{with .PageData.FormData}}
                                     <div class="b-login-form-container">
                                         <form>
                                             <div class="b-form-rows-container">
@@ -26,4 +41,13 @@ func GetLoginFormTemplate() string {
                             {{end}}
                         `
     return loginFormTemplate
+}
+func GetFormData() FormData {
+    return FormData{
+        FormRows:[]FormRow{
+            {Label:"Name", Name:"name", Type:"text"},
+            {Label:"Price", Name:"price", Type:"text"},
+        },
+        SubmitButton: SubmitButton{Label:"Add"},
+    }
 }
