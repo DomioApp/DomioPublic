@@ -11,6 +11,7 @@ func GetUserDomainsPageTemplate(parsedTemplate *template.Template) {
                                                             {{range .PageData.UserDomains}}
                                                                 <div>
                                                                     <a href="/profile/domains/{{.Name}}">{{.Name}}</a>
+                                                                    <button class="b-delete-domain-button">Delete</button>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)
