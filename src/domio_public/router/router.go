@@ -17,7 +17,7 @@ func NewRouter() *mux.Router {
         log.Print("Development environment, handling static files by Go...")
         router.Path("/style.css").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
         router.Path("/bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
-        router.Path("/{file}.dart").Handler(http.FileServer(http.Dir("/Users/sergeibasharov/WebstormProjects/DomioClient/src/app")))
+        router.PathPrefix("/app").Handler(http.FileServer(http.Dir("/Users/sergeibasharov/WebstormProjects/DomioClient/src")))
     }
 
     for _, route := range routes.RoutesList {
