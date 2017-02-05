@@ -45,7 +45,7 @@ func GetPageData() PageData {
 func GetUserDomainsTopBarData() ProfileTopBarData {
     return ProfileTopBarData{
         Links:[]templater.Link{
-            {Url:"/profile/domains", Label:"Domains"},
+            {Url:"/profile/domains", Label:"My Domains"},
             {Url:"/profile/domains/rented", Label:"Domains I rent"},
             {Url:"/profile/stats", Label:"Stats"},
         },
