@@ -108,9 +108,13 @@ http {
             auth_basic_user_file /etc/nginx/.htpasswd;
         }
 
-        location /bundle.js {
+        location /app.js {
             alias /usr/local/domio_client/bundle.js;
             expires 7d;
+        }
+
+        location /app {
+            root   /usr/local/domio_client;
         }
 
         location /style.css {
