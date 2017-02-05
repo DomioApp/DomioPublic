@@ -4,16 +4,13 @@ import (
     "html/template"
     "net/http"
     "domio_public/templater"
+    "domio_public/components/api"
 )
-
-type UserDomain struct {
-    Name string
-}
 
 type PageData struct {
     PageTitle             string
     UserDomainsTopBarData ProfileTopBarData
-    UserDomains           []UserDomain
+    UserDomains           []api.DomainJson
 }
 
 var userDomainsPageTemplate *template.Template
@@ -55,9 +52,6 @@ func GetUserDomainsTopBarData() ProfileTopBarData {
     }
 }
 
-func GetUserDomains() []UserDomain {
-    return []UserDomain{
-        {Name:"john.com"},
-        {Name:"jack.com"},
-    }
+func GetUserDomains() []api.DomainJson {
+    return api.GetUserDomains()
 }
