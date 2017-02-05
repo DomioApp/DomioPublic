@@ -46,7 +46,7 @@ func GetFormData() FormData {
     return FormData{
         FormRows:[]FormRow{
             {Label:"Name", Name:"name", Type:"text"},
-            {Label:"Price", Name:"price", Type:"text"},
+            {Label:"Price", Name:"price_per_month", Type:"text"},
         },
         SubmitButton: SubmitButton{Label:"Add"},
     }
