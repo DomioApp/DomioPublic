@@ -5,6 +5,7 @@ import (
     "net/http"
     "domio_public/templater"
     "domio_public/components/api"
+    "log"
 )
 
 type PageData struct {
@@ -14,12 +15,21 @@ type PageData struct {
 }
 
 var userDomainsPageTemplate *template.Template
+var tokenCookie *http.Cookie
 
 func init() {
     userDomainsPageTemplate = templater.BuildTemplate(GetUserDomainsPageTemplate)
 }
 
 func UserDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
+    var err error
+    tokenCookie, err = req.Cookie("token")
+
+    if (err != nil) {
+        log.Print(err)
+    }
+
+    log.Print(tokenCookie.Value)
 
     templater.WriteTemplate(w, userDomainsPageTemplate, GetPageName(), GetPageData())
 
@@ -37,7 +47,7 @@ func GetPageData() PageData {
     return PageData{
         PageTitle: "Domio - My Domains",
         UserDomainsTopBarData: GetUserDomainsTopBarData(),
-        UserDomains: GetUserDomains(),
+        UserDomains: GetUserDomains(tokenCookie.Value),
     }
 
 }
@@ -52,6 +62,6 @@ func GetUserDomainsTopBarData() ProfileTopBarData {
     }
 }
 
-func GetUserDomains() []api.DomainJson {
-    return api.GetUserDomains()
+func GetUserDomains(token string) []api.DomainJson {
+    return api.GetUserDomains(token)
 }

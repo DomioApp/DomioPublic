@@ -66,7 +66,7 @@ func GetAPIStatus() AppStatusInfo {
     return appStatusInfo
 }
 
-func GetUserDomains() []DomainJson {
+func GetUserDomains(token string) []DomainJson {
 
     var userDomains []DomainJson
 
@@ -82,7 +82,7 @@ func GetUserDomains() []DomainJson {
         Timeout: timeout,
     }
 
-    req.Header.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODY5MTYyMTIsImp0aSI6ImN1c185dHV3QklTalJJQnBTTiIsInN1YiI6ImpvaG5AZ21haWwuY29tIn0.S1VxzNPKObYEhaRkaEco56joeAhBAlcyAs_quuaYKLU")
+    req.Header.Add("Authorization", "Bearer " + token)
 
     resp, requestErr := client.Do(req)
 
@@ -98,10 +98,6 @@ func GetUserDomains() []DomainJson {
         log.Print(decodeError)
         return userDomains
     }
-
-    log.Print("=================================================================")
-    log.Print(userDomains)
-    log.Print("=================================================================")
 
     return userDomains
 }
