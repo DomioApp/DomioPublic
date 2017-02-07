@@ -63,7 +63,7 @@ func GetTopBarData(pageName string) TopBarData {
             },
             RightColumnLinks:[]Link{
                 {Url:"/profile", Label:"Profile"},
-                {Url:"/user/logout", Label:"Logout"},
+                {Url:"/logout", Label:"Logout"},
             },
             DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
