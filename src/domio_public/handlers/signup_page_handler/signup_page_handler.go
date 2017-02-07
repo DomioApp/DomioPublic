@@ -26,15 +26,15 @@ type PageData struct {
     LoginPageData LoginPageData
 }
 
-var loginPageTemplate *template.Template
+var signupPageTemplate *template.Template
 
 func init() {
-    loginPageTemplate = templater.BuildTemplate(GetSignupPageTemplate)
+    signupPageTemplate = templater.BuildTemplate(GetSignupPageTemplate)
 }
 
 func SignupPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    templater.WriteTemplate(w, req, loginPageTemplate, GetPageName(), GetPageData())
+    templater.WriteTemplate(w, req, signupPageTemplate, GetPageName(), GetPageData())
 
 }
 

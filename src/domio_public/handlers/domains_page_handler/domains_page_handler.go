@@ -12,15 +12,15 @@ type PageData struct {
     SideBarData templater.SideBarData
 }
 
-var homePageTemplate *template.Template
+var domainsPageTemplate *template.Template
 
 func init() {
-    homePageTemplate = templater.BuildTemplate(GetDomainsPageTemplate)
+    domainsPageTemplate = templater.BuildTemplate(GetDomainsPageTemplate)
 }
 
 func DomainsPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    templater.WriteTemplate(w, req, homePageTemplate, GetPageName(), GetPageData())
+    templater.WriteTemplate(w, req, domainsPageTemplate, GetPageName(), GetPageData())
 
 }
 

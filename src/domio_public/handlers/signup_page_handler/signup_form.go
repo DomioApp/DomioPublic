@@ -1,7 +1,7 @@
 package signup_page_handler
 
 func GetSignupFormTemplate() string {
-    loginFormTemplate := `
+    signupFormTemplate := `
                             {{define "login_form_template"}}
                                 {{with .PageData.LoginPageData}}
                                     <div class="b-login-form-container">
@@ -25,5 +25,5 @@ func GetSignupFormTemplate() string {
                                 {{end}}
                             {{end}}
                         `
-    return loginFormTemplate
+    return signupFormTemplate
 }
