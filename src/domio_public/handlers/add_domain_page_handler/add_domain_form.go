@@ -16,7 +16,7 @@ type FormData struct {
 }
 
 func GetAddDomainFormTemplate() string {
-    loginFormTemplate := `
+    addDomainFormTemplate := `
                             {{define "add_domain_form_template"}}
                                 {{with .PageData.FormData}}
                                     <div class="b-add-domain-form-container">
@@ -40,7 +40,7 @@ func GetAddDomainFormTemplate() string {
                                 {{end}}
                             {{end}}
                         `
-    return loginFormTemplate
+    return addDomainFormTemplate
 }
 func GetFormData() FormData {
     return FormData{
