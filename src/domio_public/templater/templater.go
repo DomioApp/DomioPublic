@@ -7,6 +7,8 @@ import (
     "github.com/tdewolff/minify"
     "github.com/tdewolff/minify/html"
     "domio_public/components/api"
+    "domio_public/components/tokens"
+    "domio_public/errors"
 )
 
 type Link struct {
@@ -46,19 +48,31 @@ func WriteTemplate(w http.ResponseWriter, req *http.Request, tmpl *template.Temp
     w.Header().Set("Content-Type", "text/html")
 
     tokenCookie, err := req.Cookie("token")
-    var userName string
+    var token string
 
     if (err != nil) {
         log.Print(err)
-        userName = ""
+        token = ""
     } else {
-        userName = tokenCookie.Value
+        token = tokenCookie.Value
+    }
+
+    var claims tokens.UserTokenWithClaims
+    var tokenErr errors.DomioError
+
+    if (token != "") {
+        claims, tokenErr = tokens.VerifyTokenString(token)
+
+        if (tokenErr != errors.DomioError{}) {
+            log.Println(tokenErr)
+        }
+
     }
 
     fullData := FullPageData{
         BaseTemplateData: BaseTemplateData{PageName: pageName},
         AppStatusInfoBarData: api.GetAPIStatus(),
-        TopBarData: GetTopBarData(pageName, userName),
+        TopBarData: GetTopBarData(pageName, claims.Email),
         PageData: data,
     }
 

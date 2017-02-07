@@ -33,6 +33,20 @@ func init() {
 }
 
 func LogoutPageHandler(w http.ResponseWriter, req *http.Request) {
+    resetTokenCookie := http.Cookie{
+        Name:"token",
+        Value:"",
+        MaxAge:-1,
+    }
+
+    resetEmailCookie := http.Cookie{
+        Name:"email",
+        Value:"",
+        MaxAge:-1,
+    }
+
+    http.SetCookie(w, &resetTokenCookie)
+    http.SetCookie(w, &resetEmailCookie)
 
     templater.WriteTemplate(w, req, loginPageTemplate, GetPageName(), GetPageData())
 

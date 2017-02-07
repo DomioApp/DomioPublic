@@ -2,7 +2,7 @@ package tokens
 
 import (
     "github.com/dgrijalva/jwt-go"
-    domioerrors  "domio_api/errors"
+    domioerrors  "domio_public/errors"
     "strings"
     "fmt"
 )
