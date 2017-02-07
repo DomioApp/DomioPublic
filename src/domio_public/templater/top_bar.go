@@ -2,6 +2,7 @@ package templater
 
 type PagesTopBars struct {
     HomePage        TopBarData
+    DomainsPage     TopBarData
     ProfilePage     TopBarData
     UserDomainsPage TopBarData
     AddDomainPage   TopBarData
@@ -56,6 +57,17 @@ func GetTopBarData(pageName string, userName string) TopBarData {
             },
             DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
         },
+        DomainsPage:TopBarData{
+            LeftColumnLinks:[]Link{
+                {Url:"/", Label:"Home"},
+                {Url:"/domains", Label:"Domains"},
+            },
+            RightColumnLinks:[]Link{
+                {Url:"/login", Label:"Login"},
+                {Url:"/signup", Label:"Signup"},
+            },
+            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+        },
         ProfilePage:TopBarData{
             LeftColumnLinks:[]Link{
                 {Url:"/", Label:"Home"},
@@ -90,6 +102,10 @@ func GetTopBarData(pageName string, userName string) TopBarData {
     }
 
     if pageName == "HomePage" {
+        return dataset.HomePage
+    } else if pageName == "LoginPage" {
+        return dataset.HomePage
+    } else if pageName == "DomainsPage" {
         return dataset.HomePage
     } else if pageName == "ProfilePage" {
         return dataset.ProfilePage

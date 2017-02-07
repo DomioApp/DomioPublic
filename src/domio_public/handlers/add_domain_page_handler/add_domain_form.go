@@ -19,11 +19,11 @@ func GetAddDomainFormTemplate() string {
     loginFormTemplate := `
                             {{define "add_domain_form_template"}}
                                 {{with .PageData.FormData}}
-                                    <div class="b-login-form-container">
+                                    <div class="b-add-domain-form-container">
                                         <form>
                                             <div class="b-form-rows-container">
                                                 {{range .FormRows}}
-                                                     <div>
+                                                     <div class="b-form-row">
                                                         <label>{{.Label}}</label>
                                                         <input type="{{.Type}}" autocomplete="off" name="{{.Name}}"></input>
                                                      </div>
@@ -46,7 +46,7 @@ func GetFormData() FormData {
     return FormData{
         FormRows:[]FormRow{
             {Label:"Name", Name:"name", Type:"text"},
-            {Label:"Price", Name:"price_per_month", Type:"text"},
+            {Label:"Price", Name:"price_per_month", Type:"number"},
         },
         SubmitButton: SubmitButton{Label:"Add"},
     }

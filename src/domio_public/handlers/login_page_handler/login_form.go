@@ -8,7 +8,7 @@ func GetLoginFormTemplate() string {
                                         <form>
                                             <div class="b-form-rows-container">
                                                 {{range .FormRows}}
-                                                     <div>
+                                                     <div class="b-form-row">
                                                         <label>{{.Label}}</label>
                                                         <input type="{{.Type}}" autocomplete="off" name="{{.Name}}"></input>
                                                      </div>
