@@ -31,7 +31,7 @@ func UserDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
 
     log.Print(tokenCookie.Value)
 
-    templater.WriteTemplate(w, userDomainsPageTemplate, GetPageName(), GetPageData())
+    templater.WriteTemplate(w, req, userDomainsPageTemplate, GetPageName(), GetPageData())
 
 }
 

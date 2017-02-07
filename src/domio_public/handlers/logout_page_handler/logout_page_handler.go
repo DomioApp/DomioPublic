@@ -34,7 +34,7 @@ func init() {
 
 func LogoutPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    templater.WriteTemplate(w, loginPageTemplate, GetPageName(), GetPageData())
+    templater.WriteTemplate(w, req, loginPageTemplate, GetPageName(), GetPageData())
 
 }
 

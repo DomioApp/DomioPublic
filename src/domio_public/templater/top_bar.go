@@ -42,7 +42,7 @@ func GetTopBarTemplate() string {
         `
 }
 
-func GetTopBarData(pageName string) TopBarData {
+func GetTopBarData(pageName string, userName string) TopBarData {
 
     dataset := PagesTopBars{
         HomePage:TopBarData{
@@ -62,7 +62,7 @@ func GetTopBarData(pageName string) TopBarData {
                 {Url:"/domains", Label:"Domains"},
             },
             RightColumnLinks:[]Link{
-                {Url:"/profile", Label:"Profile"},
+                {Url:"/profile", Label: userName},
                 {Url:"/logout", Label:"Logout"},
             },
             DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},

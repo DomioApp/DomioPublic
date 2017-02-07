@@ -20,7 +20,7 @@ func init() {
 
 func ProfilePageHandler(w http.ResponseWriter, req *http.Request) {
 
-    templater.WriteTemplate(w, profilePageTemplate, GetPageName(), GetPageData())
+    templater.WriteTemplate(w, req, profilePageTemplate, GetPageName(), GetPageData())
 
 }
 

@@ -42,13 +42,23 @@ func BuildTemplate(addTemplatesToBaseTemplate TemplateAdditionals) *template.Tem
     return parsedTemplate
 }
 
-func WriteTemplate(w http.ResponseWriter, tmpl *template.Template, pageName string, data interface{}) {
+func WriteTemplate(w http.ResponseWriter, req *http.Request, tmpl *template.Template, pageName string, data interface{}) {
     w.Header().Set("Content-Type", "text/html")
+
+    tokenCookie, err := req.Cookie("token")
+    var userName string
+
+    if (err != nil) {
+        log.Print(err)
+        userName = ""
+    } else {
+        userName = tokenCookie.Value
+    }
 
     fullData := FullPageData{
         BaseTemplateData: BaseTemplateData{PageName: pageName},
         AppStatusInfoBarData: api.GetAPIStatus(),
-        TopBarData: GetTopBarData(pageName),
+        TopBarData: GetTopBarData(pageName, userName),
         PageData: data,
     }
 

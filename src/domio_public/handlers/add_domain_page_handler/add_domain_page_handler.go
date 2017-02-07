@@ -20,7 +20,7 @@ func init() {
 
 func AddDomainPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    templater.WriteTemplate(w, addDomainPageTemplate, GetPageName(), GetPageData())
+    templater.WriteTemplate(w, req, addDomainPageTemplate, GetPageName(), GetPageData())
 
 }
 
