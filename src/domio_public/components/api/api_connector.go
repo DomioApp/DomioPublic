@@ -99,3 +99,37 @@ func GetUserDomains(token string) []DomainJson {
 
     return userDomains
 }
+
+func GetDomains() []DomainJson {
+
+    var domains []DomainJson
+
+    url := config.Config.ApiUrl
+
+    req, requestErr := http.NewRequest("GET", url + "/domains/available", nil)
+
+    req.Header.Set("Content-Type", "application/json")
+
+    timeout := time.Duration(5 * time.Second)
+
+    client := &http.Client{
+        Timeout: timeout,
+    }
+
+    resp, requestErr := client.Do(req)
+
+    if requestErr != nil {
+        log.Print(requestErr)
+        return domains
+    }
+    defer resp.Body.Close()
+
+    decodeError := DecodeJsonRequestBody(resp, &domains)
+
+    if (decodeError != nil) {
+        log.Print(decodeError)
+        return domains
+    }
+
+    return domains
+}
