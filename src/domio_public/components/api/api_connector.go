@@ -4,8 +4,6 @@ import (
     "net/http"
     "log"
     "domio_public/components/config"
-    "fmt"
-    "github.com/fatih/color"
     "time"
 )
 
@@ -34,9 +32,9 @@ func GetAPIStatus() AppStatusInfo {
 
     url := config.Config.ApiUrl
 
-    color.Set(color.FgGreen)
-    fmt.Println("URL:> ", url)
-    color.Unset()
+    //color.Set(color.FgGreen)
+    //fmt.Println("URL:> ", url)
+    //color.Unset()
 
     req, requestErr := http.NewRequest("GET", url, nil)
 
