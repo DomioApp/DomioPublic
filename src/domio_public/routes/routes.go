@@ -10,6 +10,7 @@ import (
     "domio_public/handlers/signup_page_handler"
     "domio_public/handlers/logout_page_handler"
     "domio_public/handlers/domains_page_handler"
+    "domio_public/handlers/domain_info_page_handler"
 )
 
 type Route struct {
@@ -33,6 +34,12 @@ var RoutesList = Routes{
         "GET",
         domains_page_handler.GetUrl(),
         domains_page_handler.DomainsPageHandler,
+    },
+    Route{
+        "DomainInfoPage",
+        "GET",
+        domain_info_page_handler.GetUrl(),
+        domain_info_page_handler.DomainInfoPageHandler,
     },
     Route{
         "LoginPage",
