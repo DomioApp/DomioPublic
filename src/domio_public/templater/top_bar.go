@@ -1,17 +1,10 @@
 package templater
 
-type PagesTopBars struct {
-    HomePage        TopBarData
-    DomainsPage     TopBarData
-    ProfilePage     TopBarData
-    UserDomainsPage TopBarData
-    AddDomainPage   TopBarData
-}
+import "log"
 
 type TopBarData struct {
     LeftColumnLinks  []Link
     RightColumnLinks []Link
-    DomainAddLink    Link
 }
 
 func GetTopBarTemplate() string {
@@ -20,21 +13,19 @@ func GetTopBarTemplate() string {
                 {{with .TopBarData}}
 
                     <div class="b-top-bar-container">
+
                         <div class="left-area">
                             {{range .LeftColumnLinks}}
-                                 <a href="{{.Url}}">{{.Label}}</a>
+                                 <a class="{{.ClassName}}" href="{{.Url}}">{{.Label}}</a>
                             {{end}}
                         </div>
+
                         <div class="right-area">
-
-                            {{with .DomainAddLink}}
-                                <a href="{{.Url}}" class="{{.ClassName}}">{{.Label}}</a>
-                            {{end}}
-
                             {{range .RightColumnLinks}}
-                                 <a href="{{.Url}}">{{.Label}}</a>
+                                 <a class="{{.ClassName}}" href="{{.Url}}">{{.Label}}</a>
                             {{end}}
                         </div>
+
                     </div>
 
                 {{end}}
@@ -44,76 +35,31 @@ func GetTopBarTemplate() string {
 }
 
 func GetTopBarData(pageName string, userName string) TopBarData {
+    log.Print(userName)
 
-    dataset := PagesTopBars{
-        HomePage:TopBarData{
-            LeftColumnLinks:[]Link{
-                {Url:"/", Label:"Home"},
-                {Url:"/domains", Label:"Domains"},
-            },
-            RightColumnLinks:[]Link{
-                {Url:"/login", Label:"Login"},
-                {Url:"/signup", Label:"Signup"},
-            },
-            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
-        },
-        DomainsPage:TopBarData{
-            LeftColumnLinks:[]Link{
-                {Url:"/", Label:"Home"},
-                {Url:"/domains", Label:"Domains"},
-            },
-            RightColumnLinks:[]Link{
-                {Url:"/login", Label:"Login"},
-                {Url:"/signup", Label:"Signup"},
-            },
-            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
-        },
-        ProfilePage:TopBarData{
-            LeftColumnLinks:[]Link{
-                {Url:"/", Label:"Home"},
-                {Url:"/domains", Label:"Domains"},
-            },
-            RightColumnLinks:[]Link{
-                {Url:"/profile", Label: userName},
-                {Url:"/logout", Label:"Logout"},
-            },
-            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
-        },
-        UserDomainsPage:TopBarData{
-            LeftColumnLinks:[]Link{
-                {Url:"/", Label:"Home"},
-                {Url:"/domains", Label:"Domains"},
-            },
-            RightColumnLinks:[]Link{
-                {Url:"/profile", Label:"Profile"},
-            },
-            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
-        },
-        AddDomainPage:TopBarData{
-            LeftColumnLinks:[]Link{
-                {Url:"/", Label:"Home"},
-                {Url:"/domains", Label:"Domains"},
-            },
-            RightColumnLinks:[]Link{
-                {Url:"/profile", Label:"Profile"},
-            },
-            DomainAddLink:Link{Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
-        },
+    var customLinks []Link
+
+    if (userName != "") {
+        customLinks = []Link{
+            {Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+            {Url:"/profile/domains", Label:"My Domains"},
+            {Url:"/profile", Label:userName},
+        }
+    } else {
+        customLinks = []Link{
+            {Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
+            {Url:"/login", Label:"Login"},
+            {Url:"/signup", Label:"Signup"},
+        }
     }
 
-    if pageName == "HomePage" {
-        return dataset.HomePage
-    } else if pageName == "LoginPage" {
-        return dataset.HomePage
-    } else if pageName == "DomainsPage" {
-        return dataset.HomePage
-    } else if pageName == "ProfilePage" {
-        return dataset.ProfilePage
-    } else if pageName == "UserDomainsPage" {
-        return dataset.ProfilePage
-    } else if pageName == "AddDomainPage" {
-        return dataset.AddDomainPage
+    dataset := TopBarData{
+        LeftColumnLinks:[]Link{
+            {Url:"/", Label:"Home"},
+            {Url:"/domains", Label:"Domains"},
+        },
+        RightColumnLinks:customLinks,
     }
 
-    return TopBarData{}
+    return dataset
 }
