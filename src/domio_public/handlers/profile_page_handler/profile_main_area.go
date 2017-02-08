@@ -2,12 +2,12 @@ package profile_page_handler
 
 import "domio_public/templater"
 
-type ProfileMainAreaData struct {
+type ProfileTopBarData struct {
     Links []templater.Link
 }
 
-func GetProfileMainAreaTemplate() string {
-    return `{{ define "profile_main_area_template"}}
+func GetProfileTopBarTemplate() string {
+    return `{{ define "profile_topbar_template"}}
 
                 {{with .PageData.ProfileTopBarData}}
 

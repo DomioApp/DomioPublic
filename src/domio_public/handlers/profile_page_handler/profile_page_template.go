@@ -18,4 +18,10 @@ func GetProfilePageTemplate(parsedTemplate *template.Template) {
     if (err2 != nil) {
         log.Print(err2)
     }
+
+    _, err3 := parsedTemplate.New("profile_main_area_template").Parse(GetProfileMainAreaTemplate())
+
+    if (err3 != nil) {
+        log.Print(err3)
+    }
 }
