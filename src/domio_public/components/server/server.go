@@ -6,6 +6,7 @@ import (
     "domio_public/components/config"
     "net/http"
     "fmt"
+    "os"
 )
 
 func StartRouter() {
@@ -17,10 +18,21 @@ func StartRouter() {
         log.Print("Development environment, handling static files by Go...")
         domiorouter.Path("/style.css").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
         domiorouter.Path("/bundle.js").Handler(http.FileServer(http.Dir("/usr/local/domio_client")))
-        domiorouter.PathPrefix("/app").Handler(http.FileServer(http.Dir("/Users/sergeibasharov/WebstormProjects/DomioClient/src")))
-        //domiorouter.PathPrefix("/app").Handler(http.FileServer(http.Dir("/Users/sbasharov/WebstormProjects/DomioClient/src")))
-    }
 
+        windows_dart_path := "/Users/sbasharov/WebstormProjects/DomioClient/src"
+        mac_dart_path := "/Users/sergeibasharov/WebstormProjects/DomioClient/src"
+
+        current_dart_path := ""
+
+        _, err := os.Stat(windows_dart_path)
+
+        if err == nil {
+            current_dart_path = windows_dart_path
+        } else {
+            current_dart_path = mac_dart_path
+        }
+        domiorouter.PathPrefix("/app").Handler(http.FileServer(http.Dir(current_dart_path)))
+    }
 
     log.Printf("Web server is running on http://localhost:%d", config.Config.Port)
     err := http.ListenAndServe(fmt.Sprintf(":%v", config.Config.Port), domiorouter)

@@ -4,7 +4,6 @@ import (
     "flag"
     "os"
     "fmt"
-    "log"
     "domio_public/components/config"
     "domio_public/components/server"
 )
@@ -73,7 +72,7 @@ func processStartArguments() Arguments {
     startCommand := flag.NewFlagSet("start", flag.ExitOnError)
     //recipientFlag := sendCommand.String("recipient", "", "Recipient of your message")
     //messageFlag := sendCommand.String("message", "", "Text message")
-    log.Print(*startCommand)
+    //log.Print(*startCommand)
 
     startCommand.Parse(os.Args[2:])
 
