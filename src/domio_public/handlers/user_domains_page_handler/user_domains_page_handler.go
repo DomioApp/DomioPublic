@@ -26,7 +26,7 @@ func UserDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
     tokenCookie, err = req.Cookie("token")
 
     if (err != nil) {
-        http.Redirect(w, req, "/login", http.StatusSeeOther)
+        http.Redirect(w, req, "/login", http.StatusTemporaryRedirect)
 
     } else {
         templater.WriteTemplate(w, req, userDomainsPageTemplate, GetPageName(), GetPageData())

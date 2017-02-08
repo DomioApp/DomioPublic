@@ -14,14 +14,22 @@ type PageData struct {
 }
 
 var profilePageTemplate *template.Template
+var tokenCookie *http.Cookie
 
 func init() {
     profilePageTemplate = templater.BuildTemplate(GetProfilePageTemplate)
 }
 
 func ProfilePageHandler(w http.ResponseWriter, req *http.Request) {
+    var err error
+    tokenCookie, err = req.Cookie("token")
 
-    templater.WriteTemplate(w, req, profilePageTemplate, GetPageName(), GetPageData())
+    if (err != nil) {
+        http.Redirect(w, req, "/login", http.StatusTemporaryRedirect)
+
+    } else {
+        templater.WriteTemplate(w, req, profilePageTemplate, GetPageName(), GetPageData())
+    }
 
 }
 
