@@ -35,8 +35,6 @@ func GetTopBarTemplate() string {
 }
 
 func GetTopBarData(pageName string, userName string) TopBarData {
-    log.Print(userName)
-
     var customLinks []Link
 
     if (userName != "") {
