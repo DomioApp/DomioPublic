@@ -40,6 +40,7 @@ func GetTopBarData(pageName string, userName string) TopBarData {
             {Url:"/profile/domains/add", Label:"Add Domain", ClassName:"b-top-bar-container__domain-add-link"},
             {Url:"/profile/domains", Label:"My Domains"},
             {Url:"/profile", Label:userName},
+            {Url:"/logout", Label:"Logout"},
         }
     } else {
         customLinks = []Link{
