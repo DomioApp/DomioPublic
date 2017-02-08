@@ -7,9 +7,10 @@ import (
 )
 
 type PageData struct {
-    PageTitle         string
-    ProfileTopBarData ProfileTopBarData
-    SideBarData       templater.SideBarData
+    PageTitle           string
+    ProfileTopBarData   ProfileTopBarData
+    ProfileMainAreaData ProfileMainAreaData
+    SideBarData         templater.SideBarData
 }
 
 var profilePageTemplate *template.Template
@@ -35,8 +36,9 @@ func GetPageName() string {
 func GetPageData() PageData {
     return PageData{
         PageTitle: "Domio - Marketplace for domains",
-        SideBarData:templater.GetSideBarData(),
         ProfileTopBarData:GetProfileTopBarData(),
+        ProfileMainAreaData:ProfileMainAreaData{Title:"Profile page"},
+        SideBarData:templater.GetSideBarData(),
     }
 
 }

@@ -1,20 +1,17 @@
 package profile_page_handler
 
-import "domio_public/templater"
-
-type ProfileTopBarData struct {
-    Links []templater.Link
+type ProfileMainAreaData struct {
+    Title string
 }
 
-func GetProfileTopBarTemplate() string {
-    return `{{ define "profile_topbar_template"}}
+func GetProfileMainAreaTemplate() string {
+    return `{{ define "profile_main_area_template"}}
 
-                {{with .PageData.ProfileTopBarData}}
+                {{with .PageData.ProfileMainAreaData}}
 
-                    <div class="b-profile-top-bar-container">
-                        {{range .Links}}
-                             <a href="{{.Url}}">{{.Label}}</a>
-                        {{end}}
+                    <div class="b-profile-main-area-container">
+                        <!--<h4>{{.Title}}</h4>-->
+                        <button class="b-delete-account-button">Delete my account</button>
                     </div>
 
                 {{end}}
