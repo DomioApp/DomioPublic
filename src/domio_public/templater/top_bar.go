@@ -1,7 +1,5 @@
 package templater
 
-import "log"
-
 type TopBarData struct {
     LeftColumnLinks  []Link
     RightColumnLinks []Link
