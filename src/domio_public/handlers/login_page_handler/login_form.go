@@ -13,12 +13,14 @@ func GetLoginFormTemplate() string {
                                                         <input type="{{.Type}}" autocomplete="off" name="{{.Name}}"></input>
                                                      </div>
                                                 {{end}}
+                                                <div class="b-error-message-container"></div>
                                             </div>
 
                                             <div>
                                                 {{with .SubmitButton}}
-                                                <input type="submit" value="{{.Label}}"/>
+                                                    <input type="submit" value="{{.Label}}"/>
                                                 {{end}}
+                                                <a class="signup-link" href="/signup">Signup</a>
                                             </div>
                                         </form>
                                     </div>
