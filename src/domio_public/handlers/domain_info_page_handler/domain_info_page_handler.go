@@ -38,7 +38,7 @@ func GetPageName() string {
 func GetPageData(domainName string) PageData {
     pageData := PageData{
         PageTitle: "Domio - Available Domains",
-        DomainInfo: api.GetDomainInfo(domainName),
+        DomainInfo: api.GetDomainInfo(domainName, ""),
     }
 
     return pageData

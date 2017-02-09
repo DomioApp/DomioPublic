@@ -6,6 +6,7 @@ import (
     "domio_public/templater"
     "domio_public/components/api"
     "github.com/gorilla/mux"
+    "log"
 )
 
 type PageData struct {
@@ -24,6 +25,12 @@ func DomainEditPageHandler(w http.ResponseWriter, req *http.Request) {
     vars := mux.Vars(req)
     domainName := vars["domainName"]
 
+    var tokenErr error
+
+    tokenCookie, tokenErr = req.Cookie("token")
+
+    log.Print(tokenErr)
+
     templater.WriteTemplate(w, req, domainEditPageTemplate, GetPageName(), GetPageData(domainName))
 }
 
@@ -36,9 +43,13 @@ func GetPageName() string {
 }
 
 func GetPageData(domainName string) PageData {
+    domainInfo := api.GetDomainInfo(domainName, tokenCookie.Value)
+
+    log.Print(domainInfo)
+
     pageData := PageData{
         PageTitle: "Domio - Edit Domain " + domainName,
-        DomainInfo: api.GetDomainInfo(domainName),
+        DomainInfo: domainInfo,
     }
 
     return pageData

@@ -23,6 +23,11 @@ func GetDomainEditPageTemplate(parsedTemplate *template.Template) {
                                                                             <label>Price Per Month, $:</label>
                                                                             <input name="price_per_month" type="number" value="{{.PricePerMonth}}"></input>
                                                                         </div>
+
+                                                                        <div>
+                                                                            <label>NS1: {{.NS1}}</label>
+                                                                        </div>
+
                                                                         <button>Save</button>
                                                                     </div>
                                                                 {{end}}
