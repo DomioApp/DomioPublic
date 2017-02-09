@@ -7,7 +7,7 @@ import (
     "log"
 )
 
-func GetDomainInfo(domainName string) DomainJson {
+func GetDomainInfo(domainName string, token string) DomainJson {
 
     var domain DomainJson
 
@@ -23,6 +23,8 @@ func GetDomainInfo(domainName string) DomainJson {
         Timeout: timeout,
     }
 
+    req.Header.Add("Authorization", "Bearer " + token)
+
     resp, requestErr := client.Do(req)
 
     if requestErr != nil {
@@ -37,6 +39,8 @@ func GetDomainInfo(domainName string) DomainJson {
         log.Print(decodeError)
         return domain
     }
+
+    log.Print(domain)
 
     return domain
 }

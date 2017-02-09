@@ -11,11 +11,11 @@ type DomainJson struct {
     Name          string `json:"name"`
     Owner         string `json:"owner"`
     PricePerMonth uint64 `json:"price_per_month"`
-    //ZoneId        string `json:"zone_id"`
-    //NS1           string `json:"ns1"`
-    //NS2           string `json:"ns2"`
-    //NS3           string `json:"ns3"`
-    //NS4           string `json:"ns4"`
+    ZoneId        string `json:"zone_id"`
+    NS1           string `json:"ns1"`
+    NS2           string `json:"ns2"`
+    NS3           string `json:"ns3"`
+    NS4           string `json:"ns4"`
 }
 
 type AppStatusInfo struct {
