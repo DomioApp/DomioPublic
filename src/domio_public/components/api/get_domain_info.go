@@ -40,7 +40,5 @@ func GetDomainInfo(domainName string, token string) DomainJson {
         return domain
     }
 
-    log.Print(domain)
-
     return domain
 }

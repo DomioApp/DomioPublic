@@ -14,9 +14,17 @@ func GetDomainEditPageTemplate(parsedTemplate *template.Template) {
                                                                         <h2>{{.Name}}</h2>
 
                                                                         <div>
+                                                                            <p>Is visible: {{.IsVisible}}</p>
                                                                             <label>Visible:</label>
-                                                                            <input type="radio" name="visible">Yes</input>
-                                                                            <input type="radio" name="visible">No</input>
+
+                                                                            {{if .IsVisible}}
+                                                                                <input type="radio" value="visible" name="visible" checked>Yes</input>
+                                                                                <input type="radio" value="invisible" name="visible">No</input>
+                                                                            {{else}}
+                                                                                <input type="radio" value="visible" name="visible">Yes</input>
+                                                                                <input type="radio" value="invisible" name="visible" checked>No</input>
+                                                                            {{end}}
+
                                                                         </div>
 
                                                                         <div>
@@ -42,6 +50,8 @@ func GetDomainEditPageTemplate(parsedTemplate *template.Template) {
                                                                         </div>
 
                                                                         <button>Save</button>
+                                                                        <button value="{{.Name}}" class="b-delete-domain-button">Delete</button>
+
                                                                     </div>
                                                                 {{end}}
                                                             </form>
