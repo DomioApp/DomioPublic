@@ -11,7 +11,7 @@ func GetDomainInfoPageTemplate(parsedTemplate *template.Template) {
                                                                 <div data-domain="{{.Name}}">
                                                                     <a href="/domains/{{.Name}}">{{.Name}}</a>
                                                                     <p>Price Per Month: ${{.PricePerMonth}}</p>
-                                                                    <a href="/domains/{{.Name}}/rent">Rent {{.Name}} now</a>
+                                                                    <a href="/domain/{{.Name}}/rent">Rent {{.Name}} now</a>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)

@@ -57,7 +57,7 @@ func GetProfileTopBarData() ProfileTopBarData {
         Links:[]templater.Link{
             {Url:"/profile/domains", Label:"My Domains"},
             {Url:"/profile/domains/rented", Label:"Domains I rent"},
-            {Url:"/profile/stats", Label:"Stats"},
+            {Url:"/profile/stats", Label:"Payments"},
         },
     }
 }

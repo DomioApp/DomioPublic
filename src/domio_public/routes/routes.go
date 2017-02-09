@@ -12,6 +12,7 @@ import (
     "domio_public/handlers/domains_page_handler"
     "domio_public/handlers/domain_info_page_handler"
     "domio_public/handlers/domain_edit_page_handler"
+    "domio_public/handlers/rent_domain_page_handler"
 )
 
 type Route struct {
@@ -41,6 +42,12 @@ var RoutesList = Routes{
         "GET",
         domain_info_page_handler.GetUrl(),
         domain_info_page_handler.DomainInfoPageHandler,
+    },
+    Route{
+        "RentDomainPage",
+        "GET",
+        rent_domain_page_handler.GetUrl(),
+        rent_domain_page_handler.RentDomainPageHandler,
     },
     Route{
         "DomainEditPage",
