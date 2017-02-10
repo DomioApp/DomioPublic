@@ -109,7 +109,7 @@ http {
         }
 
         location /app/app.js {
-            alias /usr/local/domio_client/app/app.dart.js;
+            alias /usr/local/domio_client/app.dart.js;
             expires 7d;
         }
 
