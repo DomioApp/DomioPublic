@@ -9,6 +9,7 @@ import (
     "domio_public/components/api"
     "domio_public/components/tokens"
     "domio_public/errors"
+    "domio_public/components/config"
 )
 
 type Link struct {
@@ -22,6 +23,7 @@ type BaseTemplateData struct {
 }
 
 type FullPageData struct {
+    UseDart              bool
     BaseTemplateData     BaseTemplateData
     AppStatusInfoBarData interface{}
     TopBarData           TopBarData
@@ -70,6 +72,7 @@ func WriteTemplate(w http.ResponseWriter, req *http.Request, tmpl *template.Temp
     }
 
     fullData := FullPageData{
+        UseDart:config.Config.UseDart,
         BaseTemplateData: BaseTemplateData{PageName: pageName},
         AppStatusInfoBarData: api.GetAPIStatus(),
         TopBarData: GetTopBarData(pageName, claims.Email),

@@ -9,7 +9,7 @@ import (
     "path"
 )
 
-func InitConfigFile(filenameFlag *string, webPortFlag *uint, envFlag *string, apiUrl *string) error {
+func InitConfigFile(filenameFlag *string, webPortFlag *uint, envFlag *string, apiUrl *string, useDart *bool) error {
 
     argsErr := false
 
@@ -29,6 +29,7 @@ func InitConfigFile(filenameFlag *string, webPortFlag *uint, envFlag *string, ap
         Port: *webPortFlag,
         Env: *envFlag,
         ApiUrl: *apiUrl,
+        UseDart: *useDart,
     }
 
     if _, err := os.Stat(ConfigPath); os.IsNotExist(err) {

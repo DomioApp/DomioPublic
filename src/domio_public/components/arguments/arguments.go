@@ -55,11 +55,12 @@ func processInitArguments() Arguments {
     webPortFlag := initCommand.Uint("port", 8090, "Port for the HTTP server to run on")
     envFlag := initCommand.String("env", "development", "Environment name: development, testing, production")
     apiUrl := initCommand.String("api-url", "https://api.domio.in/", "Url where API is served")
+    useDart := initCommand.String("use-dart", false, "Use Dart instead of JS")
 
     initCommand.Parse(os.Args[2:])
 
     if initCommand.Parsed() {
-        config.InitConfigFile(filenameFlag, webPortFlag, envFlag, apiUrl)
+        config.InitConfigFile(filenameFlag, webPortFlag, envFlag, apiUrl, useDart)
     }
     return args
 }
