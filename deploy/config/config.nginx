@@ -108,8 +108,8 @@ http {
             auth_basic_user_file /etc/nginx/.htpasswd;
         }
 
-        location /app.js {
-            alias /usr/local/domio_client/bundle.js;
+        location /app/app.js {
+            alias /usr/local/domio_client/app/app.dart.js;
             expires 7d;
         }
 

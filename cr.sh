@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
 ./compile.sh
-./run.sh
+if [ $? -eq 0 ]; then
+    echo OK
+    ./run.sh
+else
+    echo FAIL
+fi
