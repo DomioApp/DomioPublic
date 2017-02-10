@@ -11,7 +11,7 @@ func GetTopBarTemplate() string {
                 {{with .TopBarData}}
 
                     <div class="b-top-bar-container">
-
+                        <div class="toggle-menu-button"></div>
                         <div class="left-area">
                             {{range .LeftColumnLinks}}
                                  <a class="{{.ClassName}}" href="{{.Url}}">{{.Label}}</a>

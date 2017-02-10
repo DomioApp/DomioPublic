@@ -16,7 +16,7 @@ func GetLoginFormTemplate() string {
                                                 <div class="b-error-message-container"></div>
                                             </div>
 
-                                            <div>
+                                            <div class="b-actions-area">
                                                 {{with .SubmitButton}}
                                                     <input type="submit" value="{{.Label}}"/>
                                                 {{end}}
