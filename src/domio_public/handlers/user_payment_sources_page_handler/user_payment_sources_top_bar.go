@@ -9,7 +9,7 @@ type ProfileTopBarData struct {
 func GetUserDomainsTopBarTemplate() string {
     return `{{ define "user_domains_topbar_template"}}
 
-                {{with .PageData.UserDomainsTopBarData}}
+                {{with .PageData.UserPaymentSourcesTopBarData}}
 
                     <div class="b-profile-top-bar-container">
                         {{range .Links}}

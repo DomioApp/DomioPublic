@@ -8,9 +8,16 @@ import (
 func GetUserPaymentsSourcesPageTemplate(parsedTemplate *template.Template) {
     _, err := parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
                                                             {{template "user_domains_topbar_template" .}}
-                                                            {{range .PageData.UserDomains}}
-                                                                <div data-domain="{{.Name}}">
-                                                                    <a href="/profile/domain/{{.Name}}">{{.Name}}</a>
+                                                            {{range .PageData.UserPaymentSources}}
+                                                                <div>
+                                                                    <hr>
+                                                                    <div><span>ID:</span> <span>{{.Id}}</span></div>
+                                                                    <div><span>Name on card:</span> <span>{{.Name}}</span></div>
+                                                                    <div><span>Expiration:</span> <span>{{.ExpMonth}}/{{.ExpYear}}</span></div>
+                                                                    <div><span>Last 4 Digits:</span> <span>{{.LastFour}}</span></div>
+                                                                    <div><span>Brand:</span> <span>{{.Brand}}</span></div>
+                                                                    <div><span>Currency:</span> <span>{{.Currency}}</span></div>
+                                                                    <div><span>Country:</span> <span>{{.Country}}</span></div>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)

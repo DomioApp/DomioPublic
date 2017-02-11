@@ -5,12 +5,13 @@ import (
     "net/http"
     "domio_public/templater"
     "domio_public/components/api"
+    "log"
 )
 
 type PageData struct {
-    PageTitle             string
-    UserDomainsTopBarData ProfileTopBarData
-    UserDomains           []api.DomainJson
+    PageTitle                    string
+    UserPaymentSourcesTopBarData ProfileTopBarData
+    UserPaymentSources           []api.PaymentSource
 }
 
 var userPaymentSourcesPageTemplate *template.Template
@@ -46,12 +47,13 @@ func GetPageName() string {
 func GetPageData() PageData {
     pageData := PageData{
         PageTitle: "Domio - My Payment Sources",
-        UserDomainsTopBarData: GetUserDomainsTopBarData(),
+        UserPaymentSourcesTopBarData: GetUserDomainsTopBarData(),
+        UserPaymentSources: api.GetUserPaymentSources(tokenCookie.Value),
     }
 
-    if (tokenCookie != nil) {
-        pageData.UserDomains = GetUserDomains(tokenCookie.Value)
-    }
+    log.Print("========================================================")
+    log.Print(pageData.UserPaymentSources)
+    log.Print("========================================================")
 
     return pageData
 }
@@ -64,8 +66,4 @@ func GetUserDomainsTopBarData() ProfileTopBarData {
             {Url:"/profile/payments/history", Label:"Payments History"},
         },
     }
-}
-
-func GetUserDomains(token string) []api.DomainJson {
-    return api.GetUserDomains(token)
 }
