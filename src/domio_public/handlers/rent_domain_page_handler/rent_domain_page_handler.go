@@ -4,6 +4,7 @@ import (
     "html/template"
     "net/http"
     "domio_public/templater"
+    "github.com/gorilla/mux"
 )
 
 type PageData struct {
@@ -20,7 +21,10 @@ func init() {
 
 func RentDomainPageHandler(w http.ResponseWriter, req *http.Request) {
 
-    templater.WriteTemplate(w, req, rentDomainPageTemplate, GetPageName(), GetPageData())
+    vars := mux.Vars(req)
+    domainName := vars["domainName"]
+
+    templater.WriteTemplate(w, req, rentDomainPageTemplate, GetPageName(), GetPageData(domainName))
 
 }
 
@@ -32,10 +36,10 @@ func GetPageName() string {
     return "RentDomainPage"
 }
 
-func GetPageData() PageData {
+func GetPageData(domainName string) PageData {
     return PageData{
         PageTitle: "Domio - Marketplace for domains. Rent domain",
-        FormData:GetFormData(),
+        FormData:GetFormData(domainName),
     }
 
 }

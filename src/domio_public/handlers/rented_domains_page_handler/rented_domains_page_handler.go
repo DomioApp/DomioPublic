@@ -1,26 +1,27 @@
-package user_domains_page_handler
+package rented_domains_page_handler
 
 import (
     "html/template"
     "net/http"
     "domio_public/templater"
     "domio_public/components/api"
+    "log"
 )
 
 type PageData struct {
     PageTitle             string
     UserDomainsTopBarData ProfileTopBarData
-    UserDomains           []api.DomainJson
+    Subscriptions         []api.Subscription
 }
 
-var userDomainsPageTemplate *template.Template
+var rentedDomainsPageTemplate *template.Template
 var tokenCookie *http.Cookie
 
 func init() {
-    userDomainsPageTemplate = templater.BuildTemplate(GetUserDomainsPageTemplate)
+    rentedDomainsPageTemplate = templater.BuildTemplate(GetUserDomainsPageTemplate)
 }
 
-func UserDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
+func RentedDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
     var err error
 
     tokenCookie, err = req.Cookie("token")
@@ -29,34 +30,36 @@ func UserDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
         http.Redirect(w, req, "/login", http.StatusTemporaryRedirect)
 
     } else {
-        templater.WriteTemplate(w, req, userDomainsPageTemplate, GetPageName(), GetPageData())
+        templater.WriteTemplate(w, req, rentedDomainsPageTemplate, GetPageName(), GetPageData())
 
     }
 
 }
 
 func GetUrl() string {
-    return "/profile/domains"
+    return "/profile/subscriptions"
 }
 
 func GetPageName() string {
-    return "UserDomainsPage"
+    return "RentedDomainsPage"
 }
 
 func GetPageData() PageData {
     pageData := PageData{
-        PageTitle: "Domio - My Domains",
-        UserDomainsTopBarData: GetUserDomainsTopBarData(),
+        PageTitle: "Domio - My Subscriptions",
+        UserDomainsTopBarData: GetRentedDomainsTopBarData(),
     }
 
     if (tokenCookie != nil) {
-        pageData.UserDomains = GetUserDomains(tokenCookie.Value)
+        pageData.Subscriptions = api.GetSubscriptions(tokenCookie.Value)
     }
+
+    log.Print(pageData.Subscriptions)
 
     return pageData
 }
 
-func GetUserDomainsTopBarData() ProfileTopBarData {
+func GetRentedDomainsTopBarData() ProfileTopBarData {
     return ProfileTopBarData{
         Links:[]templater.Link{
             {Url:"/profile/domains", Label:"My Domains"},
@@ -64,8 +67,4 @@ func GetUserDomainsTopBarData() ProfileTopBarData {
             {Url:"/profile/stats", Label:"Stats"},
         },
     }
-}
-
-func GetUserDomains(token string) []api.DomainJson {
-    return api.GetUserDomains(token)
 }

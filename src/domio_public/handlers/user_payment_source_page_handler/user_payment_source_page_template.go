@@ -1,17 +1,15 @@
-package user_payment_sources_page_handler
+package user_payment_source_page_handler
 
 import (
     "html/template"
     "log"
 )
 
-func GetUserPaymentsSourcesPageTemplate(parsedTemplate *template.Template) {
+func GetUserPaymentSourcePageTemplate(parsedTemplate *template.Template) {
     _, err := parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
                                                             {{template "user_domains_topbar_template" .}}
-                                                            {{range .PageData.UserPaymentSources}}
+                                                            {{with .PageData.UserPaymentSource}}
                                                                 <div>
-                                                                    <hr>
-                                                                    <div><a href="/profile/payments/{{.Id}}">Details</a></div>
                                                                     <div><span>ID:</span> <span>{{.Id}}</span></div>
                                                                     <div><span>Name on card:</span> <span>{{.Name}}</span></div>
                                                                     <div><span>Expiration:</span> <span>{{.ExpMonth}}/{{.ExpYear}}</span></div>
@@ -19,6 +17,8 @@ func GetUserPaymentsSourcesPageTemplate(parsedTemplate *template.Template) {
                                                                     <div><span>Brand:</span> <span>{{.Brand}}</span></div>
                                                                     <div><span>Currency:</span> <span>{{.Currency}}</span></div>
                                                                     <div><span>Country:</span> <span>{{.Country}}</span></div>
+                                                                    <hr>
+                                                                    <button value="{{.Id}}" class="delete-payment-source-button">Delete</button>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)
@@ -26,7 +26,7 @@ func GetUserPaymentsSourcesPageTemplate(parsedTemplate *template.Template) {
         log.Print(err)
     }
 
-    _, err2 := parsedTemplate.New("user_domains_topbar_template").Parse(GetUserDomainsTopBarTemplate())
+    _, err2 := parsedTemplate.New("user_domains_topbar_template").Parse(GetUserPaymentSourceTopBarTemplate())
 
     if (err2 != nil) {
         log.Print(err2)

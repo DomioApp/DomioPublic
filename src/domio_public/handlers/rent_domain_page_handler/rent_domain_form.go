@@ -11,6 +11,7 @@ type SubmitButton struct {
 }
 
 type FormData struct {
+    DomainName   string
     FormRows     []FormRow
     SubmitButton SubmitButton
 }
@@ -31,9 +32,7 @@ func GetRentDomainFormTemplate() string {
                                             </div>
 
                                             <div>
-                                                {{with .SubmitButton}}
-                                                <input type="submit" value="{{.Label}}"/>
-                                                {{end}}
+                                                <button value="{{.DomainName}}">{{.SubmitButton.Label}}</button>
                                             </div>
                                         </form>
                                     </div>
@@ -42,8 +41,9 @@ func GetRentDomainFormTemplate() string {
                         `
     return addDomainFormTemplate
 }
-func GetFormData() FormData {
+func GetFormData(domainName string) FormData {
     return FormData{
+        DomainName:domainName,
         SubmitButton: SubmitButton{Label:"Rent now"},
     }
 }
