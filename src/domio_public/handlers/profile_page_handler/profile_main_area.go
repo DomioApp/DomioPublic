@@ -10,7 +10,6 @@ func GetProfileMainAreaTemplate() string {
                 {{with .PageData.ProfileMainAreaData}}
 
                     <div class="b-profile-main-area-container">
-                        <!--<h4>{{.Title}}</h4>-->
                         <button class="b-delete-account-button">Delete my account</button>
                     </div>
 
