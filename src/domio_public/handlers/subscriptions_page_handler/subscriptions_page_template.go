@@ -1,4 +1,4 @@
-package rented_domains_page_handler
+package subscriptions_page_handler
 
 import (
     "html/template"
@@ -10,7 +10,7 @@ func GetUserDomainsPageTemplate(parsedTemplate *template.Template) {
                                                             {{template "user_domains_topbar_template" .}}
                                                             {{range .PageData.Subscriptions}}
                                                                 <div>
-                                                                    <a href="/profile/domain/{{.Id}}">{{.Id}}</a>
+                                                                    <a href="/profile/subscriptions/{{.Id}}">{{.Id}}</a>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)

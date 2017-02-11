@@ -1,4 +1,4 @@
-package rented_domains_page_handler
+package subscription_page_handler
 
 import "domio_public/templater"
 
@@ -6,10 +6,10 @@ type ProfileTopBarData struct {
     Links []templater.Link
 }
 
-func GetRentedDomainsTopBarTemplate() string {
+func GetSubscriptionTopBarTemplate() string {
     return `{{ define "user_domains_topbar_template"}}
 
-                {{with .PageData.UserDomainsTopBarData}}
+                {{with .PageData.SubscriptionTopBarData}}
 
                     <div class="b-profile-top-bar-container">
                         {{range .Links}}

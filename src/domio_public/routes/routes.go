@@ -16,7 +16,8 @@ import (
     "domio_public/handlers/add_payment_source_page_handler"
     "domio_public/handlers/user_payment_sources_page_handler"
     "domio_public/handlers/user_payment_source_page_handler"
-    "domio_public/handlers/rented_domains_page_handler"
+    "domio_public/handlers/subscriptions_page_handler"
+    "domio_public/handlers/subscription_page_handler"
 )
 
 type Route struct {
@@ -108,10 +109,16 @@ var RoutesList = Routes{
         user_domains_page_handler.UserDomainsPageHandler,
     },
     Route{
-        "RentedDomainsPage",
+        "SubscriptionsPage",
         "GET",
-        rented_domains_page_handler.GetUrl(),
-        rented_domains_page_handler.RentedDomainsPageHandler,
+        subscriptions_page_handler.GetUrl(),
+        subscriptions_page_handler.SubscriptionsPageHandler,
+    },
+    Route{
+        "SubscriptionPage",
+        "GET",
+        subscription_page_handler.GetUrl(),
+        subscription_page_handler.SubscriptionPageHandler,
     },
     Route{
         "AddDomainPage",

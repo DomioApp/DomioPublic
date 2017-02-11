@@ -1,4 +1,4 @@
-package rented_domains_page_handler
+package subscriptions_page_handler
 
 import (
     "html/template"
@@ -21,7 +21,7 @@ func init() {
     rentedDomainsPageTemplate = templater.BuildTemplate(GetUserDomainsPageTemplate)
 }
 
-func RentedDomainsPageHandler(w http.ResponseWriter, req *http.Request) {
+func SubscriptionsPageHandler(w http.ResponseWriter, req *http.Request) {
     var err error
 
     tokenCookie, err = req.Cookie("token")

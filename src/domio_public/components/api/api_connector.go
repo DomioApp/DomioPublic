@@ -19,8 +19,27 @@ type DomainJson struct {
     NS4           string `json:"ns4"`
 }
 
+type Plan struct {
+    Id       string `json:"id"`
+    Amount   uint64 `json:"amount"`
+    Created  uint64 `json:"created"`
+    Currency string `json:"currency"`
+    Interval string `json:"interval"`
+}
+
+type SubMetadata struct {
+    Domain string `json:"domain"`
+}
+
 type Subscription struct {
-    Id string `json:"id"`
+    Id       string `json:"id"`
+    Quantity uint64 `json:"quantity"`
+    Status   string `json:"status"`
+    Created  uint64 `json:"created"`
+    Start    uint64 `json:"start"`
+
+    Plan     Plan
+    Metadata SubMetadata
 }
 
 type AppStatusInfo struct {
