@@ -9,7 +9,7 @@ func GetUserDomainsPageTemplate(parsedTemplate *template.Template) {
     _, err := parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
                                                             {{template "user_domains_topbar_template" .}}
                                                             {{range .PageData.UserDomains}}
-                                                                <div data-domain="{{.Name}}">
+                                                                <div class="b-domains-list-container">
                                                                     <a href="/profile/domain/{{.Name}}">{{.Name}}</a>
                                                                 </div>
                                                             {{end}}

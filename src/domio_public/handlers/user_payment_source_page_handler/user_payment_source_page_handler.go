@@ -50,7 +50,7 @@ func GetPageName() string {
 
 func GetPageData(id string) PageData {
     pageData := PageData{
-        PageTitle: "Domio - My Payment Sources",
+        PageTitle: "Domio - My Cards",
         UserPaymentSourcesTopBarData: GetUserDomainsTopBarData(),
         UserPaymentSource: api.GetUserPaymentSource(tokenCookie.Value, id),
     }
@@ -61,9 +61,8 @@ func GetPageData(id string) PageData {
 func GetUserDomainsTopBarData() ProfileTopBarData {
     return ProfileTopBarData{
         Links:[]templater.Link{
-            {Url:"/profile/payments", Label:"My Payment Sources"},
-            {Url:"/profile/payments/add", Label:"Add a Payment Source"},
-            {Url:"/profile/payments/history", Label:"Payments History"},
+            {Url:"/profile/payments", Label:"My Cards"},
+            {Url:"/profile/payments/add", Label:"Add a Card"},
         },
     }
 }

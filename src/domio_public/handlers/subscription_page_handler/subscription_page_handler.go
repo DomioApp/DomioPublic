@@ -64,9 +64,8 @@ func GetPageData(id string) PageData {
 func GetSubscriptionTopBarData() ProfileTopBarData {
     return ProfileTopBarData{
         Links:[]templater.Link{
-            {Url:"/profile/payments", Label:"My Payment Sources"},
-            {Url:"/profile/payments/add", Label:"Add a Payment Source"},
-            {Url:"/profile/payments/history", Label:"Payments History"},
+            {Url:"/profile/payments", Label:"My Cards"},
+            {Url:"/profile/payments/add", Label:"Add a Card"},
         },
     }
 }

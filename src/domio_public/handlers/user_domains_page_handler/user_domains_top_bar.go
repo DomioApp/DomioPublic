@@ -13,7 +13,7 @@ func GetUserDomainsTopBarTemplate() string {
 
                     <div class="b-profile-top-bar-container">
                         {{range .Links}}
-                             <a href="{{.Url}}">{{.Label}}</a>
+                             <a class="{{.ClassName}}" href="{{.Url}}">{{.Label}}</a>
                         {{end}}
                     </div>
 

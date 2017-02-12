@@ -12,9 +12,10 @@ func GetDomainEditPageTemplate(parsedTemplate *template.Template) {
                                                                     <input name="domain_name" type="hidden" value="{{.Name}}"></input>
                                                                     <div data-domain="{{.Name}}">
                                                                         <h2>{{.Name}}</h2>
-
+                                                                        <hr/>
                                                                         <div>
                                                                             <p>Is visible: {{.IsVisible}}</p>
+                                                                            <p>Is Rented: {{.IsRented}}</p>
                                                                             <label>Visible:</label>
 
                                                                             {{if .IsVisible}}
@@ -31,7 +32,7 @@ func GetDomainEditPageTemplate(parsedTemplate *template.Template) {
                                                                             <label>Price Per Month, $:</label>
                                                                             <input name="price_per_month" type="number" value="{{.PricePerMonth}}"></input>
                                                                         </div>
-
+                                                                        <hr/>
                                                                         <div>Nameservers:</div>
                                                                         <div>
                                                                             <label>NS1: {{.NS1}}</label>
@@ -48,7 +49,7 @@ func GetDomainEditPageTemplate(parsedTemplate *template.Template) {
                                                                         <div>
                                                                             <label>NS4: {{.NS4}}</label>
                                                                         </div>
-
+                                                                        <hr/>
                                                                         <button>Save</button>
                                                                         <button value="{{.Name}}" class="b-delete-domain-button">Delete</button>
 

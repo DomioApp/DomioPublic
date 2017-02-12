@@ -12,6 +12,7 @@ type DomainJson struct {
     Owner         string `json:"owner"`
     PricePerMonth uint64 `json:"price_per_month"`
     IsVisible     bool `json:"is_visible"`
+    IsRented      bool `json:"is_rented"`
     ZoneId        string `json:"zone_id"`
     NS1           string `json:"ns1"`
     NS2           string `json:"ns2"`
