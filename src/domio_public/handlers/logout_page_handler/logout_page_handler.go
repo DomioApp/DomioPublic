@@ -33,6 +33,7 @@ func init() {
 }
 
 func LogoutPageHandler(w http.ResponseWriter, req *http.Request) {
+
     resetTokenCookie := http.Cookie{
         Name:"token",
         Value:"",
@@ -44,6 +45,10 @@ func LogoutPageHandler(w http.ResponseWriter, req *http.Request) {
         Value:"",
         MaxAge:-1,
     }
+
+    //clear current request cookie
+    req.Header.Set("Cookie", "")
+
 
     http.SetCookie(w, &resetTokenCookie)
     http.SetCookie(w, &resetEmailCookie)
