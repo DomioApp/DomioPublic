@@ -22,7 +22,7 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
                                                                     <hr>
                                                                     <div><span>Domain:</span> <span>{{.Metadata.Domain}}</span></div>
                                                                     <hr>
-                                                                    <button value="{{.Id}}" class="delete-subscription-button">Delete</button>
+                                                                    <button value="{{.Id}}" class="delete-subscription-button">Cancel subscription</button>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)
