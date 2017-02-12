@@ -6,7 +6,6 @@ import (
     "domio_public/templater"
     "domio_public/components/api"
     "github.com/gorilla/mux"
-    "log"
 )
 
 type PageData struct {
