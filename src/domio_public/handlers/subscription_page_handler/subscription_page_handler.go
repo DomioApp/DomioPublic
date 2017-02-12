@@ -51,7 +51,7 @@ func GetPageName() string {
 
 func GetPageData(id string) PageData {
 
-    log.Print(api.GetSubscription(id, tokenCookie.Value))
+    //log.Print(api.GetSubscription(id, tokenCookie.Value))
 
     pageData := PageData{
         PageTitle: "Domio - Subscription Details",
