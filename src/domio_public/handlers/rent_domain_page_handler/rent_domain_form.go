@@ -22,14 +22,7 @@ func GetRentDomainFormTemplate() string {
                                 {{with .PageData.FormData}}
                                     <div class="b-add-domain-form-container">
                                         <form>
-                                            <div class="b-form-rows-container">
-                                                        <select>
-                                                            <option>1 Month</option>
-                                                            <option>3 Months</option>
-                                                            <option>6 Months</option>
-                                                            <option>12 Months</option>
-                                                        </select>
-                                            </div>
+                                            <div class="b-form-rows-container"></div>
 
                                             <div>
                                                 <button value="{{.DomainName}}">{{.SubmitButton.Label}}</button>

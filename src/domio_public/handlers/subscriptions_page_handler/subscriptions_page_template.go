@@ -10,7 +10,7 @@ func GetUserDomainsPageTemplate(parsedTemplate *template.Template) {
                                                             {{template "user_domains_topbar_template" .}}
                                                             {{range .PageData.Subscriptions}}
                                                                 <div class="b-subscriptions-list-container">
-                                                                    <a href="/profile/subscriptions/{{.Id}}">{{.Metadata.Domain}}: ${{.Plan.Amount}} per month</a>
+                                                                    <a href="/profile/subscriptions/{{.Id}}">{{.Metadata.Domain}}: ${{.Quantity}} per month</a>
                                                                 </div>
                                                             {{end}}
                                                          {{end}}`)

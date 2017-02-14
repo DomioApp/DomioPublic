@@ -10,6 +10,8 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
                                                             {{template "user_domains_topbar_template" .}}
                                                             {{with .PageData.Subscription}}
                                                                 <div>
+                                                                    <div><span>Domain:</span> <span>{{.Metadata.Domain}}</span></div>
+                                                                    <hr>
                                                                     <div><span>ID:</span> <span>{{.Id}}</span></div>
                                                                     <div><span>Status:</span> <span>{{.Status}}</span></div>
                                                                     <div><span>Created:</span> <span>{{.Created}}</span></div>
@@ -19,8 +21,6 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
                                                                     <div><span>Created:</span> <span>{{.Plan.Created}}</span></div>
                                                                     <div><span>Currency:</span> <span>{{.Plan.Currency}}</span></div>
                                                                     <div><span>Interval:</span> <span>{{.Plan.Interval}}</span></div>
-                                                                    <hr>
-                                                                    <div><span>Domain:</span> <span>{{.Metadata.Domain}}</span></div>
                                                                     <hr>
                                                                     <button value="{{.Id}}" class="delete-subscription-button">Cancel subscription</button>
                                                                 </div>
