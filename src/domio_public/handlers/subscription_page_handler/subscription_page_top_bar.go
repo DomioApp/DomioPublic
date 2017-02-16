@@ -27,7 +27,7 @@ func GetSubscriptionConfigTopBarTemplate() string {
 
                 {{with .PageData.SubscriptionConfigTopBarData}}
 
-                    <div class="b-profile-top-bar-container">
+                    <div class="b-profile-config-top-bar-container">
                         {{range .Links}}
                              <a href="{{.Url}}">{{.Label}}</a>
                         {{end}}
