@@ -9,9 +9,10 @@ import (
 )
 
 type PageData struct {
-    PageTitle              string
-    SubscriptionTopBarData ProfileTopBarData
-    Subscription           api.Subscription
+    PageTitle                    string
+    SubscriptionTopBarData       ProfileTopBarData
+    SubscriptionConfigTopBarData ProfileTopBarData
+    Subscription                 api.Subscription
 }
 
 var subscriptionPageTemplate *template.Template
@@ -55,6 +56,7 @@ func GetPageData(id string) PageData {
     pageData := PageData{
         PageTitle: "Domio - Subscription Details",
         SubscriptionTopBarData: GetSubscriptionTopBarData(),
+        SubscriptionConfigTopBarData: GetSubscriptionConfigTopBarData(),
         Subscription: api.GetSubscription(id, tokenCookie.Value),
     }
 
@@ -64,8 +66,15 @@ func GetPageData(id string) PageData {
 func GetSubscriptionTopBarData() ProfileTopBarData {
     return ProfileTopBarData{
         Links:[]templater.Link{
-            {Url:"/profile/payments", Label:"My Cards"},
-            {Url:"/profile/payments/add", Label:"Add a Card"},
+            {Url:"", Label:"Subscription Details"},
+            {Url:"/profile/subscriptions", Label:"My Subscriptions"},
+        },
+    }
+}
+func GetSubscriptionConfigTopBarData() ProfileTopBarData {
+    return ProfileTopBarData{
+        Links:[]templater.Link{
+            {Url:"", Label:"DNS Config"},
         },
     }
 }

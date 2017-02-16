@@ -7,7 +7,8 @@ import (
 
 func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
     _, err := parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
-                                                            {{template "user_domains_topbar_template" .}}
+                                                            {{template "subscriptions_topbar_template" .}}
+                                                            {{template "subscription_config_topbar_template" .}}
                                                             {{with .PageData.Subscription}}
                                                                 <div>
                                                                     <div><span>Domain:</span> <span>{{.Metadata.Domain}}</span></div>
@@ -30,9 +31,15 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
         log.Print(err)
     }
 
-    _, err2 := parsedTemplate.New("user_domains_topbar_template").Parse(GetSubscriptionTopBarTemplate())
+    _, err2 := parsedTemplate.New("subscriptions_topbar_template").Parse(GetSubscriptionTopBarTemplate())
 
     if (err2 != nil) {
         log.Print(err2)
+    }
+
+    _, err3 := parsedTemplate.New("subscription_config_topbar_template").Parse(GetSubscriptionConfigTopBarTemplate())
+
+    if (err3 != nil) {
+        log.Print(err3)
     }
 }
