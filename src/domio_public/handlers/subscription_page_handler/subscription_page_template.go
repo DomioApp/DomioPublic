@@ -22,6 +22,16 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
                                                                     <div><span>Created:</span> <span>{{.Plan.Created}}</span></div>
                                                                     <div><span>Currency:</span> <span>{{.Plan.Currency}}</span></div>
                                                                     <div><span>Interval:</span> <span>{{.Plan.Interval}}</span></div>
+
+                                                                    <hr>
+
+                                                                    <form>
+                                                                        <div>
+                                                                            <label>CNAME:<label>
+                                                                            <input />
+                                                                        <div>
+                                                                    </form>
+
                                                                     <hr>
                                                                     <button value="{{.Id}}" class="delete-subscription-button">Cancel subscription</button>
                                                                 </div>
