@@ -9,33 +9,9 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
     _, err := parsedTemplate.New("main_template").Parse(`{{define "main_template"}}
                                                             {{template "subscriptions_topbar_template" .}}
                                                             {{template "subscription_config_topbar_template" .}}
-                                                            {{with .PageData.Subscription}}
-                                                                <div>
-                                                                    <div><span>Domain:</span> <span>{{.Metadata.Domain}}</span></div>
-                                                                    <hr>
-                                                                    <div><span>ID:</span> <span>{{.Id}}</span></div>
-                                                                    <div><span>Status:</span> <span>{{.Status}}</span></div>
-                                                                    <div><span>Created:</span> <span>{{.Created}}</span></div>
-                                                                    <hr>
-                                                                    <div><span>Plan:</span> <span>{{.Plan.Id}}</span></div>
-                                                                    <div><span>Amount:</span> <span>{{.Plan.Amount}}</span></div>
-                                                                    <div><span>Created:</span> <span>{{.Plan.Created}}</span></div>
-                                                                    <div><span>Currency:</span> <span>{{.Plan.Currency}}</span></div>
-                                                                    <div><span>Interval:</span> <span>{{.Plan.Interval}}</span></div>
 
-                                                                    <hr>
-
-                                                                    <form>
-                                                                        <div>
-                                                                            <label>CNAME:<label>
-                                                                            <input />
-                                                                        <div>
-                                                                    </form>
-
-                                                                    <hr>
-                                                                    <button value="{{.Id}}" class="delete-subscription-button">Cancel subscription</button>
-                                                                </div>
-                                                            {{end}}
+                                                            {{template "subscription_config_sidebar_template" .}}
+                                                            {{template "subscription_config_mainview_template" .}}
                                                          {{end}}`)
     if (err != nil) {
         log.Print(err)
@@ -51,5 +27,16 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
 
     if (err3 != nil) {
         log.Print(err3)
+    }
+    _, err4 := parsedTemplate.New("subscription_config_sidebar_template").Parse(GetSubscriptionConfigSideBarTemplate())
+
+    if (err4 != nil) {
+        log.Print(err4)
+    }
+
+    _, err5 := parsedTemplate.New("subscription_config_mainview_template").Parse(GetSubscriptionConfigMainViewTemplate())
+
+    if (err5 != nil) {
+        log.Print(err5)
     }
 }
