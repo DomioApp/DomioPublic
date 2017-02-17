@@ -5,12 +5,14 @@ func GetSubscriptionConfigMainViewTemplate() string {
 
                 {{with .PageData.Subscription}}
 
-                    <form>
-                        <div>
-                            <label>CNAME:<label>
-                            <input />
-                        <div>
-                    </form>
+                    <div class="b-subscription-config-mainview">
+                        <form>
+                            <div>
+                                <label>CNAME:<label>
+                                <input />
+                            <div>
+                        </form>
+                    </div>
 
                 {{end}}
 

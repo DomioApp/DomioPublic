@@ -4,7 +4,7 @@ func GetSubscriptionConfigSideBarTemplate() string {
     return `{{ define "subscription_config_sidebar_template"}}
 
                 {{with .PageData.Subscription}}
-                    <div>
+                    <div class="b-subscription-config-sidebar">
                         <div><span>Domain:</span> <span>{{.Metadata.Domain}}</span></div>
 
                         <hr>

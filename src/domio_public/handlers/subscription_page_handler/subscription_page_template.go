@@ -10,8 +10,11 @@ func GetSubscriptionPageTemplate(parsedTemplate *template.Template) {
                                                             {{template "subscriptions_topbar_template" .}}
                                                             {{template "subscription_config_topbar_template" .}}
 
-                                                            {{template "subscription_config_sidebar_template" .}}
-                                                            {{template "subscription_config_mainview_template" .}}
+                                                            <div class="b-subscription-config-area">
+                                                                {{template "subscription_config_sidebar_template" .}}
+                                                                {{template "subscription_config_mainview_template" .}}
+                                                            </div>
+
                                                          {{end}}`)
     if (err != nil) {
         log.Print(err)
