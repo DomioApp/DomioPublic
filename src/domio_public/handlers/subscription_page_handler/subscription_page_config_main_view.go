@@ -12,10 +12,12 @@ func GetSubscriptionConfigMainViewTemplate() string {
 
                             <div>
                                 <label>{{.Name}}:<label>
-                                <input />
-                            <div>
+                                <input></input>
+                            </div>
 
                         {{end}}
+
+                        <submit class="update-subscription-button" type="submit" value="{{.Subscription.Id}}">Save</submit>
 
                         </form>
                     </div>
