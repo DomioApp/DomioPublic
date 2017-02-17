@@ -8,11 +8,16 @@ import (
     "github.com/gorilla/mux"
 )
 
+type Entry struct {
+    Name string
+}
+
 type PageData struct {
     PageTitle                    string
     SubscriptionTopBarData       ProfileTopBarData
     SubscriptionConfigTopBarData ProfileTopBarData
     Subscription                 api.Subscription
+    Entries                      []Entry
 }
 
 var subscriptionPageTemplate *template.Template
@@ -58,6 +63,10 @@ func GetPageData(id string) PageData {
         SubscriptionTopBarData: GetSubscriptionTopBarData(),
         SubscriptionConfigTopBarData: GetSubscriptionConfigTopBarData(),
         Subscription: api.GetSubscription(id, tokenCookie.Value),
+        Entries:[]Entry{
+            {Name:"one"},
+            {Name:"two"},
+        },
     }
 
     return pageData
