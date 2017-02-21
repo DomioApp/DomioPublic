@@ -28,7 +28,7 @@ func DomainInfoPageHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func GetUrl() string {
-    return "/domains/{domainName}"
+    return "/domain/{domainName}"
 }
 
 func GetPageName() string {

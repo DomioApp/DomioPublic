@@ -13,7 +13,10 @@ func GetDomainInfo(domainName string, token string) DomainJson {
 
     url := config.Config.ApiUrl
 
-    req, requestErr := http.NewRequest("GET", url + "/domains/" + domainName, nil)
+
+    log.Print(url + "/domain/" + domainName)
+
+    req, requestErr := http.NewRequest("GET", url + "/domain/" + domainName, nil)
 
     req.Header.Set("Content-Type", "application/json")
 
