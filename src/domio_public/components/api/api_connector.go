@@ -95,7 +95,7 @@ func GetUserDomains(token string) []DomainJson {
 
     url := config.Config.ApiUrl
 
-    req, requestErr := http.NewRequest("GET", url + "/domains/user", nil)
+    req, requestErr := http.NewRequest("GET", url + "/user/domains", nil)
 
     req.Header.Set("Content-Type", "application/json")
 
