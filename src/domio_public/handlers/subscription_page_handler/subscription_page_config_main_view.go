@@ -6,20 +6,25 @@ func GetSubscriptionConfigMainViewTemplate() string {
                 {{with .PageData}}
 
                     <div class="b-subscription-config-mainview">
-                        <form>
 
-                        {{range .Entries}}
+                        <div>
 
-                            <div>
-                                <label>{{.Name}}:<label>
-                                <input></input>
-                            </div>
+                            {{range .Entries}}
 
-                        {{end}}
+                                <div>
+                                    <label>{{.Name}}:<label>
+                                </div>
 
-                        <submit class="update-subscription-button" type="submit" value="{{.Subscription.Id}}">Save</submit>
+                            {{end}}
 
+                        </div>
+
+                        <form class="b-subscription-record-form">
+                            <input class="value-input"></input>
+
+                            <input type="submit" class="update-subscription-button" type="submit" value="Save"></input>
                         </form>
+
                     </div>
 
                 {{end}}
