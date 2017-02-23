@@ -17,6 +17,8 @@ func GetSubscriptionConfigMainViewTemplate() string {
 
                                     <ul data-type="{{.Type}}">
 
+                                        <label><i>TTL: {{.TTL}}</i></label>
+
                                         {{range .ResourceRecords}}
 
                                             <li>

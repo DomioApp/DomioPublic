@@ -16,6 +16,7 @@ type Record struct {
     Type            string
     SetIdentifier   string
     ResourceRecords []RecordValue
+    TTL             int64
 }
 
 func GetSubscriptionRecords(subscriptionId string, token string) []Record {
