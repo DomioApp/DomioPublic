@@ -8,16 +8,12 @@ import (
     "github.com/gorilla/mux"
 )
 
-type Entry struct {
-    Name string
-}
-
 type PageData struct {
     PageTitle                    string
     SubscriptionTopBarData       ProfileTopBarData
     SubscriptionConfigTopBarData ProfileTopBarData
     Subscription                 api.Subscription
-    Entries                      []Entry
+    Records                      []api.Record
 }
 
 var subscriptionPageTemplate *template.Template
@@ -38,9 +34,9 @@ func SubscriptionPageHandler(w http.ResponseWriter, req *http.Request) {
     } else {
 
         vars := mux.Vars(req)
-        id := vars["id"]
+        subId := vars["id"]
 
-        templater.WriteTemplate(w, req, subscriptionPageTemplate, GetPageName(), GetPageData(id))
+        templater.WriteTemplate(w, req, subscriptionPageTemplate, GetPageName(), GetPageData(subId))
 
     }
 
@@ -54,7 +50,7 @@ func GetPageName() string {
     return "SubscriptionPage"
 }
 
-func GetPageData(id string) PageData {
+func GetPageData(subId string) PageData {
 
     //log.Print(api.GetSubscription(id, tokenCookie.Value))
 
@@ -62,11 +58,8 @@ func GetPageData(id string) PageData {
         PageTitle: "Domio - Subscription Details",
         SubscriptionTopBarData: GetSubscriptionTopBarData(),
         SubscriptionConfigTopBarData: GetSubscriptionConfigTopBarData(),
-        Subscription: api.GetSubscription(id, tokenCookie.Value),
-        Entries:[]Entry{
-            {Name:"one"},
-            {Name:"two"},
-        },
+        Subscription: api.GetSubscription(subId, tokenCookie.Value),
+        Records:api.GetSubscriptionRecords(subId, tokenCookie.Value),
     }
 
     return pageData

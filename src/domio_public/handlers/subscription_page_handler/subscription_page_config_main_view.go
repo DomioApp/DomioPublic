@@ -4,15 +4,33 @@ func GetSubscriptionConfigMainViewTemplate() string {
     return `{{ define "subscription_config_mainview_template"}}
 
                 {{with .PageData}}
+                    <input class="subscription-id-input" type="hidden" value="{{.Subscription.Id}}"></input>
 
                     <div class="b-subscription-config-mainview">
 
                         <div>
 
-                            {{range .Entries}}
+                            {{range .Records}}
 
                                 <div>
-                                    <label>{{.Name}}:<label>
+                                    <label><strong>{{.Type}}:</strong></label>
+
+                                    <ul>
+
+                                        {{range .ResourceRecords}}
+
+                                            <li>
+                                                <label>Value:</label>
+                                                <label>{{.Value}}</label>
+
+                                                <button class="delete-record-button" value="{{.Value}}">Delete</button>
+
+                                            </li>
+
+                                        {{end}}
+
+                                    </ul>
+                                <hr>
                                 </div>
 
                             {{end}}
@@ -20,8 +38,6 @@ func GetSubscriptionConfigMainViewTemplate() string {
                         </div>
 
                         <form class="b-subscription-record-form">
-                            <input class="subscription-id-input" type="hidden" value="{{.Subscription.Id}}"></input>
-
                             <select class="value-type-select">
                                 <option value="a">A – IPv4 address</option>
                                 <option value="cname">CNAME – Canonical name</option>
@@ -37,7 +53,7 @@ func GetSubscriptionConfigMainViewTemplate() string {
                             </select>
 
                             <input class="value-input"></input>
-                            <input type="submit" class="update-subscription-button" type="submit" value="Save"></input>
+                            <input type="submit" class="update-subscription-button" type="submit" value="Add"></input>
                         </form>
 
                     </div>
