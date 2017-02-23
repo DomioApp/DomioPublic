@@ -15,12 +15,11 @@ func GetSubscriptionConfigMainViewTemplate() string {
                                 <div>
                                     <label><strong>{{.Type}}:</strong></label>
 
-                                    <ul>
+                                    <ul data-type="{{.Type}}">
 
                                         {{range .ResourceRecords}}
 
                                             <li>
-                                                <label>Value:</label>
                                                 <label>{{.Value}}</label>
 
                                                 <button class="delete-record-button" value="{{.Value}}">Delete</button>
