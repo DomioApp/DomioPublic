@@ -11,7 +11,7 @@ import (
 
 type PageData struct {
     PageTitle  string
-    DomainInfo api.DomainJson
+    DomainInfo *api.DomainJson
 }
 
 var domainEditPageTemplate *template.Template
@@ -43,9 +43,11 @@ func GetPageName() string {
 }
 
 func GetPageData(domainName string) PageData {
-    domainInfo := api.GetDomainInfo(domainName, tokenCookie.Value)
+    domainInfo, domainInfoError := api.GetDomainInfo(domainName, tokenCookie.Value)
 
-    log.Print(domainInfo)
+    if (domainInfoError != nil) {
+        log.Print(domainInfoError)
+    }
 
     pageData := PageData{
         PageTitle: "Domio - Add Payment Source ",

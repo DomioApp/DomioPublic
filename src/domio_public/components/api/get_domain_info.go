@@ -5,14 +5,14 @@ import (
     "net/http"
     "time"
     "log"
+    "domio_public/errors"
 )
 
-func GetDomainInfo(domainName string, token string) DomainJson {
+func GetDomainInfo(domainName string, token string) (*DomainJson, *errors.DomioError) {
 
     var domain DomainJson
 
     url := config.Config.ApiUrl
-
 
     log.Print(url + "/domain/" + domainName)
 
@@ -32,16 +32,21 @@ func GetDomainInfo(domainName string, token string) DomainJson {
 
     if requestErr != nil {
         log.Print(requestErr)
-        return domain
+        return nil, &errors.UnknownError
     }
+
+    if (resp.StatusCode == http.StatusNotFound) {
+        return nil, &errors.DomainNotFound
+    }
+
     defer resp.Body.Close()
 
     decodeError := DecodeJsonRequestBody(resp, &domain)
 
     if (decodeError != nil) {
         log.Print(decodeError)
-        return domain
+        return nil, decodeError
     }
 
-    return domain
+    return &domain, nil
 }

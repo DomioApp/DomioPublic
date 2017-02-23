@@ -6,11 +6,12 @@ import (
     "domio_public/templater"
     "domio_public/components/api"
     "github.com/gorilla/mux"
+    "log"
 )
 
 type PageData struct {
     PageTitle  string
-    DomainInfo api.DomainJson
+    DomainInfo *api.DomainJson
 }
 
 var domainInfoPageTemplate *template.Template
@@ -24,7 +25,13 @@ func DomainInfoPageHandler(w http.ResponseWriter, req *http.Request) {
     vars := mux.Vars(req)
     domainName := vars["domainName"]
 
-    templater.WriteTemplate(w, req, domainInfoPageTemplate, GetPageName(), GetPageData(domainName))
+    domainInfo, domainInfoError := api.GetDomainInfo(domainName, "")
+
+    if (domainInfoError != nil) {
+        log.Print(domainInfoError)
+    }
+
+    templater.WriteTemplate(w, req, domainInfoPageTemplate, GetPageName(), GetPageData(domainName, domainInfo))
 }
 
 func GetUrl() string {
@@ -35,10 +42,10 @@ func GetPageName() string {
     return "DomainInfoPage"
 }
 
-func GetPageData(domainName string) PageData {
+func GetPageData(domainName string, domainInfo *api.DomainJson) PageData {
     pageData := PageData{
-        PageTitle: "Domio - Domain information",
-        DomainInfo: api.GetDomainInfo(domainName, ""),
+        PageTitle: "Domio - Domain information " + domainName,
+        DomainInfo: domainInfo,
     }
 
     return pageData

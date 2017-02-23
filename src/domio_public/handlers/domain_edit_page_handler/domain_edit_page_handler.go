@@ -7,11 +7,12 @@ import (
     "domio_public/components/api"
     "github.com/gorilla/mux"
     "log"
+    "domio_public/errors"
 )
 
 type PageData struct {
     PageTitle  string
-    DomainInfo api.DomainJson
+    DomainInfo *api.DomainJson
 }
 
 var domainEditPageTemplate *template.Template
@@ -26,12 +27,22 @@ func DomainEditPageHandler(w http.ResponseWriter, req *http.Request) {
     domainName := vars["domainName"]
 
     var tokenErr error
+    log.Print(tokenErr)
 
     tokenCookie, tokenErr = req.Cookie("token")
 
-    log.Print(tokenErr)
+    domainInfo, domainInfoError := api.GetDomainInfo(domainName, tokenCookie.Value)
 
-    templater.WriteTemplate(w, req, domainEditPageTemplate, GetPageName(), GetPageData(domainName))
+    if (domainInfoError != nil) {
+        log.Print(domainInfoError)
+        if (domainInfoError == &errors.DomainNotFound) {
+            templater.WriteTemplate(w, req, domainEditPageTemplate, "Domain not found", GetPageData("Domain not found", domainInfo))
+            return
+        }
+    } else {
+        templater.WriteTemplate(w, req, domainEditPageTemplate, GetPageName(), GetPageData(domainName, domainInfo))
+    }
+
 }
 
 func GetUrl() string {
@@ -42,10 +53,7 @@ func GetPageName() string {
     return "DomainEditPage"
 }
 
-func GetPageData(domainName string) PageData {
-    domainInfo := api.GetDomainInfo(domainName, tokenCookie.Value)
-
-    log.Print(domainInfo)
+func GetPageData(domainName string, domainInfo *api.DomainJson) PageData {
 
     pageData := PageData{
         PageTitle: "Domio - Edit Domain " + domainName,
