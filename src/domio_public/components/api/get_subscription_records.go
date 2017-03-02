@@ -12,11 +12,25 @@ type RecordValue struct {
     Value string
 }
 
+type GeoLocation struct {
+    ContinentCode   string
+    CountryCode     string
+    SubdivisionCode string
+}
+
 type Record struct {
-    Type            string
-    SetIdentifier   string
-    ResourceRecords []RecordValue
-    TTL             int64
+    Name                    string
+    AliasTarget             string
+    Failover                string
+    GeoLocation             GeoLocation
+    HealthCheckId           string
+    Region                  string
+    TrafficPolicyInstanceId string
+    Weight                  uint64
+    Type                    string
+    SetIdentifier           string
+    ResourceRecords         []RecordValue
+    TTL                     int64
 }
 
 func GetSubscriptionRecords(subscriptionId string, token string) []Record {
@@ -51,10 +65,6 @@ func GetSubscriptionRecords(subscriptionId string, token string) []Record {
         log.Print(decodeError)
         return subRecords
     }
-
-    log.Print("*********************************************************")
-    log.Print(subRecords)
-    log.Print("*********************************************************")
 
     return subRecords
 }

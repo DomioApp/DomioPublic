@@ -8,30 +8,48 @@ func GetSubscriptionConfigMainViewTemplate() string {
 
                     <div class="b-subscription-config-mainview">
 
-                        <div>
+                        <div class="b-records-list-header">
+                            <div class="header-name">Name</div>
+                            <div class="header-type">Type</div>
+                            <div class="header-value">Value</div>
+                            <div class="header-eth">Evaluate Target Health</div>
+                            <div class="header-hcid">Health Check ID</div>
+                            <div class="header-ttl">TTL</div>
+                            <div class="header-region">Region</div>
+                            <div class="header-weight">Weight</div>
+                            <div class="header-geolocation">Geolocation</div>
+                            <div class="header-setid">Set ID</div>
+                        </div>
+
+
+                        <div class="b-records-list-container">
 
                             {{range .Records}}
 
-                                <div>
-                                    <label><strong>{{.Type}}:</strong></label>
+                                <div class="b-record-row">
 
-                                    <ul data-type="{{.Type}}">
+                                    <div class="cell cell-name">{{.Name}}</div>
+                                    <div class="cell cell-type">{{.Type}}</div>
 
-                                        <label><i>TTL: {{.TTL}}</i></label>
+                                    <div class="cell cell-value" data-type="{{.Type}}">
 
                                         {{range .ResourceRecords}}
 
-                                            <li>
-                                                <label>{{.Value}}</label>
-
-                                                <button class="delete-record-button" value="{{.Value}}">Delete</button>
-
-                                            </li>
+                                            <div class="b-record-value-row">{{.Value}}</div>
 
                                         {{end}}
 
-                                    </ul>
-                                <hr>
+                                    </div>
+
+                                    <div class="cell cell-eth">!eth!</div>
+
+                                    <div class="cell cell-hcid">{{.HealthCheckId}}</div>
+                                    <div class="cell cell-ttl">{{.TTL}}</div>
+                                    <div class="cell cell-region">{{.Region}}</div>
+                                    <div class="cell cell-weight">{{.Weight}}</div>
+                                    <div class="cell cell-geolocation">{{if .GeoLocation}}{{.GeoLocation.ContinentCode}}{{end}}</div>
+                                    <div class="cell cell-setid">{{.SetIdentifier}}</div>
+
                                 </div>
 
                             {{end}}
