@@ -5,6 +5,7 @@ import (
     "net/http"
     "domio_public/templater"
     "domio_public/components/api"
+    "log"
 )
 
 type PageData struct {
@@ -49,8 +50,12 @@ func GetPageData() PageData {
         UserDomainsTopBarData: GetUserDomainsTopBarData(),
     }
 
+    log.Print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    log.Print(tokenCookie.Value)
+    log.Print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
     if (tokenCookie != nil) {
-        pageData.UserDomains = GetUserDomains(tokenCookie.Value)
+        pageData.UserDomains = api.GetUserDomains(tokenCookie.Value)
     }
 
     return pageData
@@ -63,8 +68,4 @@ func GetUserDomainsTopBarData() ProfileTopBarData {
             {Url:"/profile/subscriptions", Label:"My Subscriptions"},
         },
     }
-}
-
-func GetUserDomains(token string) []api.DomainJson {
-    return api.GetUserDomains(token)
 }

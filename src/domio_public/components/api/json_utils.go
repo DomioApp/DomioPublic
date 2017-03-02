@@ -4,6 +4,7 @@ import (
     "net/http"
     "encoding/json"
     "domio_public/errors"
+    "log"
 )
 
 func DecodeJsonRequestBody(resp *http.Response, obj interface{}) *errors.DomioError {
@@ -12,6 +13,9 @@ func DecodeJsonRequestBody(resp *http.Response, obj interface{}) *errors.DomioEr
 
     decodeError := decoder.Decode(&obj)
     if (decodeError != nil) {
+        log.Print("#######################################")
+        log.Print(decodeError)
+        log.Print("#######################################")
         return &errors.JsonDecodeError
     }
 

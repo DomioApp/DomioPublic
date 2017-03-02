@@ -103,7 +103,7 @@ var RoutesList = Routes{
         user_payment_source_page_handler.UserPaymentSourcePageHandler,
     },
     Route{
-        "UserDomainsPage",
+        user_domains_page_handler.GetPageName(),
         "GET",
         user_domains_page_handler.GetUrl(),
         user_domains_page_handler.UserDomainsPageHandler,

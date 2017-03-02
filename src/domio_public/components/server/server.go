@@ -43,6 +43,6 @@ func StartRouter() {
 
 }
 func Start() {
-    fmt.Print("Starting app...")
+    fmt.Print("Starting app...\n")
     StartRouter()
 }

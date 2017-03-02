@@ -33,6 +33,8 @@ func DomainEditPageHandler(w http.ResponseWriter, req *http.Request) {
 
     domainInfo, domainInfoError := api.GetDomainInfo(domainName, tokenCookie.Value)
 
+    log.Print(domainInfo)
+
     if (domainInfoError != nil) {
         log.Print(domainInfoError)
         if (domainInfoError == &errors.DomainNotFound) {
