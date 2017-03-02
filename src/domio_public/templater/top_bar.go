@@ -19,13 +19,13 @@ func GetTopBarTemplate() string {
                         <div class="toggle-menu-button"></div>
                         <div class="left-area">
                             {{range .LeftColumnLinks}}
-                                 <a class="{{.ClassName}}" href="{{.Url}}">{{.Label}}</a>
+                                 <a {{if .ClassName}}class="{{.ClassName}}"{{end}} href="{{.Url}}">{{.Label}}</a>
                             {{end}}
                         </div>
 
                         <div class="right-area">
                             {{range .RightColumnLinks}}
-                                 <a class="{{.ClassName}}" href="{{.Url}}">{{.Label}}</a>
+                                 <a {{if .ClassName}}class="{{.ClassName}}"{{end}} href="{{.Url}}">{{.Label}}</a>
                             {{end}}
                         </div>
 
