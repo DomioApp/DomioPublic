@@ -4,6 +4,9 @@ import (
     "html/template"
     "net/http"
     "domio_public/templater"
+    "domio_public/components/api"
+    "fmt"
+    "log"
 )
 
 type PageData struct {
@@ -53,9 +56,13 @@ func GetPageData() PageData {
 
 func GetProfileTopBarData() ProfileTopBarData {
 
+    countResp := api.GetUserDomainsCount(tokenCookie.Value)
+
+    log.Print(countResp)
+
     return ProfileTopBarData{
         Links:[]templater.Link{
-            {Url:"/profile/domains", Label:"My Domains"},
+            {Url:"/profile/domains", Label:fmt.Sprintf("My Domains (%d)", countResp.Count)},
             {Url:"/profile/subscriptions", Label:"My Subscriptions"},
             {Url:"/profile/payments", Label:"Cards"},
         },

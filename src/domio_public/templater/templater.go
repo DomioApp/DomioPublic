@@ -75,7 +75,7 @@ func WriteTemplate(w http.ResponseWriter, req *http.Request, tmpl *template.Temp
         UseDart:config.Config.UseDart,
         BaseTemplateData: BaseTemplateData{PageName: pageName},
         AppStatusInfoBarData: api.GetAPIStatus(),
-        TopBarData: GetTopBarData(pageName, claims.Email),
+        TopBarData: GetTopBarData(pageName, claims.Email,token),
         PageData: data,
     }
 
