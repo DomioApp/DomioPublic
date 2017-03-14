@@ -21,6 +21,7 @@ func GetAddDomainFormTemplate() string {
                                 {{with .PageData.FormData}}
                                     <div class="b-add-domain-form-container">
                                         <form>
+
                                             <div class="b-form-rows-container">
                                                 {{range .FormRows}}
                                                      <div class="b-form-row">
@@ -35,6 +36,7 @@ func GetAddDomainFormTemplate() string {
                                                 <input type="submit" value="{{.Label}}"/>
                                                 {{end}}
                                             </div>
+
                                         </form>
                                     </div>
                                 {{end}}
@@ -45,8 +47,9 @@ func GetAddDomainFormTemplate() string {
 func GetFormData() FormData {
     return FormData{
         FormRows:[]FormRow{
-            {Label:"Name", Name:"name", Type:"text"},
-            {Label:"Price", Name:"price_per_month", Type:"number"},
+            {Label:"Name:", Name:"name", Type:"text"},
+            {Label:"Price:", Name:"price_per_month", Type:"number"},
+            {Label:"Tags:", Name:"tags", Type:"string"},
         },
         SubmitButton: SubmitButton{Label:"Add"},
     }
